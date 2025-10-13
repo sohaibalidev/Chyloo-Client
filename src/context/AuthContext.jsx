@@ -89,6 +89,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await fetch(`${BASE_URL}/api/auth/forgot-password`, {
         method: 'POST',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username }),
       });
@@ -104,6 +105,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await fetch(`${BASE_URL}/api/auth/reset-password/${token}`, {
         method: 'POST',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password }),
       });
