@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { useProfile } from './hooks/useProfile';
 import ProfileSkeleton from './components/ProfileSkeleton.jsx';
-import ProfileHeader from './Components/ProfileHeader';
-import ProfileContent from './Components/ProfileContent';
+import ProfileHeader from './Components/ProfileHeader.jsx';
+import ProfileContent from './Components/ProfileContent.jsx';
 import styles from './styles/index.module.css';
 
 const Profile = () => {
