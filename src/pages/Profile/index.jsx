@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { useProfile } from './hooks/useProfile';
-import ProfileSkeleton from './Components/ProfileSkeleton';
+import ProfileSkeleton from './components/ProfileSkeleton.jsx';
 import ProfileHeader from './Components/ProfileHeader';
 import ProfileContent from './Components/ProfileContent';
 import styles from './styles/index.module.css';
