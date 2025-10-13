@@ -1,0 +1,33 @@
+.searchPage {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.searchHeader {
+    margin-bottom: 2rem;
+}
+
+.searchResults {
+    min-height: 400px;
+}
+
+.loading,
+.errorMessage,
+.noResults {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-light);
+}
+
+.usersGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.postsList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}

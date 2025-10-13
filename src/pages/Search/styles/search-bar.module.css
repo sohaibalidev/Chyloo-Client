@@ -1,0 +1,39 @@
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: var(--dark-card);
+}
+
+.searchInput {
+  flex: 1;
+  padding: 1rem 0;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 1rem;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--text-lighter);
+}
+
+.searchIcon {
+  color: var(--text-lighter);
+  flex-shrink: 0;
+}
+
+.clearIcon {
+  color: var(--text-lighter);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.clearIcon:hover {
+  color: var(--text);
+}

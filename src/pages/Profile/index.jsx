@@ -1,0 +1,74 @@
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAuth } from '@/context/AuthContext';
+import { useProfile } from './hooks/useProfile';
+import ProfileSkeleton from './Components/ProfileSkeleton';
+import ProfileHeader from './Components/ProfileHeader';
+import ProfileContent from './Components/ProfileContent';
+import styles from './styles/index.module.css';
+
+const Profile = () => {
+  const { username } = useParams();
+  const { user: currentUser } = useAuth();
+  const {
+    user,
+    posts,
+    savedPosts,
+    activeTab,
+    loading,
+    error,
+    viewMode,
+    isFollowing,
+    followLoading,
+    setActiveTab,
+    setViewMode,
+    handleFollow,
+    fetchUserProfile,
+  } = useProfile(username, currentUser);
+
+  useEffect(() => {
+    fetchUserProfile();
+  }, [username]);
+
+  const handleProfileUpdate = () => {
+    fetchUserProfile();
+  };
+
+  if (loading) {
+    return <ProfileSkeleton />;
+  }
+
+  if (error || !user) {
+    return (
+      <div className={styles.profileContainer}>
+        <div className={styles.profileErrorMessage}>{error || 'User not found'}</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.profileContainer}>
+      <ProfileHeader
+        user={user}
+        currentUser={currentUser}
+        isFollowing={isFollowing}
+        followLoading={followLoading}
+        onFollow={handleFollow}
+        onProfileUpdate={handleProfileUpdate} 
+      />
+
+      <ProfileContent
+        user={user}
+        currentUser={currentUser}
+        posts={posts}
+        savedPosts={savedPosts}
+        activeTab={activeTab}
+        viewMode={viewMode}
+        onTabChange={setActiveTab}
+        onViewModeChange={setViewMode}
+      />
+    </div>
+  );
+};
+
+export default Profile;

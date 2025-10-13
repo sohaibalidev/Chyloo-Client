@@ -1,0 +1,60 @@
+.feedContainer {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.postSkeleton {
+  background-color: var(--dark-card);
+  margin-bottom: 20px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  animation: pulse 1.5s infinite;
+}
+
+.caughtUp {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  text-align: center;
+  background: var(--dark-card);
+  box-shadow: var(--shadow);
+}
+
+.caughtUpIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--primary-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  color: white;
+}
+
+.caughtUp h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.caughtUp p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin: 6px 0 0;
+}
+
+.loadingPosts,
+.noMorePosts {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--dark-card);
+  color: var(--text-light);
+  margin: 1rem 0;
+  box-shadow: var(--shadow);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
