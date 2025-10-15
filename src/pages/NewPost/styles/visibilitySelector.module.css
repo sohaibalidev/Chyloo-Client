@@ -1,0 +1,84 @@
+.visibilitySelector {
+  margin-bottom: 2rem;
+}
+
+.visibilityOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.visibilityOption {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.visibilityOption.selected {
+  border-color: var(--primary-accent);
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.visibilityOption:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--primary-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.visibilityOption.selected:hover {
+  background: rgba(212, 175, 55, 0.08);
+  transform: none;
+  box-shadow: none;
+}
+
+.optionContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.optionIcon {
+  color: var(--primary-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.optionText {
+  display: flex;
+  flex-direction: column;
+}
+
+.optionLabel {
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.optionDescription {
+  color: var(--text-light);
+  font-size: 0.875rem;
+}
+
+.visibilityOption.selected .optionLabel {
+  color: var(--primary-accent);
+}
+
+.visibilityOption.selected .optionIcon {
+  color: var(--primary-accent);
+  position: relative;
+}

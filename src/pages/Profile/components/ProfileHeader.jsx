@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { MessageCircle, UserCheck, UserPlus, Settings, CheckCircle, Calendar } from 'lucide-react';
+import { BASE_URL } from '@/config/app.config.js';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import getPlaceholderColor from '@/helpers/getPlaceholderColor';
 import EditProfile from './EditProfile';
 import styles from '../styles/ProfileHeader.module.css';
@@ -14,6 +15,7 @@ const ProfileHeader = ({
   onProfileUpdate,
 }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [messageLoading, setMessageLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleEditClick = () => {
@@ -31,6 +33,33 @@ const ProfileHeader = ({
     }
     onProfileUpdate();
     setIsEditModalOpen(false);
+  };
+
+  const handleMessageClick = async () => {
+    if (messageLoading) return;
+
+    setMessageLoading(true);
+    try {
+      const response = await fetch(`${BASE_URL}/api/messages/conversation/${user._id}`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create conversation');
+      }
+
+      const { conversation } = await response.json();
+
+      navigate(`/messages/?conversation=${conversation._id}`);
+    } catch (error) {
+      console.error('Error creating/fetching conversation:', error);
+    } finally {
+      setMessageLoading(false);
+    }
   };
 
   return (
@@ -68,6 +97,7 @@ const ProfileHeader = ({
           followLoading={followLoading}
           onFollow={onFollow}
           onEditClick={handleEditClick}
+          onMessageClick={handleMessageClick}
         />
       </div>
 
@@ -128,6 +158,7 @@ const ProfileActions = ({
   followLoading,
   onFollow,
   onEditClick,
+  onMessageClick,
 }) => {
   if (!currentUser) return null;
 
@@ -149,7 +180,7 @@ const ProfileActions = ({
               </>
             )}
           </button>
-          <button className={styles.profileMessageBtn}>
+          <button className={styles.profileMessageBtn} onClick={onMessageClick} disabled={false}>
             <MessageCircle size={16} />
             Message
           </button>

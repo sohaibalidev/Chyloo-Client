@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Upload, File, Image, Video, X } from 'lucide-react';
-import styles from '../styles/components.module.css';
+import styles from '../styles/mediaUpload.module.css';
 
 const MediaUpload = ({ media, onMediaUpload, onRemoveMedia }) => {
   const fileInputRef = useRef(null);

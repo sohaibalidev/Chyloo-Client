@@ -1,0 +1,110 @@
+.postPreview {
+  background: var(--dark-card);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.previewTitle {
+  padding: 1.5rem;
+  margin: 0;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.previewCard {
+  padding: 0;
+}
+
+.previewHeader {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-accent);
+}
+
+.username {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.visibility {
+  color: var(--text-light);
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.previewCaption {
+  padding: 1rem 1.5rem;
+  color: var(--text);
+  line-height: 1.5;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.previewMedia {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.previewMediaItem {
+  margin-bottom: 0.5rem;
+}
+
+.previewThumbnail {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.previewFile {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  color: var(--text-light);
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.moreFiles {
+  text-align: center;
+  color: var(--text-lighter);
+  font-size: 0.875rem;
+  padding: 0.5rem;
+}
+
+.previewEngagement {
+  padding: 1rem 1.5rem;
+}
+
+.engagementStats {
+  display: flex;
+  gap: 1rem;
+}
+
+.engagementItem {
+  color: var(--text-lighter);
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}

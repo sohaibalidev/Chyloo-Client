@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { useProfile } from './hooks/useProfile';
@@ -54,7 +54,7 @@ const Profile = () => {
         isFollowing={isFollowing}
         followLoading={followLoading}
         onFollow={handleFollow}
-        onProfileUpdate={handleProfileUpdate} 
+        onProfileUpdate={handleProfileUpdate}
       />
 
       <ProfileContent

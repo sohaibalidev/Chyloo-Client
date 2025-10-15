@@ -44,7 +44,7 @@ const Login = () => {
       navigate('/');
     } else {
       setError(result.error);
-      console.log(result)
+      console.error('Error Submitting Form: ', result.error);
     }
   };
 

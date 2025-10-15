@@ -40,8 +40,6 @@ export default function Sidebar() {
     icon: <Icon name={item.icon} size={item.size} />,
   }));
 
-  console.log(navItemsWithIcons)
-
   if (isMobile) {
     return <BottomNav navItems={navItemsWithIcons} />;
   }

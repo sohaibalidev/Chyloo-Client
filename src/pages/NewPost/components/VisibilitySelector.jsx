@@ -1,5 +1,5 @@
 import { Globe, Users, Lock } from 'lucide-react';
-import styles from '../styles/components.module.css';
+import styles from '../styles/visibilitySelector.module.css';
 
 const VisibilitySelector = ({ value, onChange }) => {
   const options = [
@@ -28,7 +28,12 @@ const VisibilitySelector = ({ value, onChange }) => {
       <label className={styles.label}>Visibility</label>
       <div className={styles.visibilityOptions}>
         {options.map((option) => (
-          <label key={option.value} className={styles.visibilityOption}>
+          <label
+            key={option.value}
+            className={`${styles.visibilityOption} ${
+              value === option.value ? styles.selected : ''
+            }`}
+          >
             <input
               type='radio'
               value={option.value}

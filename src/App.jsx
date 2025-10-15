@@ -6,7 +6,7 @@ import useServerStatus from '@/hooks/useServerStatus';
 import OfflineScreen from '@/components/OfflineScreen';
 import ServerDownScreen from '@/components/ServerDownScreen';
 import { ThemeProvider } from '@/context/ThemeContext';
-import './app.css';
+import './styles/app.css';
 
 export default function App() {
   const isOnline = useOnlineStatus();

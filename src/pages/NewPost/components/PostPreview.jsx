@@ -1,5 +1,5 @@
 import { Globe, Users, Lock, Heart, MessageCircle, User, Image, Video, File } from 'lucide-react';
-import styles from '../styles/components.module.css';
+import styles from '../styles/postPreview.module.css';
 
 const PostPreview = ({ caption, media, visibility }) => {
   const getVisibilityIcon = (vis) => {

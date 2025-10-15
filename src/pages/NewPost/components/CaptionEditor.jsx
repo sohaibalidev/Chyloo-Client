@@ -1,5 +1,5 @@
 import { Edit3 } from 'lucide-react';
-import styles from '../styles/components.module.css';
+import styles from '../styles/captionEditor.module.css';
 
 const CaptionEditor = ({ value, onChange, placeholder }) => {
   return (
