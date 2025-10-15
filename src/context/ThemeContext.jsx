@@ -1,14 +1,17 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { useAuth } from '@/context/AuthContext';
+import { BASE_URL } from '@/config/app.config';
 import '@/styles/theme.css';
 
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
+  const { user, loading } = useAuth();
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     const root = document.documentElement;
-
     const themes = {
       dark: {
         '--primary-color': '#1a1a1a',
@@ -51,9 +54,43 @@ export function ThemeProvider({ children }) {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  useEffect(() => {
+    if (!loading && user?.settings?.theme) {
+      setTheme(user.settings.theme);
+    }
+  }, [user, loading]);
 
-  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
+  const toggleTheme = async () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+
+    if (user?._id) {
+      try {
+        setIsSaving(true);
+        const res = await fetch(`${BASE_URL}/api/users/settings`, {
+          method: 'PATCH',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ theme: newTheme }),
+        });
+
+        if (!res.ok) throw new Error('Failed to update theme setting');
+      } catch (err) {
+        console.error('Theme sync failed:', err);
+      } finally {
+        setIsSaving(false);
+      }
+    }
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme, isSaving }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 }
 
 export const useTheme = () => useContext(ThemeContext);

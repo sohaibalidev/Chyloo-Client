@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '@/config/app.config';
-import { ArrowLeft, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import CaptionEditor from './components/CaptionEditor';
 import MediaUpload from './components/MediaUpload';
 import VisibilitySelector from './components/VisibilitySelector';
@@ -68,14 +68,6 @@ const NewPost = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <button onClick={() => navigate(-1)} className={styles.backButton}>
-          <ArrowLeft size={20} />
-        </button>
-        <h1 className={styles.title}>Create New Post</h1>
-        <p className={styles.subtitle}>Share your thoughts with the world</p>
-      </div>
-
       <div className={styles.content}>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.editorSection}>

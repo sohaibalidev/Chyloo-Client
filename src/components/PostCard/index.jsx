@@ -47,7 +47,7 @@ const PostCard = ({ post }) => {
   return (
     <div className={styles.postCard}>
       <div className={styles.postHeader}>
-        <UserCard user={post.user} showName={false} />
+        <UserCard user={post.user} showUsername={false} showName={true} />
 
         <button className={styles.postMore}>
           <MoreHorizontal size={20} />

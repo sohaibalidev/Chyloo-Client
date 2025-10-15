@@ -48,7 +48,7 @@ const UserCard = ({
       } ${getSizeClass()} ${className}`}
     >
       {user.avatar ? (
-        <img src={user.avatar} alt={user.name} />
+        <img src={user.avatar} alt={user.name || user.username} />
       ) : (
         <div
           className={styles.avatarFallback}
@@ -57,23 +57,25 @@ const UserCard = ({
           {user.username?.charAt(0).toUpperCase()}
         </div>
       )}
-      <div>
+
+      <div className={styles.infoContainer}>
         {showName && user.name && (
           <div className={styles.nameContainer}>
             <h3 className={styles.userName}>{user.name}</h3>
-            {user.isVerified && (
+            {isVerified && user.isVerified && (
               <span className={styles.verifiedBadge}>
-                <CheckCircle size={16} stroke='var(--primary-accent)' fill='none' strokeWidth={2} />
+                <CheckCircle
+                  size={getVerifiedIconSize()}
+                  stroke='var(--primary-accent)'
+                  fill='none'
+                  strokeWidth={2}
+                />
               </span>
             )}
           </div>
         )}
 
-        {showUsername && !showName && user.username ? (
-          <p className={styles.userName}>{user.username}</p>
-        ) : (
-          <p className={styles.userUsername}>@{user.username}</p>
-        )}
+        {showUsername && user.username && <p className={styles.userUsername}>@{user.username}</p>}
       </div>
     </div>
   );
