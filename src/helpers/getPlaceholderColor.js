@@ -17,7 +17,7 @@ const getPlaceholderColor = (username) => {
     '#B53471',
   ];
 
-  if (!username) return colors[0];
+  if (!username)  return colors[0];
 
   let hash = 0;
   for (let i = 0; i < username.length; i++) {
