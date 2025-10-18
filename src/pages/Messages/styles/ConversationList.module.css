@@ -1,7 +1,6 @@
 .conversationList {
   width: 380px;
   background: transparent;
-
   border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
@@ -260,14 +259,52 @@
     font-size: 1.25rem;
   }
 
-  .conversationItem {
-    padding: 1rem;
-    gap: 0.875rem;
+  .searchInput {
+    padding: 0.7rem 0.9rem 0.7rem 2.5rem;
+    font-size: 0.9rem;
   }
 
-  .avatar {
+  .searchIcon {
+    left: 0.9rem;
+  }
+
+  .searchIcon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .conversationItem {
+    padding: 0.9rem 1rem;
+    gap: 0.8rem;
+  }
+
+  .avatar,
+  .profileAvatarPlaceholder {
     width: 48px;
     height: 48px;
+  }
+
+  .profileAvatarPlaceholder {
+    font-size: 1.2rem;
+  }
+
+  .conversationName {
+    font-size: 0.95rem;
+  }
+
+  .time {
+    font-size: 0.75rem;
+  }
+
+  .lastText,
+  .noMessages {
+    font-size: 0.85rem;
+  }
+
+  .unreadBadge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.4rem;
+    min-width: 18px;
   }
 
   .noResults {
@@ -276,5 +313,97 @@
 
   .noResultsIcon {
     font-size: 2rem;
+  }
+
+  .noResultsIcon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .noResults p {
+    font-size: 0.95rem;
+  }
+
+  .noResultsHint {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 1rem 0.8rem 0.8rem;
+  }
+
+  .header h2 {
+    font-size: 1.1rem;
+  }
+
+  .searchInput {
+    padding: 0.6rem 0.8rem 0.6rem 2.3rem;
+    font-size: 0.85rem;
+  }
+
+  .searchIcon {
+    left: 0.8rem;
+  }
+
+  .searchIcon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .conversationItem {
+    padding: 0.8rem 0.8rem;
+    gap: 0.7rem;
+  }
+
+  .avatar,
+  .profileAvatarPlaceholder {
+    width: 44px;
+    height: 44px;
+  }
+
+  .profileAvatarPlaceholder {
+    font-size: 1.1rem;
+  }
+
+  .conversationName {
+    font-size: 0.9rem;
+  }
+
+  .time {
+    font-size: 0.7rem;
+  }
+
+  .lastText,
+  .noMessages {
+    font-size: 0.8rem;
+  }
+
+  .unreadBadge {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.3rem;
+    min-width: 16px;
+  }
+
+  .noResults {
+    padding: 1.5rem 1rem;
+  }
+
+  .noResultsIcon {
+    font-size: 1.8rem;
+  }
+
+  .noResultsIcon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .noResults p {
+    font-size: 0.9rem;
+  }
+
+  .noResultsHint {
+    font-size: 0.75rem;
   }
 }

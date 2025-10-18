@@ -1,8 +1,16 @@
 .postCard {
+  cursor: pointer;
   background-color: var(--dark-card);
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   overflow: hidden;
   box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.25s ease, opacity 0.2s ease;
+}
+
+.postCard:hover {
+  opacity: 0.97;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-hover, 0 4px 12px rgba(0, 0, 0, 0.25));
 }
 
 .postHeader {
@@ -41,9 +49,9 @@
 }
 
 .mediaIndicator {
+  border-radius: 50%;
   width: 6px;
   height: 6px;
-  border-radius: 50%;
   background: rgba(255, 255, 255, 0.6);
   transition: all 0.3s ease;
   cursor: pointer;
@@ -58,9 +66,9 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  border-radius: 50%;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
   background: rgba(255, 255, 255, 0.8);
   border: none;
   display: flex;
@@ -232,7 +240,6 @@
 .videoPlayBtn {
   background: rgba(0, 0, 0, 0.5);
   border: none;
-  border-radius: 50%;
   width: 60px;
   height: 60px;
   display: flex;
@@ -262,12 +269,30 @@ video::-webkit-media-controls-enclosure {
 
 @media (max-width: 768px) {
   .postCard {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+  }
+
+  .postHeader {
+    padding: 10px 12px;
+    min-height: 44px;
+  }
+
+  .postMore {
+    padding: 4px;
+  }
+
+  .mediaIndicators {
+    bottom: 8px;
+  }
+
+  .mediaIndicator {
+    width: 4px;
+    height: 4px;
   }
 
   .navBtn {
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
   }
 
   .navBtnLeft {
@@ -278,12 +303,194 @@ video::-webkit-media-controls-enclosure {
     right: 8px;
   }
 
+  .postActions {
+    padding: 8px 12px;
+    gap: 0;
+    min-height: 40px;
+  }
+
+  .actionBtn {
+    padding: 4px;
+  }
+
+  .postLikes {
+    padding: 0 12px;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+
+  .postCaption {
+    padding: 0 12px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    line-height: 1.3;
+  }
+
+  .postUsername {
+    font-size: 13px;
+  }
+
+  .postComments {
+    padding: 0 12px;
+    margin-bottom: 6px;
+  }
+
+  .comment {
+    margin-bottom: 3px;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .commentUsername {
+    font-size: 12px;
+    margin-right: 4px;
+  }
+
+  .viewAllComments {
+    margin-top: 3px;
+    font-size: 11px;
+  }
+
+  .postTime {
+    padding: 0 12px 12px;
+    font-size: 9px;
+  }
+
   .videoPlayBtn {
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
   }
 
   .videoControls {
     opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .postCard {
+    margin-bottom: 10px;
+  }
+
+  .postHeader {
+    padding: 8px 10px;
+    min-height: 40px;
+  }
+
+  .postActions {
+    padding: 6px 10px;
+    gap: 0;
+    min-height: 36px;
+  }
+
+  .postLikes {
+    padding: 0 10px;
+    margin-bottom: 4px;
+    font-size: 12px;
+  }
+
+  .postCaption {
+    padding: 0 10px;
+    margin-bottom: 4px;
+    font-size: 12px;
+  }
+
+  .postUsername {
+    font-size: 12px;
+  }
+
+  .postComments {
+    padding: 0 10px;
+    margin-bottom: 4px;
+  }
+
+  .comment {
+    font-size: 11px;
+    margin-bottom: 2px;
+  }
+
+  .commentUsername {
+    font-size: 11px;
+  }
+
+  .viewAllComments {
+    font-size: 10px;
+  }
+
+  .postTime {
+    padding: 0 10px 10px;
+    font-size: 8px;
+  }
+
+  .navBtn {
+    width: 22px;
+    height: 22px;
+  }
+
+  .navBtnLeft {
+    left: 6px;
+  }
+
+  .navBtnRight {
+    right: 6px;
+  }
+
+  .videoPlayBtn {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@supports (padding: max(0px)) {
+
+  .postHeader,
+  .postActions,
+  .postLikes,
+  .postCaption,
+  .postComments,
+  .postTime {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+
+  @media (max-width: 768px) {
+
+    .postHeader,
+    .postActions,
+    .postLikes,
+    .postCaption,
+    .postComments,
+    .postTime {
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+    }
+  }
+
+  @media (max-width: 480px) {
+
+    .postHeader,
+    .postActions,
+    .postLikes,
+    .postCaption,
+    .postComments,
+    .postTime {
+      padding-left: max(10px, env(safe-area-inset-left));
+      padding-right: max(10px, env(safe-area-inset-right));
+    }
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+
+  .actionBtn,
+  .postMore,
+  .navBtn,
+  .videoPlayBtn {
+    min-height: 30px;
+    min-width: 30px;
+  }
+
+  .mediaIndicator {
+    min-width: 6px;
+    min-height: 6px;
   }
 }

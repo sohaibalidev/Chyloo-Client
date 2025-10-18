@@ -64,11 +64,63 @@
 }
 
 @media (max-width: 768px) {
+  .profileContainer {
+    padding: 20px 15px;
+  }
+
+  .profileSkeleton {
+    padding: 15px;
+  }
+
   .profileHeaderSkeleton {
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 20px;
+    margin-bottom: 25px;
+  }
+
+  .profileAvatarSkeleton {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profileInfoSkeleton {
+    gap: 10px;
+    align-items: center;
+  }
+
+  .profileSkeletonLine {
+    height: 20px;
+  }
+
+  .profileSkeletonLine.short {
+    width: 40%;
+  }
+
+  .profileStatsSkeleton {
+    gap: 25px;
+    justify-content: center;
+  }
+
+  .profileStatSkeleton {
+    width: 70px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profileContainer {
+    padding: 15px 10px;
+  }
+
+  .profileSkeleton {
+    padding: 12px;
+  }
+
+  .profileHeaderSkeleton {
+    gap: 15px;
+    margin-bottom: 20px;
   }
 
   .profileAvatarSkeleton {
@@ -76,7 +128,45 @@
     height: 100px;
   }
 
+  .profileInfoSkeleton {
+    gap: 8px;
+  }
+
+  .profileSkeletonLine {
+    height: 18px;
+  }
+
+  .profileSkeletonLine.short {
+    width: 35%;
+  }
+
   .profileStatsSkeleton {
-    justify-content: center;
+    gap: 20px;
+  }
+
+  .profileStatSkeleton {
+    width: 60px;
+    height: 30px;
+  }
+}
+
+@supports (padding: max(0px)) {
+  .profileContainer {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+  
+  @media (max-width: 768px) {
+    .profileContainer {
+      padding-left: max(15px, env(safe-area-inset-left));
+      padding-right: max(15px, env(safe-area-inset-right));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .profileContainer {
+      padding-left: max(10px, env(safe-area-inset-left));
+      padding-right: max(10px, env(safe-area-inset-right));
+    }
   }
 }

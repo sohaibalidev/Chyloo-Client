@@ -1,16 +1,35 @@
 import { NavLink } from 'react-router-dom';
+import { Menu } from 'lucide-react';
+import styles from '../index.module.css';
 
-const BottomNav = ({ navItems }) => {
+const BottomNav = ({ navItems, onMenuClick }) => {
+  const bottomNavItems = navItems.filter(item =>
+    ['Home', 'Search', 'PlusSquare', 'Notifications', 'Profile'].includes(item.icon)
+  );
+
   return (
-    <nav className='bottom-nav'>
-      {navItems.map(({ to, label, icon }) => (
+    <nav className={styles.bottomNav} aria-label="Mobile navigation">
+      <button
+        className={`${styles.bottomNavLink} ${styles.bottomNavButton}`}
+        onClick={onMenuClick}
+        aria-label="Open menu"
+      >
+        <Menu size={20} />
+        <span className={styles.bottomNavLabel}>Menu</span>
+      </button>
+
+      {bottomNavItems.map(({ to, label, icon }) => (
         <NavLink
           key={to}
           to={to}
-          className={({ isActive }) => `bottom-nav-link ${isActive ? 'active' : ''}`}
+          className={({ isActive }) =>
+            `${styles.bottomNavLink} ${isActive ? styles.active : ''}`
+          }
+          aria-label={label}
+          end={to === '/'}
         >
           {icon}
-          <span className='bottom-nav-label'>{label}</span>
+          <span className={styles.bottomNavLabel}>{label}</span>
         </NavLink>
       ))}
     </nav>

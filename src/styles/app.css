@@ -18,7 +18,7 @@
 ::-webkit-scrollbar-thumb {
   background: rgba(212, 175, 55, 0.3);
   border: 2px solid var(--dark-card);
-} 
+}
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-accent);
@@ -163,4 +163,74 @@ body::before {
   to {
     transform: rotate(360deg);
   }
+}
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--dark-bg);
+  position: relative;
+}
+
+.app-content {
+  flex: 1;
+  padding: 1.25rem;
+  transition: var(--transition);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .app-shell {
+    padding-bottom: 70px;
+  }
+
+  .app-content {
+    padding: 0.85rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-shell {
+    padding-bottom: 60px;
+  }
+
+  .app-content {
+    padding: 0.6rem;
+    padding-bottom: 1.25rem;
+  }
+}
+
+/* ------------------------------ */
+/* Disable blue click highlight globally */
+/* ------------------------------ */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+button,
+a {
+  background-color: transparent;
+}
+
+/* ------------------------------ */
+/* Disable underline on all links (including React Router <Link>) */
+/* ------------------------------ */
+a,
+a:visited,
+a:focus,
+a:active {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
 }

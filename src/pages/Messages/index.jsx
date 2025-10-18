@@ -3,10 +3,10 @@ import { useAuth } from '@/context/AuthContext';
 import { BASE_URL } from '@/config/app.config.js';
 import { MessageSquare, X } from 'lucide-react';
 import { io } from 'socket.io-client';
+import debounce from 'lodash/debounce';
 import ConversationList from './components/ConversationList';
 import MessageArea from './components/MessageArea';
 import MessageInput from './components/MessageInput';
-import debounce from 'lodash/debounce';
 import styles from './styles/index.module.css';
 
 const Messages = () => {

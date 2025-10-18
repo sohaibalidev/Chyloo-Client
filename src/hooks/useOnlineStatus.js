@@ -1,24 +1,22 @@
-import { useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function useServerStatus(url) {
-  const [isServerOnline, setIsServerOnline] = useState(false);
-  const [isChecking, setIsChecking] = useState(false);
+export default function useOnlineStatus() {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
-  const checkServerStatus = useCallback(async () => {
-    setIsChecking(true);
-    try {
-      const res = await fetch(url, {
-        headers: { 'Content-Type': 'application/json' },
-        signal: AbortSignal.timeout(5000),
-      });
-      const data = await res.json();
-      setIsServerOnline(res.ok && data.status === 'ok');
-    } catch {
-      setIsServerOnline(false);
-    } finally {
-      setIsChecking(false);
-    }
-  }, [url]);
+  useEffect(() => {
+    const updateOnlineStatus = () => setIsOnline(navigator.onLine);
 
-  return { isServerOnline, isChecking, checkServerStatus };
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+
+    // Initial check
+    updateOnlineStatus();
+
+    return () => {
+      window.removeEventListener('online', updateOnlineStatus);
+      window.removeEventListener('offline', updateOnlineStatus);
+    };
+  }, []);
+
+  return isOnline;
 }

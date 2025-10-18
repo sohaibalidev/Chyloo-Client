@@ -1,4 +1,5 @@
 import { Grid, List, Bookmark, Users } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import PostCard from '@/components/PostCard';
 import styles from '../styles/ProfileContent.module.css';
 
@@ -12,8 +13,15 @@ const ProfileContent = ({
   onTabChange,
   onViewModeChange,
 }) => {
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
   const displayPosts = activeTab === 'posts' ? posts : savedPosts;
   const isEmpty = displayPosts.length === 0;
+
+  useEffect(() => {
+    const handleResize = () => setIsDesktop(window.innerWidth > 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <div className={styles.profileContent}>
@@ -24,7 +32,12 @@ const ProfileContent = ({
           showSaved={!!currentUser && currentUser._id === user._id}
         />
 
-        <ProfileViewOptions viewMode={viewMode} onViewModeChange={onViewModeChange} />
+        {isDesktop && (
+          <ProfileViewOptions
+            viewMode={viewMode}
+            onViewModeChange={onViewModeChange}
+          />
+        )}
       </div>
 
       <div className={`${styles.profilePostsContainer} ${styles[viewMode]}`}>

@@ -133,6 +133,17 @@
   .errorBanner {
     margin: 0.5rem;
     padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .closeError {
+    width: 24px;
+    height: 24px;
+  }
+
+  .closeError svg {
+    width: 16px;
+    height: 16px;
   }
 
   .noConversation {
@@ -144,7 +155,107 @@
     margin-bottom: 1rem;
   }
 
+  .noConversationIcon svg {
+    width: 36px;
+    height: 36px;
+  }
+
   .noConversation h3 {
     font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .noConversation p {
+    font-size: 0.9rem;
+  }
+
+  .loadingContainer {
+    gap: 0.8rem;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 2.5px;
+  }
+
+  .loadingContainer p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .messagesLayout {
+    height: calc(100vh - 60px);
+    margin: 0.25rem;
+  }
+
+  .errorBanner {
+    margin: 0.25rem;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .closeError {
+    width: 22px;
+    height: 22px;
+  }
+
+  .closeError svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .noConversation {
+    padding: 1.5rem 1rem;
+  }
+
+  .noConversationIcon {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .noConversationIcon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .noConversation h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .noConversation p {
+    font-size: 0.85rem;
+  }
+
+  .loadingContainer {
+    gap: 0.6rem;
+  }
+
+  .spinner {
+    width: 36px;
+    height: 36px;
+    border-width: 2px;
+  }
+
+  .loadingContainer p {
+    font-size: 0.85rem;
+  }
+}
+
+@supports (padding: max(0px)) {
+  .messagesLayout {
+    margin-left: max(0.5rem, env(safe-area-inset-left));
+    margin-right: max(0.5rem, env(safe-area-inset-right));
+    margin-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+  
+  @media (max-width: 480px) {
+    .messagesLayout {
+      margin-left: max(0.25rem, env(safe-area-inset-left));
+      margin-right: max(0.25rem, env(safe-area-inset-right));
+      margin-bottom: max(0.25rem, env(safe-area-inset-bottom));
+    }
   }
 }

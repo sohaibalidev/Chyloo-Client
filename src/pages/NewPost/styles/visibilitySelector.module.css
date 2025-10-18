@@ -82,3 +82,67 @@
   color: var(--primary-accent);
   position: relative;
 }
+
+@media (max-width: 768px) {
+  .visibilitySelector {
+    margin-bottom: 1.5rem;
+  }
+
+  .visibilityOptions {
+    gap: 0.4rem;
+  }
+
+  .visibilityOption {
+    padding: 0.8rem;
+  }
+
+  .optionContent {
+    gap: 0.8rem;
+  }
+
+  .optionIcon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .optionLabel {
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .optionDescription {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .visibilitySelector {
+    margin-bottom: 1.25rem;
+  }
+
+  .visibilityOptions {
+    gap: 0.3rem;
+  }
+
+  .visibilityOption {
+    padding: 0.7rem;
+  }
+
+  .optionContent {
+    gap: 0.7rem;
+  }
+
+  .optionIcon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .optionLabel {
+    font-size: 0.85rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .optionDescription {
+    font-size: 0.75rem;
+  }
+}

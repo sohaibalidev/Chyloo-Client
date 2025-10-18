@@ -1,0 +1,38 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.statusCard {
+    background: var(--dark-card);
+    padding: 2.5rem;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.statusIcon {
+    margin-bottom: 1.5rem;
+}
+
+.statusIconError {
+    color: var(--error);
+}
+
+.statusTitle {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.statusDescription {
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}

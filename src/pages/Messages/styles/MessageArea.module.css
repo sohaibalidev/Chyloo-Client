@@ -456,55 +456,6 @@
   outline-offset: 2px;
 }
 
-@media (max-width: 768px) {
-  .message {
-    max-width: 88%;
-  }
-
-  .mediaImage,
-  .mediaVideo {
-    max-width: 240px;
-    max-height: 240px;
-  }
-
-  .chatHeader {
-    padding: 1rem 1.25rem;
-  }
-
-  .messagesContainer {
-    padding: 1rem 1.25rem;
-  }
-
-  .chatAvatar,
-  .profileAvatarPlaceholder {
-    width: 46px;
-    height: 46px;
-    font-size: 1.2rem;
-  }
-
-  .chatName {
-    font-size: 1.1rem;
-  }
-
-  .textContent {
-    padding: 0.75rem 1rem;
-    font-size: 0.9rem;
-  }
-
-  .noMessages {
-    padding: 2rem 1.5rem;
-  }
-
-  .noMessagesIcon {
-    font-size: 3rem;
-  }
-
-  .noMessages h4 {
-    font-size: 1.25rem;
-  }
-}
-
-/* Media Popup Styles */
 .mediaPopup {
   position: fixed;
   top: 0;
@@ -559,7 +510,6 @@
   border-radius: 12px;
 }
 
-/* Video Player Styles */
 .videoContainer {
   position: relative;
   display: inline-block;
@@ -663,7 +613,6 @@
   transition: width 0.1s ease;
 }
 
-/* Media item hover effects */
 .mediaImage {
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -674,8 +623,109 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Mobile responsive styles for popup */
+.popupVideo::-webkit-media-controls {
+  display: none !important;
+}
+
+.popupVideo {
+  -webkit-appearance: none;
+}
+
 @media (max-width: 768px) {
+  .message {
+    max-width: 88%;
+  }
+
+  .mediaImage,
+  .mediaVideo {
+    max-width: 240px;
+    max-height: 240px;
+  }
+
+  .chatHeader {
+    padding: 1rem 1.25rem;
+  }
+
+  .messagesContainer {
+    padding: 1rem 1.25rem;
+  }
+
+  .chatAvatar,
+  .profileAvatarPlaceholder {
+    width: 46px;
+    height: 46px;
+    font-size: 1.2rem;
+  }
+
+  .chatName {
+    font-size: 1.1rem;
+  }
+
+  .textContent {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .noMessages {
+    padding: 2rem 1.5rem;
+  }
+
+  .noMessagesIcon {
+    font-size: 3rem;
+  }
+
+  .noMessagesIcon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .noMessages h4 {
+    font-size: 1.25rem;
+  }
+
+  .noMessages p {
+    font-size: 0.9rem;
+  }
+
+  .messageAvatar,
+  .messageAvatarPlaceholder {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .senderName {
+    font-size: 0.8rem;
+  }
+
+  .messageMeta {
+    font-size: 0.75rem;
+  }
+
+  .typingIndicator {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  .typingDots span {
+    width: 6px;
+    height: 6px;
+  }
+
+  .dateSeparator {
+    margin: 1rem 0;
+    font-size: 0.8rem;
+  }
+
+  .dateSeparator::before {
+    left: 1rem;
+    right: 1rem;
+  }
+
+  .dateSeparator span {
+    padding: 0.4rem 1rem;
+  }
+
   .mediaPopupContent {
     max-width: 95vw;
     max-height: 95vh;
@@ -686,28 +736,186 @@
     right: 50%;
     transform: translateX(50%);
     background: rgba(255, 255, 255, 0.2);
+    width: 36px;
+    height: 36px;
+  }
+
+  .closeButton svg {
+    width: 18px;
+    height: 18px;
   }
 
   .videoControls {
     padding: 1rem;
-    opacity: 1; /* Always show controls on mobile */
+    opacity: 1;
     background: rgba(0, 0, 0, 0.7);
   }
 
   .controlButton {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .controlButton svg {
+    width: 16px;
+    height: 16px;
   }
 
   .popupVideo {
     max-height: 60vh;
   }
+
+  .mediaFile {
+    max-width: 240px;
+    padding: 0.8rem 1rem;
+  }
+
+  .fileLink {
+    font-size: 0.85rem;
+  }
 }
 
-.popupVideo::-webkit-media-controls {
-  display: none !important;
+@media (max-width: 480px) {
+  .chatHeader {
+    padding: 0.8rem 1rem;
+  }
+
+  .messagesContainer {
+    padding: 0.8rem 1rem;
+  }
+
+  .chatAvatar,
+  .profileAvatarPlaceholder {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .chatName {
+    font-size: 1rem;
+  }
+
+  .memberCount {
+    font-size: 0.8rem;
+  }
+
+  .message {
+    max-width: 92%;
+    gap: 0.6rem;
+  }
+
+  .textContent {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .mediaImage,
+  .mediaVideo {
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .noMessages {
+    padding: 1.5rem 1rem;
+  }
+
+  .noMessagesIcon {
+    font-size: 2.5rem;
+  }
+
+  .noMessagesIcon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .noMessages h4 {
+    font-size: 1.1rem;
+  }
+
+  .noMessages p {
+    font-size: 0.85rem;
+  }
+
+  .messageAvatar,
+  .messageAvatarPlaceholder {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+
+  .senderName {
+    font-size: 0.75rem;
+  }
+
+  .messageMeta {
+    font-size: 0.7rem;
+    gap: 0.5rem;
+  }
+
+  .typingIndicator {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    gap: 0.6rem;
+  }
+
+  .dateSeparator {
+    font-size: 0.75rem;
+    margin: 0.8rem 0;
+  }
+
+  .dateSeparator span {
+    padding: 0.3rem 0.8rem;
+  }
+
+  .mediaFile {
+    max-width: 200px;
+    padding: 0.6rem 0.8rem;
+    gap: 0.6rem;
+  }
+
+  .fileIcon {
+    font-size: 1.1rem;
+  }
+
+  .fileLink {
+    font-size: 0.8rem;
+  }
+
+  .contextMenu {
+    min-width: 140px;
+  }
+
+  .contextMenuItem {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .contextMenuItem svg {
+    width: 14px;
+    height: 14px;
+  }
 }
 
-.popupVideo {
-  -webkit-appearance: none;
+@supports (padding: max(0px)) {
+  .messagesContainer {
+    padding-left: max(2rem, env(safe-area-inset-left));
+    padding-right: max(2rem, env(safe-area-inset-right));
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+  
+  @media (max-width: 768px) {
+    .messagesContainer {
+      padding-left: max(1.25rem, env(safe-area-inset-left));
+      padding-right: max(1.25rem, env(safe-area-inset-right));
+      padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .messagesContainer {
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+  }
 }

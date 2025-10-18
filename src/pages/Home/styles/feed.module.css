@@ -55,6 +55,98 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 768px) {
+  .postSkeleton {
+    margin-bottom: 16px;
+    padding: 14px;
+  }
+
+  .caughtUp {
+    margin: 1.5rem auto;
+    padding: 1.25rem;
+  }
+
+  .caughtUpIcon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 10px;
+  }
+
+  .caughtUpIcon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .caughtUp h3 {
+    font-size: 0.9rem;
+  }
+
+  .caughtUp p {
+    font-size: 0.8rem;
+    margin: 4px 0 0;
+  }
+
+  .loadingPosts,
+  .noMorePosts {
+    padding: 1.25rem;
+    margin: 0.8rem 0;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .postSkeleton {
+    margin-bottom: 14px;
+    padding: 12px;
+  }
+
+  .caughtUp {
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+
+  .caughtUpIcon {
+    width: 44px;
+    height: 44px;
+    margin: 0 auto 8px;
+  }
+
+  .caughtUpIcon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .caughtUp h3 {
+    font-size: 0.85rem;
+  }
+
+  .caughtUp p {
+    font-size: 0.75rem;
+    margin: 3px 0 0;
+  }
+
+  .loadingPosts,
+  .noMorePosts {
+    padding: 1rem;
+    margin: 0.6rem 0;
+    font-size: 0.85rem;
+  }
+}
+
+@supports (padding: max(0px)) {
+  .feedContainer {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
 }

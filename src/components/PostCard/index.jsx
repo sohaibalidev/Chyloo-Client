@@ -13,6 +13,7 @@ import styles from './index.module.css';
 import { usePostCard } from './postCard';
 import UserCard from '@/components/UserCard';
 import { Link } from 'react-router-dom';
+import enhanceText from '@/helpers/enhanceText';
 
 const PostCard = ({ post }) => {
   const {
@@ -50,7 +51,7 @@ const PostCard = ({ post }) => {
         <UserCard user={post.user} showUsername={false} showName={true} />
 
         <button className={styles.postMore}>
-          <MoreHorizontal size={20} />
+          <MoreHorizontal size={18} />
         </button>
       </div>
 
@@ -61,9 +62,8 @@ const PostCard = ({ post }) => {
               {post.media.map((_, index) => (
                 <div
                   key={index}
-                  className={`${styles.mediaIndicator} ${
-                    activeMediaIndex === index ? styles.active : ''
-                  }`}
+                  className={`${styles.mediaIndicator} ${activeMediaIndex === index ? styles.active : ''
+                    }`}
                   onClick={() => scrollToMedia(index)}
                 ></div>
               ))}
@@ -77,7 +77,7 @@ const PostCard = ({ post }) => {
                   className={`${styles.navBtn} ${styles.navBtnLeft}`}
                   onClick={() => navigateMedia('prev')}
                 >
-                  <ChevronLeft size={20} />
+                  <ChevronLeft size={16} />
                 </button>
               )}
               {activeMediaIndex < post.media.length - 1 && (
@@ -85,7 +85,7 @@ const PostCard = ({ post }) => {
                   className={`${styles.navBtn} ${styles.navBtnRight}`}
                   onClick={() => navigateMedia('next')}
                 >
-                  <ChevronRight size={20} />
+                  <ChevronRight size={16} />
                 </button>
               )}
             </>
@@ -127,9 +127,9 @@ const PostCard = ({ post }) => {
                         }}
                       >
                         {videoStates[`post-${post._id}-${index}`]?.isPlaying ? (
-                          <Pause size={24} />
+                          <Pause size={20} />
                         ) : (
-                          <Play size={24} />
+                          <Play size={20} />
                         )}
                       </button>
                     </div>
@@ -143,26 +143,31 @@ const PostCard = ({ post }) => {
 
       <div className={styles.postActions}>
         <button className={styles.actionBtn} onClick={handleLike}>
-          <Heart size={24} fill={isLiked ? 'red' : 'none'} stroke={isLiked ? 'red' : 'white'} />
+          <Heart size={20} fill={isLiked ? 'red' : 'none'} stroke={isLiked ? 'red' : 'white'} />
         </button>
         <button className={styles.actionBtn}>
-          <MessageCircle size={24} />
+          <MessageCircle size={20} />
         </button>
         <button className={styles.actionBtn}>
-          <Send size={24} />
+          <Send size={20} />
         </button>
         <button className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={handleSave}>
-          <Bookmark size={24} fill={isSaved ? 'white' : 'none'} />
+          <Bookmark size={20} fill={isSaved ? 'white' : 'none'} />
         </button>
       </div>
 
       <div className={styles.postLikes}>{likesCount} likes</div>
 
       <div className={styles.postCaption}>
-        <Link to={`/profile/${post.user?.username || 'unknown'}`} className={styles.postUsername}>
+        <Link
+          to={`/profile/${post.user?.username || 'unknown'}`}
+          className={styles.postUsername}
+        >
           @{post.user?.username || 'unknown'}
         </Link>{' '}
-        {post.caption}
+        <span
+          dangerouslySetInnerHTML={{ __html: enhanceText(post.caption || '') }}
+        />
       </div>
 
       {post.comments && post.comments.length > 0 && (

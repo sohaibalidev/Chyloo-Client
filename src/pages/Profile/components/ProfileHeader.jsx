@@ -2,6 +2,7 @@ import { MessageCircle, UserCheck, UserPlus, Settings, CheckCircle, Calendar } f
 import { BASE_URL } from '@/config/app.config.js';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import enhanceText from '@/helpers/enhanceText'
 import getPlaceholderColor from '@/helpers/getPlaceholderColor';
 import EditProfile from './EditProfile';
 import styles from '../styles/ProfileHeader.module.css';
@@ -78,7 +79,12 @@ const ProfileHeader = ({
           </div>
 
           <p className={styles.profileUsername}>@{user.username}</p>
-          {user.bio && <p className={styles.profileBio}>{user.bio}</p>}
+          {user.bio && (
+            <p
+              className={styles.profileBio}
+              dangerouslySetInnerHTML={{ __html: enhanceText(user.bio) }}
+            />
+          )}
 
           <div className={styles.profileMeta}>
             <span className={styles.profileMetaItem}>

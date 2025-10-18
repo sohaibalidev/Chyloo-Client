@@ -33,3 +33,33 @@
   background: var(--primary-accent);
   box-shadow: var(--gold-glow);
 }
+
+@media (max-width: 768px) {
+  .searchTabs {
+    margin-bottom: 1rem;
+  }
+
+  .searchTab {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .searchActive::after {
+    height: 1.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchTabs {
+    margin-bottom: 0.8rem;
+  }
+
+  .searchTab {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .searchActive::after {
+    height: 1px;
+  }
+}

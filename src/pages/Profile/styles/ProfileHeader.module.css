@@ -39,6 +39,7 @@
 
 .profileNameSection {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 10px;
 }
@@ -212,31 +213,147 @@
     grid-template-columns: 1fr;
     text-align: center;
     gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .profileAvatar {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+  }
+
+  .profileAvatarPlaceholder {
+    font-size: 50px;
+  }
+
+  .profileName {
+    font-size: 20px;
+  }
+
+  .profileUsername {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .profileBio {
+    font-size: 13px;
+    margin: 6px 0;
+  }
+
+  .profileMeta {
+    gap: 12px;
+    margin: 6px 0;
+    justify-content: center;
+  }
+
+  .profileMetaItem {
+    font-size: 13px;
+  }
+
+  .profileMetaItem svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .profileStats {
+    gap: 16px;
+    margin-top: 6px;
+    justify-content: center;
+  }
+
+  .profileStatNumber {
+    font-size: 16px;
+  }
+
+  .profileStatLabel {
+    font-size: 13px;
+  }
+
+  .profileActions {
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .profileFollowBtn,
+  .profileMessageBtn,
+  .profileEditProfileBtn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .profileFollowBtn svg,
+  .profileMessageBtn svg,
+  .profileEditProfileBtn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .profileLoadingSpinner {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profileHeader {
+    gap: 16px;
+    margin-bottom: 25px;
   }
 
   .profileAvatar {
     width: 100px;
     height: 100px;
-    margin: 0 auto;
   }
 
-  .profileStats {
-    justify-content: center;
+  .profileAvatarPlaceholder {
+    font-size: 40px;
+  }
+
+  .profileName {
+    font-size: 20px;
+  }
+
+  .profileUsername {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  .profileBio {
+    font-size: 12px;
+    margin: 5px 0;
   }
 
   .profileMeta {
-    justify-content: center;
+    gap: 10px;
+    margin: 5px 0;
   }
 
-  .profileActions {
-    justify-content: center;
+  .profileMetaItem {
+    font-size: 12px;
   }
-}
 
-@media (max-width: 480px) {
+  .profileMetaItem svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .profileStats {
+    gap: 14px;
+    margin-top: 5px;
+  }
+
+  .profileStatNumber {
+    font-size: 15px;
+  }
+
+  .profileStatLabel {
+    font-size: 12px;
+  }
+
   .profileActions {
     flex-direction: column;
     width: 100%;
+    gap: 8px;
   }
 
   .profileFollowBtn,
@@ -244,5 +361,19 @@
   .profileEditProfileBtn {
     width: 100%;
     justify-content: center;
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .profileFollowBtn svg,
+  .profileMessageBtn svg,
+  .profileEditProfileBtn svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .profileLoadingSpinner {
+    width: 13px;
+    height: 13px;
   }
 }
