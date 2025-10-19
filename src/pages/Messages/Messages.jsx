@@ -36,11 +36,15 @@ const Messages = () => {
         setError('Failed to connect to chat server');
       });
 
+      socketRef.current.emit('joinUserRoom', user._id);
+
       socketRef.current.on('newMessage', handleNewMessage);
-      socketRef.current.on('messageSeen', handleMessageSeen);
+      socketRef.current.on('conversationSeen', handleConversationSeen);
       socketRef.current.on('messageDeleted', handleMessageDeleted);
       socketRef.current.on('userTyping', handleUserTyping);
       socketRef.current.on('userStoppedTyping', handleUserStoppedTyping);
+
+      socketRef.current.on('refreshConversationList', handleRefreshConversationList);
 
       return () => {
         if (socketRef.current) {
@@ -54,6 +58,8 @@ const Messages = () => {
     if (selectedConversation) {
       loadMessages(selectedConversation._id);
       joinConversation(selectedConversation._id);
+
+      markConversationAsSeen(selectedConversation._id);
     }
   }, [selectedConversation]);
 
@@ -85,6 +91,11 @@ const Messages = () => {
     }
   };
 
+  const handleRefreshConversationList = useCallback(() => {
+    console.log('Refreshing conversation list...');
+    loadConversations();
+  }, []);
+
   const loadMessages = async (chatId) => {
     setMessagesLoading(true);
     try {
@@ -94,25 +105,29 @@ const Messages = () => {
       if (!response.ok) throw new Error('Failed to load messages');
       const { messages: data } = await response.json();
       setMessages(data);
-
-      // Mark unread messages as seen
-      const unreadMessages = data.filter(
-        (msg) =>
-          msg.senderId._id !== user?._id &&
-          (!msg.seenBy || !msg.seenBy.some((seenUser) => seenUser._id === user?._id))
-      );
-
-      if (unreadMessages.length > 0) {
-        unreadMessages.forEach((msg) => {
-          markAsSeen(msg._id);
-        });
-      }
     } catch (err) {
       setError(err.message);
     } finally {
       setMessagesLoading(false);
     }
   };
+
+  const markConversationAsSeen = useRef(
+    debounce(async (chatId) => {
+      try {
+        await fetch(`${BASE_URL}/api/messages/seen`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ chatId }),
+        });
+      } catch (err) {
+        console.error('Failed to mark conversation as seen:', err);
+      }
+    }, 300)
+  ).current;
 
   const joinConversation = (chatId) => {
     if (socketRef.current) {
@@ -127,25 +142,29 @@ const Messages = () => {
   };
 
   const handleNewMessage = useCallback(
-    (message) => {
+    (data) => {
+      const { message, conversationStatus } = data;
+
       setMessages((prev) => {
-        // Check if message already exists to avoid duplicates
         if (prev.some((msg) => msg._id === message._id)) {
           return prev;
         }
         return [...prev, message];
       });
 
-      if (message.senderId._id !== user?._id && message.chatId === selectedConversation?._id) {
-        markAsSeen(message._id);
-      }
-      updateConversationList(message);
+      updateConversationList(message, conversationStatus);
     },
     [user, selectedConversation]
   );
 
-  const handleMessageSeen = useCallback(({ messageId, seenBy }) => {
-    setMessages((prev) => prev.map((msg) => (msg._id === messageId ? { ...msg, seenBy } : msg)));
+  const handleConversationSeen = useCallback(({ chatId, seenBy, userId }) => {
+    setConversations(prev =>
+      prev.map(conv =>
+        conv._id === chatId
+          ? { ...conv, seenBy, hasNewMessages: !seenBy.includes(userId) }
+          : conv
+      )
+    );
   }, []);
 
   const handleMessageDeleted = useCallback(({ messageId }) => {
@@ -177,31 +196,20 @@ const Messages = () => {
     });
   }, []);
 
-  const updateConversationList = useCallback((message) => {
+  const updateConversationList = useCallback((message, conversationStatus) => {
     setConversations((prev) => {
       const otherConversations = prev.filter((conv) => conv._id !== message.chatId._id);
       return [
         {
           ...message.chatId,
           lastMessage: message,
+          seenBy: conversationStatus?.seenBy || [],
+          hasNewMessages: conversationStatus?.hasNewMessages || false
         },
         ...otherConversations,
       ];
     });
   }, []);
-
-  const markAsSeen = useRef(
-    debounce(async (messageId) => {
-      try {
-        await fetch(`${BASE_URL}/api/messages/${messageId}/seen`, {
-          method: 'POST',
-          credentials: 'include',
-        });
-      } catch (err) {
-        console.error('Failed to mark as seen:', err);
-      }
-    }, 300)
-  ).current;
 
   const sendMessage = async (text, media = []) => {
     if (!selectedConversation || !user) return;
@@ -230,7 +238,7 @@ const Messages = () => {
       return newMessage;
     } catch (err) {
       setError(err.message);
-      throw err; // Re-throw to handle in MessageInput component
+      throw err;
     }
   };
 
@@ -247,7 +255,7 @@ const Messages = () => {
       }
     } catch (err) {
       setError(err.message);
-      throw err; // Re-throw to handle in MessageArea component
+      throw err;
     }
   };
 

@@ -69,8 +69,9 @@ const ConversationList = ({
     return conversation.lastMessageId || conversation.lastMessage;
   };
 
-  const getUnreadCount = (conversation) => {
-    return conversation.unreadCount || 0;
+  // UPDATED: Get new message status
+  const getHasNewMessages = (conversation) => {
+    return conversation.hasNewMessages || false;
   };
 
   return (
@@ -98,7 +99,7 @@ const ConversationList = ({
           const displayInfo = getDisplayInfo(conversation);
           const isSelected = selectedConversation?._id === conversation._id;
           const lastMessage = getLastMessage(conversation);
-          const unreadCount = getUnreadCount(conversation);
+          const hasNewMessages = getHasNewMessages(conversation); // UPDATED
 
           return (
             <div
@@ -134,6 +135,11 @@ const ConversationList = ({
                     <span>Group</span>
                   </div>
                 )}
+
+                {/* UPDATED: New message indicator */}
+                {hasNewMessages && (
+                  <div className={styles.newMessageIndicator}></div>
+                )}
               </div>
 
               <div className={styles.conversationInfo}>
@@ -151,10 +157,9 @@ const ConversationList = ({
                         {lastMessage.text ||
                           (lastMessage.media?.length > 0 ? `Media` : 'Message sent')}
                       </span>
-                      {unreadCount > 0 && (
-                        <span className={styles.unreadBadge}>
-                          {unreadCount > 99 ? '99+' : unreadCount}
-                        </span>
+                      {/* UPDATED: Show new message indicator instead of count */}
+                      {hasNewMessages && (
+                        <span className={styles.newMessageBadge}>New</span>
                       )}
                     </>
                   ) : (

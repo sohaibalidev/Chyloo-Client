@@ -391,11 +391,7 @@ const MessageArea = ({
                         <span className={styles.messageTime}>
                           {formatMessageTime(message.createdAt)}
                         </span>
-                        {isMe && (
-                          <span className={styles.seenIndicator}>
-                            {message.seenBy && message.seenBy.length > 0 ? '✓✓ Seen' : '✓ Sent'}
-                          </span>
-                        )}
+                        {/* REMOVED: Seen indicator since it's now at conversation level */}
                       </div>
                     </div>
                   </div>

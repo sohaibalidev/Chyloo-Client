@@ -21,7 +21,23 @@ const NotificationsPage = () => {
 
     useEffect(() => {
         fetchNotifications();
+        setupSocketListeners();
+
+        return () => {
+            if (window.socket) {
+                window.socket.off('new_notification');
+            }
+        };
     }, []);
+
+    const setupSocketListeners = () => {
+        if (window.socket) {
+            window.socket.on('new_notification', (newNotification) => {
+                setNotifications(prev => [newNotification, ...prev]);
+                setUnreadCount(prev => prev + 1);
+            });
+        }
+    };
 
     const fetchNotifications = async (pageNum = 1, append = false) => {
         try {
@@ -51,7 +67,6 @@ const NotificationsPage = () => {
 
     const handleNotificationClick = async (notification) => {
         try {
-            // Get the action URL and redirect
             const response = await fetch(
                 `${BASE_URL}/api/notifications/${notification._id}/action`,
                 { credentials: 'include' }
@@ -102,50 +117,6 @@ const NotificationsPage = () => {
         }
     };
 
-    const handleAcceptFollow = async (notification, e) => {
-        e.stopPropagation();
-
-        try {
-            await fetch(
-                `${BASE_URL}/api/follow/${notification.senderId._id}/accept`,
-                {
-                    method: 'POST',
-                    credentials: 'include'
-                }
-            );
-
-            // Remove the follow request notification after accepting
-            setNotifications(prev =>
-                prev.filter(notif => notif._id !== notification._id)
-            );
-
-            // You might want to create a new notification for follow acceptance
-        } catch (error) {
-            console.error('Error accepting follow request:', error);
-        }
-    };
-
-    const handleDeclineFollow = async (notification, e) => {
-        e.stopPropagation();
-
-        try {
-            await fetch(
-                `${BASE_URL}/api/follow/${notification.senderId._id}/decline`,
-                {
-                    method: 'POST',
-                    credentials: 'include'
-                }
-            );
-
-            // Remove the follow request notification after declining
-            setNotifications(prev =>
-                prev.filter(notif => notif._id !== notification._id)
-            );
-        } catch (error) {
-            console.error('Error declining follow request:', error);
-        }
-    };
-
     const getNotificationIcon = (type) => {
         switch (type) {
             case 'like_post':
@@ -154,8 +125,6 @@ const NotificationsPage = () => {
             case 'comment':
                 return <MessageCircle className={styles.icon} />;
             case 'follow':
-            case 'follow_request':
-            case 'follow_accept':
                 return <UserPlus className={styles.icon} />;
             default:
                 return <Bell className={styles.icon} />;
@@ -218,7 +187,7 @@ const NotificationsPage = () => {
                     <h3 className={styles.emptyTitle}>No notifications yet</h3>
                     <p className={styles.emptyDescription}>
                         When you get notifications, they'll show up here.
-                        You'll see things like likes, comments, and follow requests.
+                        You'll see things like likes, comments, and new followers.
                     </p>
                 </div>
             ) : (
@@ -256,23 +225,6 @@ const NotificationsPage = () => {
                                     <p className={styles.timestamp}>
                                         {formatTime(notification.createdAt)}
                                     </p>
-
-                                    {notification.type === 'follow_request' && (
-                                        <div className={styles.followActions}>
-                                            <button
-                                                onClick={(e) => handleAcceptFollow(notification, e)}
-                                                className={styles.acceptButton}
-                                            >
-                                                Accept
-                                            </button>
-                                            <button
-                                                onClick={(e) => handleDeclineFollow(notification, e)}
-                                                className={styles.declineButton}
-                                            >
-                                                Decline
-                                            </button>
-                                        </div>
-                                    )}
 
                                     <div className={styles.actionsRow}>
                                         {!notification.isRead && (

@@ -1,6 +1,4 @@
 .container {
-    max-width: 800px;
-    margin: 0 auto;
     padding: 20px;
     background-color: var(--dark-bg);
 }
@@ -11,7 +9,6 @@
     align-items: center;
     margin-bottom: 24px;
     padding-bottom: 16px;
-    border-bottom: 1px solid var(--border-color);
 }
 
 .title {
@@ -32,7 +29,6 @@
     color: var(--text);
     border: none;
     padding: 8px 16px;
-    border-radius: 8px;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -42,7 +38,6 @@
 
 .markAllButton:hover {
     background: var(--primary-accent-hover);
-    transform: translateY(-1px);
     box-shadow: var(--shadow-hover);
 }
 
@@ -57,7 +52,6 @@
     background: var(--primary-accent);
     color: var(--text);
     padding: 4px 12px;
-    border-radius: 20px;
     font-size: 14px;
     font-weight: 600;
     box-shadow: var(--gold-glow);
@@ -75,30 +69,24 @@
     gap: 16px;
     padding: 16px;
     background: var(--dark-card);
-    border-radius: 12px;
     border: 1px solid var(--border-color);
     cursor: pointer;
-    transition: var(--transition);
+    transition: 0.3s;
     position: relative;
-    box-shadow: var(--shadow);
 }
 
 .notificationItem:hover {
     background: var(--primary-color);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
     border-color: var(--primary-accent);
 }
 
 .notificationItem.unread {
     background: var(--dark-card);
     border-left: 4px solid var(--primary-accent);
-    box-shadow: var(--gold-glow);
 }
 
 .notificationItem.unread:hover {
     background: var(--primary-color);
-    box-shadow: var(--shadow-hover), var(--gold-glow);
 }
 
 .avatar {
@@ -174,7 +162,6 @@
     background: transparent;
     border: 1px solid var(--border-color);
     padding: 6px 12px;
-    border-radius: 6px;
     font-size: 13px;
     color: var(--text-light);
     cursor: pointer;
@@ -185,7 +172,6 @@
     background: var(--primary-accent);
     color: var(--text);
     border-color: var(--primary-accent);
-    transform: translateY(-1px);
 }
 
 .followActions {
@@ -199,7 +185,6 @@
     color: var(--text);
     border: none;
     padding: 6px 16px;
-    border-radius: 6px;
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
@@ -208,7 +193,6 @@
 
 .acceptButton:hover {
     background: var(--success);
-    transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(67, 160, 71, 0.4);
 }
 
@@ -217,7 +201,6 @@
     color: var(--text);
     border: none;
     padding: 6px 16px;
-    border-radius: 6px;
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
@@ -226,7 +209,6 @@
 
 .declineButton:hover {
     background: var(--error);
-    transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(229, 57, 53, 0.4);
 }
 
@@ -288,7 +270,6 @@
     background: transparent;
     border: 1px solid var(--border-color);
     padding: 10px 24px;
-    border-radius: 8px;
     color: var(--text);
     cursor: pointer;
     transition: var(--transition);
@@ -299,7 +280,6 @@
     background: var(--primary-accent);
     border-color: var(--primary-accent);
     color: var(--text);
-    transform: translateY(-1px);
     box-shadow: var(--gold-glow);
 }
 
