@@ -1,0 +1,228 @@
+.profileContent {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+}
+
+.profileNavigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.profileTabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profileTab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+}
+
+.profileTab.active {
+  color: var(--primary-accent);
+  border-bottom-color: var(--primary-accent);
+}
+
+.profileTab:hover {
+  color: var(--text);
+}
+
+.profileViewOptions {
+  display: flex;
+  gap: 8px;
+}
+
+.profileViewBtn {
+  padding: 8px;
+  background: var(--dark-card);
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.profileViewBtn.active,
+.profileViewBtn:hover {
+  color: var(--primary-accent);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.profilePostsContainer.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.profilePostsContainer.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profileEmptyState {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-light);
+  grid-column: 1 / -1;
+}
+
+.profileEmptyState svg {
+  margin-bottom: 16px;
+  color: var(--text-lighter);
+}
+
+.profileEmptyState h3 {
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .profileContent {
+    padding-top: 18px;
+  }
+
+  .profileNavigation {
+    margin-bottom: 25px;
+    gap: 16px;
+  }
+
+  .profileTabs {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .profileTab {
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+
+  .profileTab svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .profileViewOptions {
+    justify-content: flex-end;
+  }
+
+  .profileViewBtn {
+    padding: 7px;
+  }
+
+  .profileViewBtn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .profilePostsContainer.grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+  }
+
+  .profilePostsContainer.list {
+    gap: 16px;
+  }
+
+  .profileEmptyState {
+    padding: 50px 18px;
+  }
+
+  .profileEmptyState svg {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 14px;
+  }
+
+  .profileEmptyState h3 {
+    font-size: 18px;
+    margin-bottom: 7px;
+  }
+
+  .profileEmptyState p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profileContent {
+    padding-top: 16px;
+  }
+
+  .profileNavigation {
+    margin-bottom: 20px;
+    gap: 12px;
+  }
+
+  .profileTabs {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .profileTab {
+    padding: 12px 16px;
+    font-size: 13px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .profileTab svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .profileViewOptions {
+    width: 100%;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .profileViewBtn {
+    padding: 8px 12px;
+    border-radius: 4px;
+  }
+
+  .profileViewBtn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .profilePostsContainer.grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .profilePostsContainer.list {
+    gap: 14px;
+  }
+
+  .profileEmptyState {
+    padding: 40px 16px;
+  }
+
+  .profileEmptyState svg {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 12px;
+  }
+
+  .profileEmptyState h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .profileEmptyState p {
+    font-size: 13px;
+  }
+}

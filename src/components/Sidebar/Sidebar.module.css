@@ -1,0 +1,318 @@
+:root {
+  --primary-accent: #d4af37;
+  --dark-bg: #0a0a0a;
+  --dark-card: #1a1a1a;
+  --text-light: #e5e5e5;
+  --text-muted: #a3a3a3;
+  --border-color: #404040;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --backdrop-blur: blur(8px);
+  --error: #ef4444;
+  --success: #10b981;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.appShell {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--dark-bg);
+  position: relative;
+}
+
+.sidebar {
+  width: 220px;
+  background: var(--dark-card);
+  padding: 1.25rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  user-select: none;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  z-index: 50;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+  padding: 1.25rem 0.4rem;
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding: 0 0.4rem;
+}
+
+.sidebar.collapsed .sidebarHeader {
+  justify-content: center;
+  padding: 0;
+}
+
+.sidebarLogo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-accent);
+  letter-spacing: -0.025em;
+}
+
+.sidebarToggle,
+.sidebarClose {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 0.4rem;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebarToggle:hover,
+.sidebarClose:hover {
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--primary-accent);
+}
+
+.sidebar.collapsed .sidebarToggle {
+  margin: 0 auto;
+}
+
+.sidebarNavContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebarFooter {
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.85rem;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.sidebarLink {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-light);
+  text-decoration: none;
+  padding: 0.65rem 0.7rem;
+  transition: var(--transition);
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.sidebar.collapsed .sidebarLink {
+  justify-content: center;
+  padding: 0.65rem;
+}
+
+.sidebarLink:hover {
+  background: rgba(212, 175, 55, 0.08);
+  color: var(--primary-accent);
+  transform: translateX(2px);
+}
+
+.sidebarLink.active {
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--primary-accent);
+  font-weight: 600;
+}
+
+.sidebarLogout {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-light);
+  text-decoration: none;
+  padding: 0.65rem 0.7rem;
+  transition: var(--transition);
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 0.9rem;
+  background: none;
+  width: 100%;
+  border: none;
+  font: inherit;
+  text-align: left;
+}
+
+.sidebar.collapsed .sidebarLogout {
+  justify-content: center;
+  padding: 0.65rem;
+}
+
+.sidebarLogout:hover {
+  background: rgba(229, 57, 53, 0.1);
+  color: var(--error);
+  transform: translateX(2px);
+}
+
+.mobileSidebarOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: var(--backdrop-blur);
+  z-index: 1000;
+  display: flex;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.mobileSidebarContent {
+  width: 260px;
+  background: var(--dark-card);
+  padding: 1.25rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transform: translateX(0);
+  animation: slideIn 0.3s ease-out;
+}
+
+.mobileSidebarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding: 0 0.4rem;
+}
+
+.mobileSidebarFooter {
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.85rem;
+}
+
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--dark-card);
+  backdrop-filter: var(--backdrop-blur);
+  display: flex;
+  justify-content: space-around;
+  padding: 0.4rem;
+  border-top: 1px solid var(--border-color);
+  z-index: 1000;
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.bottomNavLink {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  color: var(--text-light);
+  text-decoration: none;
+  padding: 0.4rem;
+  transition: var(--transition);
+  flex: 1;
+  max-width: 70px;
+  min-height: 50px;
+  justify-content: center;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.bottomNavLink:hover {
+  background: rgba(212, 175, 55, 0.08);
+  color: var(--primary-accent);
+}
+
+.bottomNavLink.active {
+  color: var(--primary-accent);
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.bottomNavLabel {
+  font-size: 0.6rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.appContent {
+  flex: 1;
+  padding: 1.25rem;
+  transition: var(--transition);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.sidebarLink:focus-visible,
+.sidebarLogout:focus-visible,
+.bottomNavLink:focus-visible,
+.sidebarToggle:focus-visible {
+  outline: 2px solid var(--primary-accent);
+  outline-offset: 1px;
+}
+
+.sidebarSaving::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0.85rem;
+  width: 14px;
+  height: 14px;
+  border: 2px solid transparent;
+  border-top: 2px solid var(--primary-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.sidebarIcon {
+  flex-shrink: 0;
+}
+
+.mobileSidebarContent {
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.bottomNavLink {
+  position: relative;
+  overflow: hidden;
+}
+
+.bottomNavLink::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.bottomNavLink:hover::after {
+  left: 100%;
+}

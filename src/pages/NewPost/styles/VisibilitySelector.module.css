@@ -1,0 +1,148 @@
+.visibilitySelector {
+  margin-bottom: 2rem;
+}
+
+.visibilityOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.visibilityOption {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.visibilityOption.selected {
+  border-color: var(--primary-accent);
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.visibilityOption:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--primary-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.visibilityOption.selected:hover {
+  background: rgba(212, 175, 55, 0.08);
+  transform: none;
+  box-shadow: none;
+}
+
+.optionContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.optionIcon {
+  color: var(--primary-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.optionText {
+  display: flex;
+  flex-direction: column;
+}
+
+.optionLabel {
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.optionDescription {
+  color: var(--text-light);
+  font-size: 0.875rem;
+}
+
+.visibilityOption.selected .optionLabel {
+  color: var(--primary-accent);
+}
+
+.visibilityOption.selected .optionIcon {
+  color: var(--primary-accent);
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .visibilitySelector {
+    margin-bottom: 1.5rem;
+  }
+
+  .visibilityOptions {
+    gap: 0.4rem;
+  }
+
+  .visibilityOption {
+    padding: 0.8rem;
+  }
+
+  .optionContent {
+    gap: 0.8rem;
+  }
+
+  .optionIcon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .optionLabel {
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .optionDescription {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .visibilitySelector {
+    margin-bottom: 1.25rem;
+  }
+
+  .visibilityOptions {
+    gap: 0.3rem;
+  }
+
+  .visibilityOption {
+    padding: 0.7rem;
+  }
+
+  .optionContent {
+    gap: 0.7rem;
+  }
+
+  .optionIcon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .optionLabel {
+    font-size: 0.85rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .optionDescription {
+    font-size: 0.75rem;
+  }
+}

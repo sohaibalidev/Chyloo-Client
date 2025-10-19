@@ -1,0 +1,85 @@
+.followingList {
+  background-color: var(--dark-card);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow);
+}
+
+.followingItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.followingItem:last-child {
+  border-bottom: none;
+  padding: 5px 0 0 0;
+}
+
+.unfollowBtn {
+  background-color: transparent;
+  border: 1px solid var(--text-lighter);
+  color: var(--text);
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: var(--transition);
+}
+
+.unfollowBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.noFollowing {
+  text-align: center;
+  padding: 20px 0;
+  color: var(--text-light);
+}
+
+.followingItemSkeleton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.followingAvatarSkeleton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #2a2a2a;
+  animation: pulse 1.5s infinite;
+}
+
+.followingUsernameSkeleton {
+  width: 80px;
+  height: 14px;
+  background-color: #2a2a2a;
+  animation: pulse 1.5s infinite;
+  margin: 0 12px;
+  flex-grow: 1;
+}
+
+.unfollowBtnSkeleton {
+  width: 70px;
+  height: 28px;
+  background-color: #2a2a2a;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}

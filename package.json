@@ -1,0 +1,50 @@
+{
+  "name": "chyloo-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chyloo — A modern social media platform inspired by Facebook & Instagram. Built with React (Vite), Context API, and React Router.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "upload": "git diff --quiet && git diff --cached --quiet && echo 'No changes to commit' || (git add . && git commit -m \"auto-update\" && git push origin main)",
+    "download": "git fetch origin && git reset --hard origin/main && git clean -fd && echo 'Project updated from GitHub'"
+  },
+  "keywords": [
+    "Social Media",
+    "Instagram Clone",
+    "Facebook Clone",
+    "React",
+    "Vite",
+    "Context API",
+    "Auth"
+  ],
+  "author": "Sohaib <msohaibaliofficial@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.0.1",
+    "js-cookie": "^3.0.5",
+    "lodash": "^4.17.21",
+    "lucide-react": "^0.544.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.8.2",
+    "socket.io-client": "^4.8.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.33.0",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^5.0.0",
+    "eslint": "^9.33.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "vite": "^7.1.2"
+  },
+  "engines": {
+    "node": "20.x"
+  }
+}

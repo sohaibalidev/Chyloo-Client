@@ -1,0 +1,106 @@
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: var(--dark-card);
+}
+
+.searchInput {
+  flex: 1;
+  padding: 1rem 0;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 1rem;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--text-lighter);
+}
+
+.searchIcon {
+  color: var(--text-lighter);
+  flex-shrink: 0;
+}
+
+.clearIcon {
+  color: var(--text-lighter);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.clearIcon:hover {
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .searchBar {
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    padding: 0 0.8rem;
+  }
+
+  .searchInput {
+    padding: 0.8rem 0;
+    font-size: 0.9rem;
+  }
+
+  .searchIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .clearIcon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchBar {
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
+    padding: 0 0.6rem;
+  }
+
+  .searchInput {
+    padding: 0.6rem 0;
+    font-size: 0.85rem;
+  }
+
+  .searchIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .clearIcon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@supports (padding: max(0px)) {
+  .searchBar {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+  
+  @media (max-width: 768px) {
+    .searchBar {
+      padding-left: max(0.8rem, env(safe-area-inset-left));
+      padding-right: max(0.8rem, env(safe-area-inset-right));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .searchBar {
+      padding-left: max(0.6rem, env(safe-area-inset-left));
+      padding-right: max(0.6rem, env(safe-area-inset-right));
+    }
+  }
+}

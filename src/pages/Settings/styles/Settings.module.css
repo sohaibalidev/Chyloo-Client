@@ -1,0 +1,128 @@
+.settingsPage {
+    min-height: 100vh;
+    background: var(--dark-bg);
+    color: var(--text);
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.settingsContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.settingsHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.settingsHeader h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    flex: 1;
+}
+
+.settingsMain {
+    padding: 20px 0 40px;
+    width: 100%;
+}
+
+.settingsLayout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    width: 100%;
+}
+
+.settingsSidebar {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.settingsContent {
+    background: var(--dark-card);
+    padding: 32px;
+    min-height: 600px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    font-size: 16px;
+    color: var(--text-light);
+}
+
+@media (max-width: 1024px) {
+    .settingsLayout {
+        grid-template-columns: 240px 1fr;
+        gap: 30px;
+    }
+
+    .settingsContent {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .settingsContainer {
+        padding: 0 16px;
+    }
+
+    .settingsHeader {
+        padding: 16px 0;
+        margin-bottom: 20px;
+    }
+
+    .settingsHeader h1 {
+        font-size: 24px;
+    }
+
+    .settingsMain {
+        padding: 0;
+    }
+
+    .settingsLayout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .settingsSidebar {
+        position: static;
+        top: auto;
+    }
+
+    .settingsContent {
+        padding: 20px;
+        min-height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .settingsContainer {
+        padding: 0 12px;
+    }
+
+    .settingsHeader {
+        padding: 12px 0;
+    }
+
+    .settingsHeader h1 {
+        font-size: 20px;
+    }
+
+    .settingsContent {
+        padding: 16px;
+    }
+}

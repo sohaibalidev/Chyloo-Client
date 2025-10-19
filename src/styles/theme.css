@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #1a1a1a;
+  --primary-accent: #d4af37;
+  --primary-accent-hover: #c19b2e;
+  --dark-bg: #0a0a0a;
+  --dark-card: #111111;
+  --text: #ffffff;
+  --text-light: #b8b8b8;
+  --text-lighter: #888888;
+  --error: #e53935;
+  --success: #43a047;
+  --transition: all 0.2s ease;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.6);
+  --gold-glow: 0 0 15px rgba(212, 175, 55, 0.4);
+  --border-color: rgba(255, 255, 255, 0.1);
+}

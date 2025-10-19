@@ -1,0 +1,43 @@
+.dashboardContainer {
+  min-height: 100vh;
+  background-color: var(--dark-bg);
+  padding: 20px;
+}
+
+.dashboardContent {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboardMain {
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.storiesSection {
+  margin-bottom: 24px;
+}
+
+.feedSection {
+  width: 100%;
+}
+
+.dashboardSidebar {
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+@media (max-width: 1150px) {
+  .dashboardContent {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboardSidebar {
+    display: none;
+  }
+}

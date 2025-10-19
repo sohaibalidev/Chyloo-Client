@@ -1,0 +1,101 @@
+.avatarSection {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.avatarContainer {
+    text-align: center;
+    width: 100%;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-accent);
+    margin-bottom: 12px;
+}
+
+.avatarPlaceholder {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--primary-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    margin: auto;
+    margin-bottom: 12px;
+}
+
+.avatarActions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.avatarButton {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: var(--dark-card);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 14px;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+}
+
+.avatarButton:hover:not(:disabled) {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: var(--primary-accent);
+}
+
+.avatarButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.removeButton {
+    color: var(--error);
+    border-color: var(--error);
+}
+
+.removeButton:hover:not(:disabled) {
+    background: rgba(255, 107, 107, 0.1);
+}
+
+.fileInput {
+    display: none;
+}
+
+.error {
+    color: var(--error);
+    font-size: 12px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .avatarActions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .avatarButton {
+        width: 140px;
+        justify-content: center;
+    }
+}

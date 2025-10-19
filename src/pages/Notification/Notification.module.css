@@ -1,0 +1,401 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--dark-bg);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.markAllButton {
+    background: var(--primary-accent);
+    color: var(--text);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--gold-glow);
+}
+
+.markAllButton:hover {
+    background: var(--primary-accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-hover);
+}
+
+.markAllButton:disabled {
+    background: var(--text-lighter);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.unreadCount {
+    background: var(--primary-accent);
+    color: var(--text);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: var(--gold-glow);
+}
+
+.notificationsList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.notificationItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+    background: var(--dark-card);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    box-shadow: var(--shadow);
+}
+
+.notificationItem:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary-accent);
+}
+
+.notificationItem.unread {
+    background: var(--dark-card);
+    border-left: 4px solid var(--primary-accent);
+    box-shadow: var(--gold-glow);
+}
+
+.notificationItem.unread:hover {
+    background: var(--primary-color);
+    box-shadow: var(--shadow-hover), var(--gold-glow);
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--primary-accent);
+}
+
+.avatarPlaceholder {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    border: 2px solid var(--primary-accent);
+}
+
+.content {
+    flex: 1;
+    min-width: 0;
+}
+
+.messageRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--primary-accent);
+}
+
+.message {
+    flex: 1;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--text);
+    margin: 0;
+}
+
+.message strong {
+    font-weight: 600;
+    color: var(--primary-accent);
+}
+
+.timestamp {
+    font-size: 13px;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.actionsRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.readButton {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.readButton:hover {
+    background: var(--primary-accent);
+    color: var(--text);
+    border-color: var(--primary-accent);
+    transform: translateY(-1px);
+}
+
+.followActions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.acceptButton {
+    background: var(--success);
+    color: var(--text);
+    border: none;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.acceptButton:hover {
+    background: var(--success);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(67, 160, 71, 0.4);
+}
+
+.declineButton {
+    background: var(--error);
+    color: var(--text);
+    border: none;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.declineButton:hover {
+    background: var(--error);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.4);
+}
+
+.statusIndicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+.readStatus {
+    color: var(--success);
+}
+
+.emptyState {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+}
+
+.emptyIcon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    color: var(--text-lighter);
+}
+
+.emptyTitle {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+}
+
+.emptyDescription {
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 400px;
+    margin: 0 auto;
+    color: var(--text-light);
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    color: var(--text-light);
+}
+
+.loadMore {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.loadMoreButton {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    padding: 10px 24px;
+    border-radius: 8px;
+    color: var(--text);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.loadMoreButton:hover {
+    background: var(--primary-accent);
+    border-color: var(--primary-accent);
+    color: var(--text);
+    transform: translateY(-1px);
+    box-shadow: var(--gold-glow);
+}
+
+.loadMoreButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Animation for new notifications */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.notificationItem {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 16px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+    }
+
+    .actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .notificationItem {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .avatar,
+    .avatarPlaceholder {
+        width: 40px;
+        height: 40px;
+    }
+
+    .message {
+        font-size: 14px;
+    }
+
+    .followActions {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .acceptButton,
+    .declineButton {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 12px;
+    }
+
+    .notificationItem {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .avatar,
+    .avatarPlaceholder {
+        align-self: center;
+    }
+
+    .messageRow {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .actionsRow {
+        justify-content: center;
+    }
+}

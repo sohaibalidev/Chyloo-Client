@@ -1,0 +1,387 @@
+.stories-container {
+  background-color: var(--dark-card);
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.stories-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 4px;
+  scrollbar-width: none;
+}
+
+.stories-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.story-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.story-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  padding: 2px;
+  background: linear-gradient(45deg, var(--primary-accent), #f09433, #bc1888);
+  margin-bottom: 8px;
+}
+
+.story-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--dark-card);
+}
+
+.story-username {
+  font-size: 12px;
+  color: var(--text-light);
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.story-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.story-modal-content {
+  position: relative;
+  max-width: 350px;
+  width: 100%;
+  max-height: 90vh;
+}
+
+.story-modal-content img {
+  width: 100%;
+  height: auto;
+}
+
+.story-modal-header {
+  position: absolute;
+  top: 24px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.story-modal-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.story-modal-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.story-avatar-skeleton {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #2a2a2a;
+  margin-bottom: 8px;
+  animation: pulse 1.5s infinite;
+}
+
+.story-username-skeleton {
+  width: 50px;
+  height: 10px;
+  background-color: #2a2a2a;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.story-progress-container {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+}
+
+.story-progress-track {
+  flex: 1;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+}
+
+.story-progress-bar {
+  height: 100%;
+  background-color: white;
+  transition: width 0.1s linear;
+}
+
+.story-progress-bar.completed {
+  background-color: white;
+}
+
+.story-modal-content {
+  position: relative;
+  max-width: 350px;
+  width: 100%;
+  max-height: 90vh;
+  aspect-ratio: 9/16;
+}
+
+.story-modal-content img,
+.story-modal-content video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-modal-content video {
+  background-color: #000;
+}
+
+.story-nav-left,
+.story-nav-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 24px;
+  color: white;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.story-nav-left {
+  left: 0;
+  justify-content: flex-start;
+  padding-left: 10px;
+}
+
+.story-nav-right {
+  right: 0;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+
+.story-modal-content:hover .story-nav-left,
+.story-modal-content:hover .story-nav-right {
+  opacity: 1;
+}
+
+.story-caption {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  z-index: 5;
+}
+
+@media (max-width: 768px) {
+  .stories-container {
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+
+  .stories-scroll {
+    gap: 14px;
+  }
+
+  .story-avatar {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 6px;
+  }
+
+  .story-username {
+    font-size: 11px;
+    max-width: 60px;
+  }
+
+  .story-modal-content {
+    max-width: 100%;
+    max-height: 100vh;
+  }
+
+  .story-progress-container {
+    top: 14px;
+    left: 14px;
+    right: 14px;
+  }
+
+  .story-modal-header {
+    top: 20px;
+    left: 14px;
+  }
+
+  .story-modal-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .story-caption {
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    font-size: 13px;
+  }
+
+  .story-nav-left,
+  .story-nav-right {
+    opacity: 1;
+    font-size: 20px;
+  }
+
+  .story-avatar-skeleton {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 6px;
+  }
+
+  .story-username-skeleton {
+    width: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stories-container {
+    padding: 12px;
+    margin-bottom: 14px;
+  }
+
+  .stories-scroll {
+    gap: 12px;
+  }
+
+  .story-avatar {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+  }
+
+  .story-username {
+    font-size: 10px;
+    max-width: 55px;
+  }
+
+  .story-progress-container {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+  }
+
+  .story-modal-header {
+    top: 18px;
+    left: 12px;
+    gap: 6px;
+  }
+
+  .story-modal-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .story-caption {
+    bottom: 14px;
+    left: 14px;
+    right: 14px;
+    font-size: 12px;
+  }
+
+  .story-nav-left,
+  .story-nav-right {
+    font-size: 18px;
+    width: 40px;
+  }
+
+  .story-nav-left {
+    padding-left: 8px;
+  }
+
+  .story-nav-right {
+    padding-right: 8px;
+  }
+
+  .story-avatar-skeleton {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+  }
+
+  .story-username-skeleton {
+    width: 40px;
+  }
+}
+
+@supports (padding: max(0px)) {
+  .stories-container {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+
+  @media (max-width: 768px) {
+    .stories-container {
+      padding-left: max(14px, env(safe-area-inset-left));
+      padding-right: max(14px, env(safe-area-inset-right));
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stories-container {
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+    }
+  }
+}

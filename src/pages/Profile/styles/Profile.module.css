@@ -1,0 +1,55 @@
+.profileContainer {
+  max-width: 935px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.profileErrorMessage {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-light);
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .profileContainer {
+    padding: 20px 15px;
+  }
+
+  .profileErrorMessage {
+    padding: 40px 15px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profileContainer {
+    padding: 15px 10px;
+  }
+
+  .profileErrorMessage {
+    padding: 30px 10px;
+    font-size: 14px;
+  }
+}
+
+@supports (padding: max(0px)) {
+  .profileContainer {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+  
+  @media (max-width: 768px) {
+    .profileContainer {
+      padding-left: max(15px, env(safe-area-inset-left));
+      padding-right: max(15px, env(safe-area-inset-right));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .profileContainer {
+      padding-left: max(10px, env(safe-area-inset-left));
+      padding-right: max(10px, env(safe-area-inset-right));
+    }
+  }
+}

@@ -1,0 +1,116 @@
+.searchPage {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.searchHeader {
+    margin-bottom: 2rem;
+}
+
+.searchResults {
+    min-height: 400px;
+}
+
+.loading,
+.errorMessage,
+.noResults {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-light);
+}
+
+.usersGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.postsList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .searchPage {
+        padding: 16px;
+    }
+
+    .searchHeader {
+        margin-bottom: 1.5rem;
+    }
+
+    .searchResults {
+        min-height: 300px;
+    }
+
+    .loading,
+    .errorMessage,
+    .noResults {
+        padding: 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .usersGrid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1rem;
+    }
+
+    .postsList {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .searchPage {
+        padding: 12px;
+    }
+
+    .searchHeader {
+        margin-bottom: 1rem;
+    }
+
+    .searchResults {
+        min-height: 250px;
+    }
+
+    .loading,
+    .errorMessage,
+    .noResults {
+        padding: 1rem;
+        font-size: 0.85rem;
+    }
+
+    .usersGrid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .postsList {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+}
+
+@supports (padding: max(0px)) {
+    .searchPage {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+    }
+
+    @media (max-width: 768px) {
+        .searchPage {
+            padding-left: max(16px, env(safe-area-inset-left));
+            padding-right: max(16px, env(safe-area-inset-right));
+        }
+    }
+
+    @media (max-width: 480px) {
+        .searchPage {
+            padding-left: max(12px, env(safe-area-inset-left));
+            padding-right: max(12px, env(safe-area-inset-right));
+        }
+    }
+}

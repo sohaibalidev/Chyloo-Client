@@ -1,0 +1,94 @@
+.tabContent h3 {
+    margin: 0 0 24px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.formGroup {
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+}
+
+.formGroup label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.formGroup select {
+    width: 100%;
+    padding: 12px;
+    background: var(--dark-bg);
+    color: var(--text);
+    font-size: 14px;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    box-sizing: border-box;
+}
+
+.formGroup select:focus {
+    outline: none;
+    border-color: var(--primary-accent);
+}
+
+.formGroup select:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.helpText {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+.savingIndicator {
+    font-size: 12px;
+    color: var(--primary-accent);
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.savingIndicator::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary-accent);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .tabContent h3 {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .formGroup {
+        margin-bottom: 16px;
+    }
+}

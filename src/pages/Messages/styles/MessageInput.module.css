@@ -1,0 +1,373 @@
+.messageInputContainer {
+    background: transparent;
+  border-top: 1px solid var(--border-color);
+  padding: 1rem 1.5rem;
+}
+
+.mediaPreview {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.mediaPreviewItem {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.mediaPreviewItem:hover {
+  transform: translateY(-2px);
+}
+
+.mediaPreviewImage {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+.mediaPreviewFile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: var(--dark-bg);
+  border: 1px solid var(--border-color);
+  min-width: 120px;
+}
+
+.fileIcon {
+  font-size: 1.2rem;
+}
+
+.fileName {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  font-weight: 500;
+}
+
+.removeMedia {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--error);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--dark-card);
+  transition: transform 0.2s ease;
+}
+
+.removeMedia:focus {
+  outline: 2px solid white;
+  outline-offset: 1px;
+}
+
+.inputForm {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.75rem;
+}
+
+.inputActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mediaButton {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: var(--transition);
+  color: var(--text-light);
+}
+
+.mediaButton:focus {
+  outline: 2px solid var(--primary-accent);
+  outline-offset: 2px;
+}
+
+.mediaButton:hover:not(:disabled) {
+  background: var(--dark-bg);
+  color: var(--primary-accent);
+}
+
+.mediaButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.fileInput {
+  display: none;
+}
+
+.textInputContainer {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.textInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--dark-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: none;
+  max-height: 120px;
+  min-height: 44px;
+  line-height: 1.4;
+  overflow-y: auto;
+  transition: var(--transition);
+}
+
+.textInput:focus {
+  outline: none;
+  border-color: var(--primary-accent);
+}
+
+.textInput::placeholder {
+  color: var(--text-lighter);
+}
+
+.textInput:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--dark-bg);
+}
+
+.sendButton {
+  background: var(--primary-accent);
+  color: var(--primary-color);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  min-width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sendButton:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.sendButton:hover:not(:disabled) {
+  background: var(--primary-accent-hover);
+}
+
+.sendButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .messageInputContainer {
+    padding: 0.75rem 1rem;
+  }
+
+  .mediaPreview {
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .mediaPreviewImage {
+    width: 70px;
+    height: 70px;
+  }
+
+  .mediaPreviewFile {
+    min-width: 100px;
+    padding: 0.4rem;
+  }
+
+  .fileIcon {
+    font-size: 1.1rem;
+  }
+
+  .fileName {
+    font-size: 0.75rem;
+    max-width: 80px;
+  }
+
+  .removeMedia {
+    width: 20px;
+    height: 20px;
+  }
+
+  .removeMedia svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .inputForm {
+    gap: 0.5rem;
+  }
+
+  .mediaButton {
+    padding: 0.4rem;
+  }
+
+  .mediaButton svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .textInput {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+    min-height: 40px;
+  }
+
+  .sendButton {
+    padding: 0.6rem 1rem;
+    min-width: 60px;
+    font-size: 0.9rem;
+  }
+
+  .spinner {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .messageInputContainer {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .mediaPreview {
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .mediaPreviewImage {
+    width: 60px;
+    height: 60px;
+  }
+
+  .mediaPreviewFile {
+    min-width: 90px;
+    padding: 0.3rem;
+    gap: 0.4rem;
+  }
+
+  .fileIcon {
+    font-size: 1rem;
+  }
+
+  .fileName {
+    font-size: 0.7rem;
+    max-width: 70px;
+  }
+
+  .removeMedia {
+    width: 18px;
+    height: 18px;
+    top: -4px;
+    right: -4px;
+  }
+
+  .removeMedia svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .inputForm {
+    gap: 0.4rem;
+  }
+
+  .mediaButton {
+    padding: 0.3rem;
+  }
+
+  .mediaButton svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .textInput {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.8rem;
+    min-height: 36px;
+  }
+
+  .sendButton {
+    padding: 0.5rem 0.8rem;
+    min-width: 50px;
+    font-size: 0.85rem;
+  }
+
+  .spinner {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@supports (padding: max(0px)) {
+  .messageInputContainer {
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  @media (max-width: 768px) {
+    .messageInputContainer {
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .messageInputContainer {
+      padding-left: max(0.8rem, env(safe-area-inset-left));
+      padding-right: max(0.8rem, env(safe-area-inset-right));
+      padding-bottom: max(0.6rem, env(safe-area-inset-bottom));
+    }
+  }
+}

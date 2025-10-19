@@ -1,0 +1,42 @@
+.sidebar {
+    background: var(--dark-card);
+    padding: 20px 10px;
+    border-radius: 0;
+}
+
+.sidebarItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 16px 24px;
+    background: none;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    border-radius: 0;
+}
+
+.sidebarItem:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+}
+
+.sidebarItem.active {
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--primary-accent);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        padding: 16px 0;
+    }
+
+    .sidebarItem {
+        padding: 14px 20px;
+        font-size: 14px;
+    }
+}
