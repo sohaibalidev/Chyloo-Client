@@ -131,7 +131,6 @@
 .sidebarLink:hover {
   background: rgba(212, 175, 55, 0.08);
   color: var(--primary-accent);
-  transform: translateX(2px);
 }
 
 .sidebarLink.active {
@@ -167,7 +166,6 @@
 .sidebarLogout:hover {
   background: rgba(229, 57, 53, 0.1);
   color: var(--error);
-  transform: translateX(2px);
 }
 
 .mobileSidebarOverlay {
@@ -190,7 +188,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  transform: translateX(0);
   animation: slideIn 0.3s ease-out;
 }
 

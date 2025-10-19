@@ -51,6 +51,7 @@
 .formGroup textarea {
     resize: vertical;
     min-height: 80px;
+    max-height: 200px;
     font-family: inherit;
 }
 

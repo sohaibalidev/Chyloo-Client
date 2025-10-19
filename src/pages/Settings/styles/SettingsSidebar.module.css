@@ -2,6 +2,9 @@
     background: var(--dark-card);
     padding: 20px 10px;
     border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .sidebarItem {
