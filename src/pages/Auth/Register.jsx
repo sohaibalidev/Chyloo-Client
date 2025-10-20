@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
+import SEO from '@/components/SEO';
 import AuthFormInput from './components/AuthFormInput';
 import styles from './styles/auth.module.css';
 
@@ -81,77 +82,85 @@ const Register = () => {
   };
 
   return (
-    <div className='container'>
-      <div className={styles.authContainer}>
-        <h1 className={styles.authTitle}>Create Account</h1>
+    <>
+      <SEO
+        title="Register"
+        description="Join Chyloo — create an account to share stories, connect with people, and explore trending posts."
+        path="/register"
+      />
 
-        {error && <div className={`${styles.alert} ${styles.alertError}`}>{error}</div>}
+      <div className='container'>
+        <div className={styles.authContainer}>
+          <h1 className={styles.authTitle}>Create Account</h1>
 
-        <form onSubmit={handleSubmit} className={styles.authForm}>
-          <AuthFormInput
-            label='Full Name'
-            name='name'
-            value={formData.name}
-            onChange={handleChange}
-            placeholder='Enter your full name'
-            required
-            autoFocus
-          />
+          {error && <div className={`${styles.alert} ${styles.alertError}`}>{error}</div>}
 
-          <AuthFormInput
-            label='Username'
-            name='username'
-            value={formData.username}
-            onChange={handleChange}
-            placeholder='Enter your username'
-            required
-          />
+          <form onSubmit={handleSubmit} className={styles.authForm}>
+            <AuthFormInput
+              label='Full Name'
+              name='name'
+              value={formData.name}
+              onChange={handleChange}
+              placeholder='Enter your full name'
+              required
+              autoFocus
+            />
 
-          <AuthFormInput
-            label='Email'
-            type='email'
-            name='email'
-            value={formData.email}
-            onChange={handleChange}
-            placeholder='Enter your email'
-            required
-          />
+            <AuthFormInput
+              label='Username'
+              name='username'
+              value={formData.username}
+              onChange={handleChange}
+              placeholder='Enter your username'
+              required
+            />
 
-          <AuthFormInput
-            label='Password'
-            type='password'
-            name='password'
-            value={formData.password}
-            isPassword={true}
-            onChange={handleChange}
-            placeholder='Create a password (min. 6 characters)'
-            required
-          />
+            <AuthFormInput
+              label='Email'
+              type='email'
+              name='email'
+              value={formData.email}
+              onChange={handleChange}
+              placeholder='Enter your email'
+              required
+            />
 
-          <AuthFormInput
-            label='Confirm Password'
-            type='password'
-            name='confirmPassword'
-            value={formData.confirmPassword}
-            isPassword={true}
-            onChange={handleChange}
-            placeholder='Confirm your password'
-            required
-          />
+            <AuthFormInput
+              label='Password'
+              type='password'
+              name='password'
+              value={formData.password}
+              isPassword={true}
+              onChange={handleChange}
+              placeholder='Create a password (min. 6 characters)'
+              required
+            />
 
-          <button type='submit' className={`${styles.btn} ${styles.btnPrimary}`} disabled={loading}>
-            {loading ? 'Creating Account...' : 'Create Account'}
-          </button>
-        </form>
+            <AuthFormInput
+              label='Confirm Password'
+              type='password'
+              name='confirmPassword'
+              value={formData.confirmPassword}
+              isPassword={true}
+              onChange={handleChange}
+              placeholder='Confirm your password'
+              required
+            />
 
-        <div className={styles.authFooter}>
-          Already have an account?{' '}
-          <Link to='/auth/login' className={styles.authLink}>
-            Sign in
-          </Link>
+            <button type='submit' className={`${styles.btn} ${styles.btnPrimary}`} disabled={loading}>
+              {loading ? 'Creating Account...' : 'Create Account'}
+            </button>
+          </form>
+
+          <div className={styles.authFooter}>
+            Already have an account?{' '}
+            <Link to='/auth/login' className={styles.authLink}>
+              Sign in
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BASE_URL } from '@/config/app.config';
+import SEO from '@/components/SEO'
 import {
     Bell,
     Check,
@@ -160,107 +161,116 @@ const NotificationsPage = () => {
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.header}>
-                <h1 className={styles.title}>Notifications</h1>
-                <div className={styles.actions}>
-                    {unreadCount > 0 && (
-                        <>
-                            <span className={styles.unreadCount}>
-                                {unreadCount} unread
-                            </span>
-                            <button
-                                onClick={handleMarkAllAsRead}
-                                className={styles.markAllButton}
-                                disabled={unreadCount === 0}
-                            >
-                                Mark all as read
-                            </button>
-                        </>
-                    )}
+        <>
+
+            <SEO
+                title="Notifications"
+                description="Stay updated with the latest activity — likes, comments, and mentions all in one place on Chyloo."
+                path="/notifications"
+            />
+
+            <div className={styles.container}>
+                <div className={styles.header}>
+                    <h1 className={styles.title}>Notifications</h1>
+                    <div className={styles.actions}>
+                        {unreadCount > 0 && (
+                            <>
+                                <span className={styles.unreadCount}>
+                                    {unreadCount} unread
+                                </span>
+                                <button
+                                    onClick={handleMarkAllAsRead}
+                                    className={styles.markAllButton}
+                                    disabled={unreadCount === 0}
+                                >
+                                    Mark all as read
+                                </button>
+                            </>
+                        )}
+                    </div>
                 </div>
-            </div>
 
-            {notifications.length === 0 ? (
-                <div className={styles.emptyState}>
-                    <Inbox className={styles.emptyIcon} size={64} />
-                    <h3 className={styles.emptyTitle}>No notifications yet</h3>
-                    <p className={styles.emptyDescription}>
-                        When you get notifications, they'll show up here.
-                        You'll see things like likes, comments, and new followers.
-                    </p>
-                </div>
-            ) : (
-                <>
-                    <div className={styles.notificationsList}>
-                        {notifications.map((notification) => (
-                            <div
-                                key={notification._id}
-                                onClick={() => handleNotificationClick(notification)}
-                                className={`${styles.notificationItem} ${!notification.isRead ? styles.unread : ''
-                                    }`}
-                            >
-                                <div className={styles.avatar}>
-                                    {notification.senderId?.avatar ? (
-                                        <img
-                                            src={notification.senderId.avatar}
-                                            alt={notification.senderId.username}
-                                            className={styles.avatar}
-                                        />
-                                    ) : (
-                                        <div className={styles.avatarPlaceholder}>
-                                            <User size={24} />
-                                        </div>
-                                    )}
-                                </div>
-
-                                <div className={styles.content}>
-                                    <div className={styles.messageRow}>
-                                        {getNotificationIcon(notification.type)}
-                                        <p className={styles.message}>
-                                            {notification.message}
-                                        </p>
-                                    </div>
-
-                                    <p className={styles.timestamp}>
-                                        {formatTime(notification.createdAt)}
-                                    </p>
-
-                                    <div className={styles.actionsRow}>
-                                        {!notification.isRead && (
-                                            <button
-                                                onClick={(e) => handleMarkAsRead(notification._id, e)}
-                                                className={styles.readButton}
-                                            >
-                                                Mark as read
-                                            </button>
-                                        )}
-                                        {notification.isRead && (
-                                            <div className={styles.statusIndicator}>
-                                                <CheckCheck size={16} className={styles.readStatus} />
-                                                <span>Read</span>
+                {notifications.length === 0 ? (
+                    <div className={styles.emptyState}>
+                        <Inbox className={styles.emptyIcon} size={64} />
+                        <h3 className={styles.emptyTitle}>No notifications yet</h3>
+                        <p className={styles.emptyDescription}>
+                            When you get notifications, they'll show up here.
+                            You'll see things like likes, comments, and new followers.
+                        </p>
+                    </div>
+                ) : (
+                    <>
+                        <div className={styles.notificationsList}>
+                            {notifications.map((notification) => (
+                                <div
+                                    key={notification._id}
+                                    onClick={() => handleNotificationClick(notification)}
+                                    className={`${styles.notificationItem} ${!notification.isRead ? styles.unread : ''
+                                        }`}
+                                >
+                                    <div className={styles.avatar}>
+                                        {notification.senderId?.avatar ? (
+                                            <img
+                                                src={notification.senderId.avatar}
+                                                alt={notification.senderId.username}
+                                                className={styles.avatar}
+                                            />
+                                        ) : (
+                                            <div className={styles.avatarPlaceholder}>
+                                                <User size={24} />
                                             </div>
                                         )}
                                     </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
 
-                    {hasMore && (
-                        <div className={styles.loadMore}>
-                            <button
-                                onClick={loadMore}
-                                className={styles.loadMoreButton}
-                                disabled={loading}
-                            >
-                                {loading ? 'Loading...' : 'Load more notifications'}
-                            </button>
+                                    <div className={styles.content}>
+                                        <div className={styles.messageRow}>
+                                            {getNotificationIcon(notification.type)}
+                                            <p className={styles.message}>
+                                                {notification.message}
+                                            </p>
+                                        </div>
+
+                                        <p className={styles.timestamp}>
+                                            {formatTime(notification.createdAt)}
+                                        </p>
+
+                                        <div className={styles.actionsRow}>
+                                            {!notification.isRead && (
+                                                <button
+                                                    onClick={(e) => handleMarkAsRead(notification._id, e)}
+                                                    className={styles.readButton}
+                                                >
+                                                    Mark as read
+                                                </button>
+                                            )}
+                                            {notification.isRead && (
+                                                <div className={styles.statusIndicator}>
+                                                    <CheckCheck size={16} className={styles.readStatus} />
+                                                    <span>Read</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    )}
-                </>
-            )}
-        </div>
+
+                        {hasMore && (
+                            <div className={styles.loadMore}>
+                                <button
+                                    onClick={loadMore}
+                                    className={styles.loadMoreButton}
+                                    disabled={loading}
+                                >
+                                    {loading ? 'Loading...' : 'Load more notifications'}
+                                </button>
+                            </div>
+                        )}
+                    </>
+                )}
+            </div>
+        </>
     );
 };
 

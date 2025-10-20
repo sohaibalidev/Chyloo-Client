@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
+import SEO from '@/components/SEO';
 import AuthFormInput from './components/AuthFormInput';
 import styles from './styles/auth.module.css';
 
@@ -65,50 +66,58 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className='container'>
-      <div className={styles.authContainer}>
-        <h1 className={styles.authTitle}>Set New Password</h1>
+    <>
+      <SEO
+        title="Reset Password"
+        description="Reset your Chyloo password securely and get back to your personalized feed."
+        path="/reset-password"
+      />
 
-        {error && <div className={`${styles.alert} ${styles.alertError}`}>{error}</div>}
+      <div className='container'>
+        <div className={styles.authContainer}>
+          <h1 className={styles.authTitle}>Set New Password</h1>
 
-        {success && <div className={`${styles.alert} ${styles.alertSuccess}`}>{success}</div>}
+          {error && <div className={`${styles.alert} ${styles.alertError}`}>{error}</div>}
 
-        <form onSubmit={handleSubmit} className={styles.authForm}>
-          <AuthFormInput
-            label='New Password'
-            type='password'
-            name='newPassword'
-            value={formData.newPassword}
-            onChange={handleChange}
-            placeholder='Enter your new password'
-            isPassword={true}
-            required
-            autoFocus
-          />
+          {success && <div className={`${styles.alert} ${styles.alertSuccess}`}>{success}</div>}
 
-          <AuthFormInput
-            label='Confirm Password'
-            type='password'
-            name='confirmPassword'
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            isPassword={true}
-            placeholder='Confirm your new password'
-            required
-          />
+          <form onSubmit={handleSubmit} className={styles.authForm}>
+            <AuthFormInput
+              label='New Password'
+              type='password'
+              name='newPassword'
+              value={formData.newPassword}
+              onChange={handleChange}
+              placeholder='Enter your new password'
+              isPassword={true}
+              required
+              autoFocus
+            />
 
-          <button type='submit' className={`${styles.btn} ${styles.btnPrimary}`} disabled={loading}>
-            {loading ? 'Resetting...' : 'Reset Password'}
-          </button>
-        </form>
+            <AuthFormInput
+              label='Confirm Password'
+              type='password'
+              name='confirmPassword'
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              isPassword={true}
+              placeholder='Confirm your new password'
+              required
+            />
 
-        <div className={styles.authFooter}>
-          <Link to='/auth/login' className={styles.authLink}>
-            Back to Sign In
-          </Link>
+            <button type='submit' className={`${styles.btn} ${styles.btnPrimary}`} disabled={loading}>
+              {loading ? 'Resetting...' : 'Reset Password'}
+            </button>
+          </form>
+
+          <div className={styles.authFooter}>
+            <Link to='/auth/login' className={styles.authLink}>
+              Back to Sign In
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

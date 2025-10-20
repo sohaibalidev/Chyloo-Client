@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '@/config/app.config';
 import { Loader2 } from 'lucide-react';
+import SEO from '@/components/SEO'
 import CaptionEditor from './components/CaptionEditor';
 import MediaUpload from './components/MediaUpload';
 import VisibilitySelector from './components/VisibilitySelector';
@@ -67,54 +68,62 @@ const NewPost = () => {
   const canSubmit = (caption.trim() || media.length > 0) && !isSubmitting;
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.editorSection}>
-            <CaptionEditor
-              value={caption}
-              onChange={setCaption}
-              placeholder="What's on your mind?"
-            />
+    <>
+      <SEO
+        title="Create Post"
+        description="Share your thoughts, stories, or updates with your followers. Create a new post on Chyloo now."
+        path="/posts/new"
+      />
 
-            <MediaUpload
-              media={media}
-              onMediaUpload={handleMediaUpload}
-              onRemoveMedia={removeMedia}
-            />
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.editorSection}>
+              <CaptionEditor
+                value={caption}
+                onChange={setCaption}
+                placeholder="What's on your mind?"
+              />
 
-            <VisibilitySelector value={visibility} onChange={setVisibility} />
+              <MediaUpload
+                media={media}
+                onMediaUpload={handleMediaUpload}
+                onRemoveMedia={removeMedia}
+              />
 
-            {error && <div className={styles.errorMessage}>{error}</div>}
+              <VisibilitySelector value={visibility} onChange={setVisibility} />
 
-            <div className={styles.actions}>
-              <button
-                type='button'
-                onClick={() => navigate(-1)}
-                className={styles.cancelBtn}
-                disabled={isSubmitting}
-              >
-                Cancel
-              </button>
-              <button type='submit' className={styles.submitBtn} disabled={!canSubmit}>
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className={styles.spinning} size={18} />
-                    Publishing...
-                  </>
-                ) : (
-                  'Publish Post'
-                )}
-              </button>
+              {error && <div className={styles.errorMessage}>{error}</div>}
+
+              <div className={styles.actions}>
+                <button
+                  type='button'
+                  onClick={() => navigate(-1)}
+                  className={styles.cancelBtn}
+                  disabled={isSubmitting}
+                >
+                  Cancel
+                </button>
+                <button type='submit' className={styles.submitBtn} disabled={!canSubmit}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className={styles.spinning} size={18} />
+                      Publishing...
+                    </>
+                  ) : (
+                    'Publish Post'
+                  )}
+                </button>
+              </div>
             </div>
-          </div>
 
-          <div className={styles.previewSection}>
-            <PostPreview caption={caption} media={media} visibility={visibility} />
-          </div>
-        </form>
+            <div className={styles.previewSection}>
+              <PostPreview caption={caption} media={media} visibility={visibility} />
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

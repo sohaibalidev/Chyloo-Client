@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { User, Settings as SettingsIcon } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import SEO from '@/components/SEO';
 import SettingsSidebar from './components/SettingsSidebar';
 import ProfileSettings from './components/ProfileSettings';
 import PreferencesSettings from './components/PreferencesSettings';
-import { useAuth } from '@/context/AuthContext';
 import styles from './styles/Settings.module.css';
 
 const Settings = () => {
@@ -25,40 +25,48 @@ const Settings = () => {
     }
 
     return (
-        <div className={styles.settingsPage}>
-            <div className={styles.settingsContainer}>
-                <div className={styles.settingsHeader}>
-                    <h1>Settings</h1>
-                </div>
+        <>
+            <SEO
+                title="Settings"
+                description="Manage your Chyloo profile, preferences, and privacy settings — take full control of your experience."
+                path="/settings"
+            />
 
-                <div className={styles.settingsMain}>
-                    <div className={styles.settingsLayout}>
-                        <aside className={styles.settingsSidebar}>
-                            <SettingsSidebar
-                                activeTab={activeTab}
-                                onTabChange={setActiveTab}
-                            />
-                        </aside>
+            <div className={styles.settingsPage}>
+                <div className={styles.settingsContainer}>
+                    <div className={styles.settingsHeader}>
+                        <h1>Settings</h1>
+                    </div>
 
-                        <main className={styles.settingsContent}>
-                            {activeTab === 'profile' && (
-                                <ProfileSettings
-                                    user={user}
-                                    onUpdate={handleProfileUpdate}
+                    <div className={styles.settingsMain}>
+                        <div className={styles.settingsLayout}>
+                            <aside className={styles.settingsSidebar}>
+                                <SettingsSidebar
+                                    activeTab={activeTab}
+                                    onTabChange={setActiveTab}
                                 />
-                            )}
+                            </aside>
 
-                            {activeTab === 'preferences' && (
-                                <PreferencesSettings
-                                    user={user}
-                                    onUpdate={handleProfileUpdate}
-                                />
-                            )}
-                        </main>
+                            <main className={styles.settingsContent}>
+                                {activeTab === 'profile' && (
+                                    <ProfileSettings
+                                        user={user}
+                                        onUpdate={handleProfileUpdate}
+                                    />
+                                )}
+
+                                {activeTab === 'preferences' && (
+                                    <PreferencesSettings
+                                        user={user}
+                                        onUpdate={handleProfileUpdate}
+                                    />
+                                )}
+                            </main>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
+import SEO from '@/components/SEO';
 import AuthFormInput from './components/AuthFormInput';
 import styles from './styles/auth.module.css';
 
@@ -46,37 +47,45 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className='container'>
-      <div className={styles.authContainer}>
-        <h1 className={styles.authTitle}>Reset Password</h1>
+    <>
+      <SEO
+        title="Forgot Password"
+        description="Forgot your Chyloo password? Reset it easily to regain access to your account."
+        path="/forgot-password"
+      />
 
-        {error && <div className={`${styles.alert} ${styles.alertError}`}>{error}</div>}
+      <div className='container'>
+        <div className={styles.authContainer}>
+          <h1 className={styles.authTitle}>Reset Password</h1>
 
-        {success && <div className={`${styles.alert} ${styles.alertSuccess}`}>{success}</div>}
+          {error && <div className={`${styles.alert} ${styles.alertError}`}>{error}</div>}
 
-        <form onSubmit={handleSubmit} className={styles.authForm}>
-          <AuthFormInput
-            label='Email'
-            type='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder='Enter your email address'
-            required
-            autoFocus
-          />
+          {success && <div className={`${styles.alert} ${styles.alertSuccess}`}>{success}</div>}
 
-          <button type='submit' className={`${styles.btn} ${styles.btnPrimary}`} disabled={loading}>
-            {loading ? 'Sending...' : 'Send Reset Instructions'}
-          </button>
-        </form>
+          <form onSubmit={handleSubmit} className={styles.authForm}>
+            <AuthFormInput
+              label='Email'
+              type='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder='Enter your email address'
+              required
+              autoFocus
+            />
 
-        <div className={styles.authFooter}>
-          <Link to='/auth/login' className={styles.authLink}>
-            Back to Sign In
-          </Link>
+            <button type='submit' className={`${styles.btn} ${styles.btnPrimary}`} disabled={loading}>
+              {loading ? 'Sending...' : 'Send Reset Instructions'}
+            </button>
+          </form>
+
+          <div className={styles.authFooter}>
+            <Link to='/auth/login' className={styles.authLink}>
+              Back to Sign In
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

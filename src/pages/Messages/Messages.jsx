@@ -3,6 +3,7 @@ import { useAuth } from '@/context/AuthContext';
 import { BASE_URL } from '@/config/app.config.js';
 import { MessageSquare, X } from 'lucide-react';
 import { io } from 'socket.io-client';
+import SEO from '@/components/SEO'
 import debounce from 'lodash/debounce';
 import ConversationList from './components/ConversationList';
 import MessageArea from './components/MessageArea';
@@ -303,54 +304,62 @@ const Messages = () => {
   }
 
   return (
-    <div className={styles.messagesContainer}>
-      {error && (
-        <div className={styles.errorBanner}>
-          <span className={styles.errorText}>{error}</span>
-          <button onClick={() => setError('')} className={styles.closeError}>
-            <X size={18} strokeWidth={2} />
-          </button>
-        </div>
-      )}
+    <>
+      <SEO
+        title="Messages"
+        description="Chat privately with your friends and followers on Chyloo — stay connected and never miss a conversation."
+        path="/messages"
+      />
 
-      <div className={styles.messagesLayout}>
-        <ConversationList
-          conversations={conversations}
-          selectedConversation={selectedConversation}
-          onSelectConversation={handleConversationSelect}
-          currentUser={user}
-        />
+      <div className={styles.messagesContainer}>
+        {error && (
+          <div className={styles.errorBanner}>
+            <span className={styles.errorText}>{error}</span>
+            <button onClick={() => setError('')} className={styles.closeError}>
+              <X size={18} strokeWidth={2} />
+            </button>
+          </div>
+        )}
 
-        <div className={styles.chatArea}>
-          {selectedConversation ? (
-            <>
-              <MessageArea
-                messages={messages}
-                conversation={selectedConversation}
-                currentUser={user}
-                typingUsers={typingUsers}
-                onDeleteMessage={deleteMessage}
-                loading={messagesLoading}
-              />
-              <MessageInput
-                onSendMessage={sendMessage}
-                onTypingStart={handleTypingStart}
-                onTypingStop={handleTypingStop}
-                disabled={!user}
-              />
-            </>
-          ) : (
-            <div className={styles.noConversation}>
-              <div className={styles.noConversationIcon}>
-                <MessageSquare size={40} strokeWidth={1.6} />
+        <div className={styles.messagesLayout}>
+          <ConversationList
+            conversations={conversations}
+            selectedConversation={selectedConversation}
+            onSelectConversation={handleConversationSelect}
+            currentUser={user}
+          />
+
+          <div className={styles.chatArea}>
+            {selectedConversation ? (
+              <>
+                <MessageArea
+                  messages={messages}
+                  conversation={selectedConversation}
+                  currentUser={user}
+                  typingUsers={typingUsers}
+                  onDeleteMessage={deleteMessage}
+                  loading={messagesLoading}
+                />
+                <MessageInput
+                  onSendMessage={sendMessage}
+                  onTypingStart={handleTypingStart}
+                  onTypingStop={handleTypingStop}
+                  disabled={!user}
+                />
+              </>
+            ) : (
+              <div className={styles.noConversation}>
+                <div className={styles.noConversationIcon}>
+                  <MessageSquare size={40} strokeWidth={1.6} />
+                </div>
+                <h3>Select a conversation</h3>
+                <p>Choose a chat to start messaging</p>
               </div>
-              <h3>Select a conversation</h3>
-              <p>Choose a chat to start messaging</p>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
