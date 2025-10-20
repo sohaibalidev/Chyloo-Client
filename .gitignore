@@ -14,7 +14,7 @@ dist-ssr
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-Chyloo Workspace.code-workspace
+Chyloo Workspace.code-workspace 
 .idea
 .DS_Store
 *.suo
