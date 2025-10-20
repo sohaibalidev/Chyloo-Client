@@ -15,7 +15,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <> 
       <SEO
         title="Home"
         description="Welcome to Chyloo — connect, share, and explore stories and posts from your network."
