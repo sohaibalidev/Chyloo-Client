@@ -7,6 +7,7 @@
 }
 
 .profileAvatar {
+  cursor: pointer;
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -141,7 +142,6 @@
 
 .profileFollowBtn:hover {
   background: var(--primary-accent-hover);
-  transform: translateY(-1px);
 }
 
 .profileFollowBtn.following {
@@ -203,6 +203,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -375,5 +376,100 @@
   .profileLoadingSpinner {
     width: 13px;
     height: 13px;
+  }
+}
+
+.profilePrivateBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  color: var(--text-light);
+}
+
+.profileFollowBtn.pending {
+  background: var(--dark-card);
+  color: var(--text-light);
+  border: 1px solid var(--text-lighter);
+}
+
+.profileFollowBtn.pending:hover {
+  background: rgba(255, 193, 7, 0.1);
+  border-color: #ffc107;
+  color: #ffc107;
+}
+
+.profileFollowBtn.following:hover {
+  background: rgba(255, 59, 48, 0.1);
+  border-color: #ff3b30;
+  color: #ff3b30;
+}
+
+.profileMessageBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.profileMessageBtn:disabled:hover {
+  background: var(--dark-card);
+  border-color: var(--text-lighter);
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.25s ease;
+}
+
+.image {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 4px;
+  object-fit: contain;
+  animation: zoomIn 0.25s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .image {
+    max-width: 85vw;
+    max-height: 80vh;
+    border-radius: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .image {
+    max-width: 90vw;
+    max-height: 75vh;
+    border-radius: 2px;
   }
 }

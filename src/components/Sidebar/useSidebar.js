@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 
 export const useSidebar = () => {
   const { user, logout } = useAuth();
@@ -17,6 +17,7 @@ export const useSidebar = () => {
     { to: '/search', label: 'Search', icon: 'Search', size: 20 },
     { to: '/messages', label: 'Messages', icon: 'MessageSquare', size: 20 },
     { to: '/posts/new', label: 'New Post', icon: 'PlusSquare', size: 20 },
+    { to: '/stories/new', label: 'New Story', icon: 'CircleDashed', size: 20 },
     { to: `/profile/${user?.username}`, label: 'Profile', icon: 'User', size: 20 },
     { to: '/notifications', label: 'Notifications', icon: 'Bell', size: 20 },
     { to: '/settings', label: 'Settings', icon: 'Settings', size: 20 },

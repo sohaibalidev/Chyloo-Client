@@ -3,7 +3,7 @@ import useOnlineStatus from '@/hooks/useOnlineStatus';
 import useServerStatus from '@/hooks/useServerStatus';
 import OfflineScreen from '@/components/OfflineScreen';
 import ServerDownScreen from '@/components/ServerDownScreen';
-import ContextProvider from '@/context/ContextProvider';
+import ContextProvider from '@/contexts/ContextProvider';
 import './styles/app.css';
 
 export default function App() {

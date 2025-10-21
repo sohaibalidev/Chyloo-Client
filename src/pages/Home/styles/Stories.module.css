@@ -1,0 +1,361 @@
+.storiesContainer {
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.storiesList {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.storiesList::-webkit-scrollbar {
+  display: none;
+}
+
+.storyItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  min-width: 70px;
+  flex-shrink: 0;
+  gap: 0.2rem;
+}
+
+.storyItem:hover {
+  transform: scale(1);
+}
+
+.avatarContainer {
+  position: relative;
+  width: 82px;
+  height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.storyRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(45deg, var(--primary-accent), #ff6b6b, #4ecdc4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.storyRing::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--dark-bg);
+  z-index: 0;
+}
+
+.avatar {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  object-fit: cover;
+  z-index: 2;
+  background: var(--dark-bg);
+  border: none;
+}
+
+.avatarPlaceholder {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: white;
+  z-index: 2;
+  background: var(--dark-bg);
+  border: none;
+}
+
+.username {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  font-weight: 500;
+}
+
+.loading,
+.noStories,
+.error {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-light);
+  background: var(--dark-card);
+}
+
+.error {
+  color: var(--error);
+  background: rgba(229, 57, 53, 0.1);
+}
+
+.storyViewer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.storyOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(5px);
+}
+
+.storyContent {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 85vh;
+  background: var(--dark-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-hover);
+  z-index: 1001;
+  animation: scaleIn 0.2s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.progressContainer {
+  display: flex;
+  gap: 4px;
+  padding: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1002;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
+}
+
+.progressBar {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.progressBar:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--text);
+  transition: width 0.1s linear;
+  width: 0%;
+}
+
+.storyHeader {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  z-index: 1002;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  padding: 6px 12px;
+  backdrop-filter: blur(10px);
+}
+
+.userAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-accent);
+  background: var(--dark-bg);
+}
+
+.userAvatarPlaceholder {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 2px solid var(--primary-accent);
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.closeButton {
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: var(--text);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.closeButton:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+}
+
+.mediaContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dark-bg);
+}
+
+.storyMedia {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.storyMedia video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.navSection {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  display: flex;
+  z-index: 1003;
+}
+
+.navArea {
+  flex: 1;
+  height: 100%;
+  cursor: pointer;
+}
+
+.navArea:first-child:hover {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.03), transparent);
+}
+
+.navArea:last-child:hover {
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.03), transparent);
+}
+
+.caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: center;
+  z-index: 1002;
+}
+
+@media (max-width: 768px) {
+  .storyContent {
+    height: 100vh;
+    max-width: none;
+  }
+
+  .storiesList {
+    padding: 0.75rem;
+    margin: 0 0.5rem;
+  }
+
+  .avatarContainer {
+    width: 60px;
+    height: 60px;
+  }
+
+  .avatar {
+    width: 56px;
+    height: 56px;
+  }
+
+  .avatarPlaceholder {
+    width: 56px;
+    height: 56px;
+  }
+
+  .storyItem {
+    min-width: 65px;
+  }
+}

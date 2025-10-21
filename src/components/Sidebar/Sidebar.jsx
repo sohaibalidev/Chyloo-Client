@@ -9,13 +9,14 @@ import {
   Search,
   Sun,
   Moon,
+  CircleDashed,
   PlusSquare,
   X,
 } from 'lucide-react';
 import { useSidebar } from './useSidebar';
 import BottomNav from './components/BottomNav';
 import SidebarNav from './components/SidebarNav';
-import { useTheme } from '@/context/ThemeContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import styles from './Sidebar.module.css';
 
 const Icon = ({ name, size = 20 }) => {
@@ -24,6 +25,7 @@ const Icon = ({ name, size = 20 }) => {
     Search: <Search size={size} />,
     MessageSquare: <MessageSquare size={size} />,
     PlusSquare: <PlusSquare size={size} />,
+    CircleDashed: <CircleDashed size={size} />,
     User: <User size={size} />,
     Bell: <Bell size={size} />,
     Settings: <Settings size={size} />,

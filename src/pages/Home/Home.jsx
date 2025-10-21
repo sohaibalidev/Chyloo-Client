@@ -1,4 +1,4 @@
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { useEffect } from 'react';
 import SEO from '@/components/SEO'
 import Feed from './components/Feed';

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
-import placeholderColor from '@/helpers/placeholderColor';
+import placeholderColor from '@/utils/placeholderColor';
 import styles from './UserCard.module.css';
 
 const UserCard = ({

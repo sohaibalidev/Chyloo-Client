@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Search, MessageSquare } from 'lucide-react';
-import placeholderColor from '@/helpers/placeholderColor';
+import placeholderColor from '@/utils/placeholderColor';
 import styles from '../styles/ConversationList.module.css';
 
 const ConversationList = ({

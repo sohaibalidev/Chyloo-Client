@@ -1,216 +1,235 @@
-import { useState, useEffect, useRef } from 'react';
-import { BASE_URL } from '@/config/app.config';
-import '../styles/Stories.css';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { X } from 'lucide-react';
+import getPlaceholderColor from '@/utils/placeholderColor';
+import useStories from '../hooks/useStories';
+import styles from '../styles/Stories.module.css';
 
 const Stories = () => {
-  const [stories, setStories] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedUserStories, setSelectedUserStories] = useState(null);
-  const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
+  const { stories, loading, error } = useStories();
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(0);
-  const progressInterval = useRef(null);
-  const videoRef = useRef(null);
+  const progressIntervalRef = useRef(null);
+  const startTimeRef = useRef(null);
 
-  useEffect(() => {
-    const fetchStories = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/api/stories`, {
-          credentials: 'include',
-        });
-        const data = await response.json();
-        setStories(data.stories);
-      } catch (error) {
-        console.error('Error fetching stories:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const selectedUser = selectedUserId ? stories[selectedUserId] : null;
+  const currentStory = selectedUser?.stories?.[currentIndex];
 
-    fetchStories();
+  const closeStory = useCallback(() => {
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current);
+      progressIntervalRef.current = null;
+    }
+    setSelectedUserId(null);
+    setCurrentIndex(0);
+    setProgress(0);
   }, []);
 
-  const openStory = (userStories) => {
-    setSelectedUserStories(userStories);
-    setCurrentStoryIndex(0);
-    setProgress(0);
-  };
-
-  const closeStory = () => {
-    setSelectedUserStories(null);
-    setCurrentStoryIndex(0);
-    setProgress(0);
-    clearInterval(progressInterval.current);
-    if (videoRef.current) {
-      videoRef.current.pause();
-    }
-  };
-
-  const nextStory = () => {
-    if (selectedUserStories && currentStoryIndex < selectedUserStories.stories.length - 1) {
-      setCurrentStoryIndex((prev) => prev + 1);
+  const nextStory = useCallback(() => {
+    if (!selectedUser) return;
+    if (currentIndex < selectedUser.stories.length - 1) {
+      setCurrentIndex((prev) => prev + 1);
       setProgress(0);
     } else {
       closeStory();
     }
-  };
+  }, [selectedUser, currentIndex, closeStory]);
 
-  const prevStory = () => {
-    if (currentStoryIndex > 0) {
-      setCurrentStoryIndex((prev) => prev - 1);
+  const prevStory = useCallback(() => {
+    if (currentIndex > 0) {
+      setCurrentIndex((prev) => prev - 1);
       setProgress(0);
     }
-  };
+  }, [currentIndex]);
 
-  const startProgress = (duration) => {
-    clearInterval(progressInterval.current);
-    setProgress(0);
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (!selectedUser) return;
+      if (e.key === 'ArrowRight') nextStory();
+      if (e.key === 'ArrowLeft') prevStory();
+      if (e.key === 'Escape') closeStory();
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [selectedUser, nextStory, prevStory, closeStory]);
 
-    progressInterval.current = setInterval(() => {
+  useEffect(() => {
+    if (!currentStory) return;
+
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current);
+    }
+
+    const duration = (currentStory.media.duration || 7) * 1000;
+    const updateInterval = 50;
+    const totalSteps = duration / updateInterval;
+    const increment = 100 / totalSteps;
+
+    startTimeRef.current = Date.now();
+
+    progressIntervalRef.current = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(progressInterval.current);
+        const newProgress = prev + increment;
+        if (newProgress >= 100) {
+          clearInterval(progressIntervalRef.current);
           nextStory();
           return 0;
         }
-        return prev + 100 / (duration * 10);
+        return newProgress;
       });
-    }, 100);
-  };
+    }, updateInterval);
 
-  useEffect(() => {
-    if (selectedUserStories) {
-      const currentStory = selectedUserStories.stories[currentStoryIndex];
-      startProgress(currentStory.duration);
+    return () => {
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+        progressIntervalRef.current = null;
+      }
+    };
+  }, [currentStory, nextStory]);
 
-      const timeout = setTimeout(() => {
-        nextStory();
-      }, currentStory.duration * 1000);
+  const handleProgressClick = useCallback((index) => {
+    if (!selectedUser) return;
+    setCurrentIndex(index);
+    setProgress(0);
+  }, [selectedUser]);
 
-      return () => {
-        clearTimeout(timeout);
-        clearInterval(progressInterval.current);
-      };
+  const renderAvatar = (user, size = 'normal') => {
+    const { avatar, username, name } = user;
+    const displayName = name || username;
+    const firstLetter = displayName?.charAt(0)?.toUpperCase() || 'U';
+
+    if (avatar) {
+      return (
+        <img
+          src={avatar}
+          alt={username}
+          className={size === 'normal' ? styles.avatar : styles.userAvatar}
+          onError={(e) => {
+            e.target.style.display = 'none';
+            e.target.nextSibling.style.display = 'flex';
+          }}
+        />
+      );
     }
-  }, [selectedUserStories, currentStoryIndex]);
 
-  const handleVideoLoad = (event) => {
-    if (event.target) {
-      event.target.play().catch((error) => {
-        console.error('Error playing video:', error);
-      });
-    }
-  };
-
-  if (loading) {
     return (
-      <div className='stories-container'>
-        <div className='stories-scroll'>
-          {[...Array(8)].map((_, i) => (
-            <div key={i} className='story-skeleton'>
-              <div className='story-avatar-skeleton'></div>
-              <div className='story-username-skeleton'></div>
-            </div>
-          ))}
-        </div>
+      <div
+        className={size === 'normal' ? styles.avatarPlaceholder : styles.userAvatarPlaceholder}
+        style={{ backgroundColor: getPlaceholderColor(username) }}
+      >
+        {firstLetter}
       </div>
     );
-  }
+  };
+
+  if (loading && Object.keys(stories).length === 0)
+    return <div className={styles.loading}>Loading stories...</div>;
+  if (error && Object.keys(stories).length === 0)
+    return <div className={styles.error}>Error loading stories: {error}</div>;
+  if (Object.keys(stories).length === 0 && !loading)
+    return <div className={styles.noStories}>No stories available</div>;
 
   return (
-    <>
-      <div className='stories-container'>
-        <div className='stories-scroll'>
-          {stories.map((userStories) => (
-            <div key={userStories.id} className='story-item' onClick={() => openStory(userStories)}>
-              <div className='story-avatar'>
-                <img src={userStories.avatar} alt={userStories.username} />
-              </div>
-              <span className='story-username'>{userStories.username}</span>
+    <div className={styles.storiesContainer}>
+      <div className={styles.storiesList}>
+        {Object.values(stories).map((userData) => (
+          <div
+            key={userData.user._id}
+            className={styles.storyItem}
+            onClick={() => {
+              setSelectedUserId(userData.user._id);
+              setCurrentIndex(0);
+              setProgress(0);
+            }}
+          >
+            <div className={styles.avatarContainer}>
+              <div className={styles.storyRing} />
+              {renderAvatar(userData.user)}
             </div>
-          ))}
-
-          {!stories.length ? 'No Active Stories' : null}
-        </div>
+            <span className={styles.username}>@{userData.user.username}</span>
+          </div>
+        ))}
       </div>
 
-      {selectedUserStories && (
-        <div className='story-modal' onClick={closeStory}>
-          <div className='story-modal-content' onClick={(e) => e.stopPropagation()}>
-            <div className='story-progress-container'>
-              {selectedUserStories.stories.map((story, index) => (
-                <div key={story.id} className='story-progress-track'>
+      {selectedUser && currentStory && (
+        <div className={styles.storyViewer}>
+          <div
+            className={styles.storyOverlay}
+            onClick={(e) => e.target === e.currentTarget && closeStory()}
+          />
+          <div className={styles.storyContent}>
+            <div className={styles.progressContainer}>
+              {selectedUser.stories.map((_, i) => (
+                <div
+                  key={i}
+                  className={styles.progressBar}
+                  onClick={() => handleProgressClick(i)}
+                >
                   <div
-                    className={`story-progress-bar ${index === currentStoryIndex ? 'active' : ''} ${
-                      index < currentStoryIndex ? 'completed' : ''
-                    }`}
+                    className={styles.progressFill}
                     style={{
                       width:
-                        index === currentStoryIndex
-                          ? `${progress}%`
-                          : index < currentStoryIndex
+                        i < currentIndex
                           ? '100%'
-                          : '0%',
+                          : i === currentIndex
+                            ? `${progress}%`
+                            : '0%',
                     }}
-                  ></div>
+                  />
                 </div>
               ))}
             </div>
 
-            {selectedUserStories.stories[currentStoryIndex] && (
-              <>
-                {selectedUserStories.stories[currentStoryIndex].type === 'image' ? (
-                  <img
-                    src={selectedUserStories.stories[currentStoryIndex].image}
-                    alt={selectedUserStories.username}
-                  />
-                ) : (
-                  <video
-                    ref={videoRef}
-                    src={selectedUserStories.stories[currentStoryIndex].image}
-                    onLoadedMetadata={handleVideoLoad}
-                    autoPlay
-                    muted
-                    playsInline
-                  />
-                )}
-              </>
-            )}
-
-            <div className='story-modal-header'>
-              <div className='story-modal-avatar'>
-                <img src={selectedUserStories.avatar} alt={selectedUserStories.username} />
-              </div>
-              <span>{selectedUserStories.username}</span>
+            <div className={styles.storyHeader}>
+              <Link to={`/profile/${selectedUser.user.username}`} className={styles.userLink} onClick={closeStory}>
+                <div className={styles.userInfo}>
+                  {renderAvatar(selectedUser.user, 'small')}
+                  <span className={styles.userName}>{selectedUser.user.username}</span>
+                </div>
+              </Link>
+              <button className={styles.closeButton} onClick={closeStory}>
+                <X size={20} />
+              </button>
             </div>
 
-            <div
-              className='story-nav-left'
-              onClick={(e) => {
-                e.stopPropagation();
-                prevStory();
-              }}
-            >
-              ‹
-            </div>
-            <div
-              className='story-nav-right'
-              onClick={(e) => {
-                e.stopPropagation();
-                nextStory();
-              }}
-            >
-              ›
+            <div className={styles.mediaContainer}>
+              {currentStory.media.type === 'image' ? (
+                <img
+                  src={currentStory.media.url}
+                  alt="Story"
+                  className={styles.storyMedia}
+                />
+              ) : (
+                <video
+                  src={currentStory.media.url}
+                  className={styles.storyMedia}
+                  autoPlay
+                  muted
+                  playsInline
+                  onEnded={nextStory}
+                />
+              )}
             </div>
 
-            {selectedUserStories.stories[currentStoryIndex]?.caption && (
-              <div className='story-caption'>
-                {selectedUserStories.stories[currentStoryIndex].caption}
-              </div>
+            <div className={styles.navSection}>
+              <div
+                className={styles.navArea}
+                onClick={prevStory}
+              />
+              <div
+                className={styles.navArea}
+                onClick={nextStory}
+              />
+            </div>
+
+            {currentStory.caption && (
+              <div className={styles.caption}>{currentStory.caption}</div>
             )}
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

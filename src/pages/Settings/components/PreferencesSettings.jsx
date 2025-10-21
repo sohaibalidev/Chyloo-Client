@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Moon, Sun, Eye, EyeOff } from 'lucide-react';
 import { useUpdateSettings } from '../hooks/useUpdateSettings';
-import { useTheme } from '@/context/ThemeContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import styles from '../styles/PreferencesSettings.module.css';
 
 const PreferencesSettings = ({ user, onUpdate }) => {

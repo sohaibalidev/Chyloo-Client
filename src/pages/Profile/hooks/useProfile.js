@@ -9,7 +9,7 @@ export const useProfile = (username, thisUser) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [viewMode, setViewMode] = useState('grid');
-  const [isFollowing, setIsFollowing] = useState(false);
+  const [followStatus, setFollowStatus] = useState('not_following');
   const [followLoading, setFollowLoading] = useState(false);
 
   const fetchUserProfile = useCallback(async () => {
@@ -25,7 +25,7 @@ export const useProfile = (username, thisUser) => {
 
       if (data.success) {
         setUser(data.user);
-        setIsFollowing(data.user.isFollowed || false);
+        setFollowStatus(data.user.followStatus || 'not_following');
         await fetchUserPosts(data.user._id);
 
         if (thisUser && thisUser._id === data.user._id) {
@@ -77,25 +77,55 @@ export const useProfile = (username, thisUser) => {
 
     try {
       setFollowLoading(true);
-      const method = isFollowing ? 'DELETE' : 'POST';
 
-      const response = await fetch(`${BASE_URL}/api/users/${user._id}/follow`, {
+      let method, endpoint;
+
+      if (followStatus === 'accepted') {
+        method = 'DELETE';
+        endpoint = `${BASE_URL}/api/users/${user._id}/unfollow`;
+      } else if (followStatus === 'pending') {
+        method = 'DELETE';
+        endpoint = `${BASE_URL}/api/users/${user._id}/unfollow`;
+      } else {
+        method = 'POST';
+        endpoint = `${BASE_URL}/api/users/${user._id}/follow`;
+      }
+
+      const response = await fetch(endpoint, {
         method,
         credentials: 'include',
       });
 
-      if (response.ok) {
-        setIsFollowing(!isFollowing);
+      const data = await response.json();
+
+      if (data.success) {
+        let newFollowStatus = 'not_following';
+        let followerCountChange = 0;
+
+        if (method === 'POST') {
+          if (user.accountStatus === 'private') {
+            newFollowStatus = 'pending';
+          } else {
+            newFollowStatus = 'accepted';
+            followerCountChange = 1;
+          }
+        } else {
+          if (followStatus === 'accepted') {
+            followerCountChange = -1;
+          }
+        }
+
+        setFollowStatus(newFollowStatus);
         setUser((prev) => ({
           ...prev,
-          followerCount: isFollowing ? prev.followerCount - 1 : prev.followerCount + 1,
-          isFollowed: !isFollowing,
+          followerCount: prev.followerCount + followerCountChange,
+          followStatus: newFollowStatus,
         }));
       } else {
-        throw new Error('Failed to update follow status');
+        throw new Error(data.message || 'Failed to update follow status');
       }
     } catch (err) {
-      setError('Error updating follow status');
+      setError(err.message || 'Error updating follow status');
       console.error('Follow error:', err);
     } finally {
       setFollowLoading(false);
@@ -110,7 +140,7 @@ export const useProfile = (username, thisUser) => {
     loading,
     error,
     viewMode,
-    isFollowing,
+    followStatus,
     followLoading,
     setActiveTab,
     setViewMode,

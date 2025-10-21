@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { useProfile } from './hooks/useProfile.js';
 import ProfileSkeleton from './components/ProfileSkeleton.jsx';
 import ProfileHeader from './components/ProfileHeader.jsx';
@@ -18,7 +18,7 @@ const Profile = () => {
     loading,
     error,
     viewMode,
-    isFollowing,
+    followStatus,
     followLoading,
     setActiveTab,
     setViewMode,
@@ -51,7 +51,7 @@ const Profile = () => {
       <ProfileHeader
         user={user}
         currentUser={currentUser}
-        isFollowing={isFollowing}
+        followStatus={followStatus}
         followLoading={followLoading}
         onFollow={handleFollow}
         onProfileUpdate={handleProfileUpdate}

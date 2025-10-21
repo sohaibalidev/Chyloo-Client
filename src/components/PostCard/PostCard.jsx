@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import { usePostCard } from './usePostCard.js';
 import { Link } from 'react-router-dom';
-import textEnhancer from '@/helpers/textEnhancer';
+import textEnhancer from '@/utils/textEnhancer';
 import UserCard from '@/components/UserCard';
 import styles from './PostCard.module.css';
 

@@ -1,21 +1,51 @@
 .container {
-    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
     background-color: var(--dark-bg);
+    min-height: 100vh;
+    user-select: none;
 }
 
 .header {
+    background: var(--dark-card);
+    padding: 24px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.headerMain {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
+    margin-bottom: 20px;
+}
+
+.titleSection {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.titleIcon {
+    color: var(--primary-accent);
 }
 
 .title {
-    font-size: 28px;
-    font-weight: 700;
+    font-size: 22px;
+    font-weight: 800;
     color: var(--text);
     margin: 0;
+    background-clip: text;
+}
+
+.unreadBadge {
+    background: var(--error);
+    color: white;
+    padding: 2px 9px;
+    font-size: 12px;
+    font-weight: 700;
 }
 
 .actions {
@@ -25,18 +55,21 @@
 }
 
 .markAllButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     background: var(--primary-accent);
     color: var(--text);
     border: none;
-    padding: 8px 16px;
+    padding: 10px 20px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
     box-shadow: var(--gold-glow);
 }
 
-.markAllButton:hover {
+.markAllButton:hover:not(:disabled) {
     background: var(--primary-accent-hover);
     box-shadow: var(--shadow-hover);
 }
@@ -48,70 +81,144 @@
     box-shadow: none;
 }
 
-.unreadCount {
-    background: var(--primary-accent);
-    color: var(--text);
-    padding: 4px 12px;
-    font-size: 14px;
-    font-weight: 600;
-    box-shadow: var(--gold-glow);
+.settingsButton {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: var(--transition);
 }
 
-.notificationsList {
+.settingsButton:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-accent);
+    color: var(--primary-accent);
+}
+
+.controls {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.searchBox {
+    position: relative;
+    flex: 1;
+    min-width: 250px;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+}
+
+.searchInput {
+    width: 100%;
+    padding: 12px 12px 12px 40px;
+    background: var(--dark-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text);
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+}
+
+.filterTabs {
+    display: flex;
+    gap: 4px;
+    background: var(--dark-bg);
+    padding: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.filterTab {
+    padding: 8px 16px;
+    background: transparent;
+    border: none;
+    color: var(--text-light);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filterTab.active {
+    background: var(--primary-accent);
+    color: var(--text);
+    box-shadow: var(--gold-glow);
 }
 
 .notificationItem {
     display: flex;
     align-items: flex-start;
     gap: 16px;
-    padding: 16px;
+    padding: 20px;
     background: var(--dark-card);
     border: 1px solid var(--border-color);
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
     position: relative;
+    overflow: hidden;
 }
 
 .notificationItem:hover {
     background: var(--primary-color);
     border-color: var(--primary-accent);
+    box-shadow: var(--shadow-lg);
 }
 
 .notificationItem.unread {
-    background: var(--dark-card);
+    background: linear-gradient(135deg, var(--dark-card), var(--primary-color));
     border-left: 4px solid var(--primary-accent);
 }
 
-.notificationItem.unread:hover {
-    background: var(--primary-color);
+.notificationCheckbox {
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.notificationCheckbox input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
 }
 
 .avatar {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
-    object-fit: cover;
     flex-shrink: 0;
     background: var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
     border: 2px solid var(--primary-accent);
+    overflow: hidden;
+}
+
+.avatarImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .avatarPlaceholder {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--border-color);
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text-light);
-    border: 2px solid var(--primary-accent);
 }
 
 .content {
@@ -123,26 +230,36 @@
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 
 .icon {
     flex-shrink: 0;
     margin-top: 2px;
     color: var(--primary-accent);
+    width: 20px;
+    height: 20px;
 }
 
 .message {
     flex: 1;
     font-size: 15px;
-    line-height: 1.4;
+    line-height: 1.5;
     color: var(--text);
     margin: 0;
 }
 
 .message strong {
-    font-weight: 600;
+    font-weight: 700;
     color: var(--primary-accent);
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .timestamp {
@@ -155,14 +272,13 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-top: 12px;
 }
 
 .readButton {
     background: transparent;
     border: 1px solid var(--border-color);
     padding: 6px 12px;
-    font-size: 13px;
+    font-size: 12px;
     color: var(--text-light);
     cursor: pointer;
     transition: var(--transition);
@@ -177,46 +293,47 @@
 .followActions {
     display: flex;
     gap: 8px;
-    margin-top: 12px;
 }
 
 .acceptButton {
     background: var(--success);
-    color: var(--text);
+    color: white;
     border: none;
-    padding: 6px 16px;
+    padding: 8px 16px;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
 }
 
 .acceptButton:hover {
-    background: var(--success);
+    background: #2e7d32;
+
     box-shadow: 0 4px 12px rgba(67, 160, 71, 0.4);
 }
 
 .declineButton {
     background: var(--error);
-    color: var(--text);
+    color: white;
     border: none;
-    padding: 6px 16px;
+    padding: 8px 16px;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
 }
 
 .declineButton:hover {
-    background: var(--error);
+    background: #d32f2f;
+
     box-shadow: 0 4px 12px rgba(229, 57, 53, 0.4);
 }
 
 .statusIndicator {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 13px;
+    gap: 6px;
+    font-size: 12px;
     color: var(--text-light);
 }
 
@@ -224,61 +341,124 @@
     color: var(--success);
 }
 
+.unreadIndicator {
+    position: absolute;
+    top: 53%;
+    right: 17px;
+    transform: translateY(-53%);
+    width: 8px;
+    height: 8px;
+    background: var(--primary-accent);
+    border-radius: 50%;
+}
+
 .emptyState {
     text-align: center;
-    padding: 60px 20px;
-    color: var(--text-light);
+    padding: 80px 24px;
+    background: var(--dark-card);
+    border: 2px dashed var(--border-color);
 }
 
 .emptyIcon {
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 16px;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
     color: var(--text-lighter);
+    opacity: 0.7;
 }
 
 .emptyTitle {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
     color: var(--text);
 }
 
 .emptyDescription {
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 15px;
+    line-height: 1.6;
     max-width: 400px;
-    margin: 0 auto;
+    margin: 0 auto 24px;
     color: var(--text-light);
 }
 
-.loading {
+.clearSearchButton {
+    background: var(--primary-accent);
+    color: var(--text);
+    border: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.clearSearchButton:hover {
+    background: var(--primary-accent-hover);
+
+}
+
+.loadingState {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 40px;
-    color: var(--text-light);
+    justify-content: center;
+    padding: 80px 24px;
+    text-align: center;
+}
+
+.loadingSpinner {
+    margin-bottom: 16px;
+}
+
+.spinning {
+    animation: spin 1.5s linear infinite;
+}
+
+.errorState {
+    background: var(--error);
+    color: white;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: shake 0.5s ease-in-out;
+}
+
+.retryButton {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.retryButton:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .loadMore {
     display: flex;
     justify-content: center;
-    margin-top: 24px;
+    margin-top: 32px;
 }
 
 .loadMoreButton {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     background: transparent;
-    border: 1px solid var(--border-color);
-    padding: 10px 24px;
-    color: var(--text);
+    border: 2px solid var(--primary-accent);
+    padding: 12px 32px;
+    color: var(--primary-accent);
+    font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
-    font-weight: 500;
 }
 
-.loadMoreButton:hover {
+.loadMoreButton:hover:not(:disabled) {
     background: var(--primary-accent);
-    border-color: var(--primary-accent);
     color: var(--text);
     box-shadow: var(--gold-glow);
 }
@@ -290,7 +470,27 @@
     box-shadow: none;
 }
 
-/* Animation for new notifications */
+.loadingDots {
+    display: flex;
+    gap: 4px;
+}
+
+.loadingDots span {
+    width: 6px;
+    height: 6px;
+    background: currentColor;
+    border-radius: 50%;
+    animation: bounce 1.4s ease-in-out infinite both;
+}
+
+.loadingDots span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.loadingDots span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -303,55 +503,103 @@
     }
 }
 
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
 .notificationItem {
     animation: slideIn 0.3s ease-out;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     .container {
         padding: 16px;
     }
 
     .header {
+        padding: 20px;
+    }
+
+    .headerMain {
         flex-direction: column;
         gap: 16px;
         align-items: flex-start;
     }
 
-    .actions {
-        width: 100%;
-        justify-content: space-between;
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .searchBox {
+        min-width: auto;
     }
 
     .title {
-        font-size: 24px;
+        font-size: 28px;
     }
 
     .notificationItem {
-        padding: 12px;
+        padding: 16px;
         gap: 12px;
     }
 
-    .avatar,
-    .avatarPlaceholder {
-        width: 40px;
-        height: 40px;
+    .avatar {
+        width: 44px;
+        height: 44px;
     }
 
-    .message {
-        font-size: 14px;
-    }
-
-    .followActions {
+    .footer {
         flex-direction: column;
-        gap: 6px;
-    }
-
-    .acceptButton,
-    .declineButton {
-        padding: 8px 12px;
-        font-size: 12px;
+        align-items: flex-start;
+        gap: 8px;
     }
 }
 
@@ -363,10 +611,10 @@
     .notificationItem {
         flex-direction: column;
         text-align: center;
+        gap: 12px;
     }
 
-    .avatar,
-    .avatarPlaceholder {
+    .avatar {
         align-self: center;
     }
 
@@ -375,7 +623,47 @@
         text-align: center;
     }
 
-    .actionsRow {
-        justify-content: center;
+    .followActions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .acceptButton,
+    .declineButton {
+        width: 100%;
+    }
+}
+
+.loadingDots {
+    display: flex;
+    gap: 4px;
+}
+
+.loadingDots span {
+    width: 6px;
+    height: 6px;
+    background: currentColor;
+    border-radius: 50%;
+    animation: bounce 1.4s ease-in-out infinite both;
+}
+
+.loadingDots span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.loadingDots span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+
+    40% {
+        transform: scale(1);
     }
 }

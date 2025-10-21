@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { MessageSquare, Trash2, X, Play, Pause, Volume2, VolumeX } from 'lucide-react';
-import textEnhancer from '@/helpers/textEnhancer'
-import placeholderColor from '@/helpers/placeholderColor';
+import textEnhancer from '@/utils/textEnhancer'
+import placeholderColor from '@/utils/placeholderColor';
 import styles from '../styles/MessageArea.module.css';
 
 const MessageArea = ({

@@ -1,0 +1,1 @@
+export { default } from './NewStory.jsx';
