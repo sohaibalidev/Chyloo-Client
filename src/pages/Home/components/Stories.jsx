@@ -13,6 +13,9 @@ const Stories = () => {
   const progressIntervalRef = useRef(null);
   const startTimeRef = useRef(null);
 
+  const userIds = Object.keys(stories);
+  const currentUserIndex = userIds.findIndex(id => id === selectedUserId);
+
   const selectedUser = selectedUserId ? stories[selectedUserId] : null;
   const currentStory = selectedUser?.stories?.[currentIndex];
 
@@ -32,16 +35,42 @@ const Stories = () => {
       setCurrentIndex((prev) => prev + 1);
       setProgress(0);
     } else {
-      closeStory();
+      nextUser();
     }
-  }, [selectedUser, currentIndex, closeStory]);
+  }, [selectedUser, currentIndex]);
 
   const prevStory = useCallback(() => {
     if (currentIndex > 0) {
       setCurrentIndex((prev) => prev - 1);
       setProgress(0);
+    } else {
+      prevUser();
     }
   }, [currentIndex]);
+
+  const nextUser = useCallback(() => {
+    if (currentUserIndex < userIds.length - 1) {
+      const nextUserId = userIds[currentUserIndex + 1];
+      setSelectedUserId(nextUserId);
+      setCurrentIndex(0);
+      setProgress(0);
+    } else {
+      closeStory();
+    }
+  }, [currentUserIndex, userIds, closeStory]);
+
+  const prevUser = useCallback(() => {
+    if (currentUserIndex > 0) {
+      const prevUserId = userIds[currentUserIndex - 1];
+      const prevUserStories = stories[prevUserId].stories;
+      setSelectedUserId(prevUserId);
+      setCurrentIndex(prevUserStories.length - 1); 
+      setProgress(0);
+    } else {
+      setCurrentIndex(0);
+      setProgress(0);
+    }
+  }, [currentUserIndex, userIds, stories]);
 
   useEffect(() => {
     const handleKey = (e) => {
@@ -185,7 +214,7 @@ const Stories = () => {
               <Link to={`/profile/${selectedUser.user.username}`} className={styles.userLink} onClick={closeStory}>
                 <div className={styles.userInfo}>
                   {renderAvatar(selectedUser.user, 'small')}
-                  <span className={styles.userName}>{selectedUser.user.username}</span>
+                  <span className={styles.userName}>@{selectedUser.user.username}</span>
                 </div>
               </Link>
               <button className={styles.closeButton} onClick={closeStory}>
