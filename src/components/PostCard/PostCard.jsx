@@ -9,11 +9,13 @@ import {
   Play,
   Pause,
 } from 'lucide-react';
-import { usePostCard } from './usePostCard.js';
 import { Link } from 'react-router-dom';
+import { usePostCard } from './hooks/usePostCard.js';
+import { createPortal } from 'react-dom';
+import PostPopup from './components/PostPopup.jsx';
 import textEnhancer from '@/utils/textEnhancer';
 import UserCard from '@/components/UserCard';
-import styles from './PostCard.module.css';
+import styles from './styles/PostCard.module.css';
 
 const PostCard = ({ post }) => {
   const {
@@ -24,6 +26,7 @@ const PostCard = ({ post }) => {
     likesCount,
     isLiking,
     videoRefs,
+    selectedPost,
     mediaContainerRef,
     handleMediaScroll,
     scrollToMedia,
@@ -31,6 +34,7 @@ const PostCard = ({ post }) => {
     toggleVideoPlayback,
     handleVideoClick,
     handleVideoEnded,
+    setSelectedPost,
     handleLike,
     handleSave,
     formatDate,
@@ -90,6 +94,10 @@ const PostCard = ({ post }) => {
             id={`post-media-container-${post._id}`}
             className={styles.mediaContainer}
             onScroll={handleMediaScroll}
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedPost(post);
+            }}
           >
             {post.media.map((mediaItem, index) => (
               <div key={mediaItem._id || index} className={styles.mediaItem}>
@@ -140,7 +148,7 @@ const PostCard = ({ post }) => {
         <button className={styles.actionBtn} onClick={handleLike}>
           <Heart size={20} fill={isLiked ? 'red' : 'none'} stroke={isLiked ? 'red' : 'white'} />
         </button>
-        <button className={styles.actionBtn}>
+        <button className={styles.actionBtn} onClick={() => setSelectedPost(post)}>
           <MessageCircle size={20} />
         </button>
         <button className={styles.actionBtn}>
@@ -164,22 +172,15 @@ const PostCard = ({ post }) => {
           dangerouslySetInnerHTML={{ __html: textEnhancer(post.caption || '') }}
         />
       </div>
-
-      {post.comments && post.comments.length > 0 && (
-        <div className={styles.postComments}>
-          {post.comments.slice(0, 2).map((comment) => (
-            <div key={comment._id} className={styles.comment}>
-              <span className={styles.commentUsername}>@{comment.user?.username || 'unknown'}</span>
-              <span>{comment.text}</span>
-            </div>
-          ))}
-          {post.commentsCount > 2 && (
-            <div className={styles.viewAllComments}>View all {post.commentsCount} comments</div>
-          )}
-        </div>
-      )}
-
       <div className={styles.postTime}>{formatDate(post.createdAt)}</div>
+
+      {selectedPost && createPortal(
+        <PostPopup
+          post={selectedPost}
+          onClose={() => setSelectedPost(null)}
+        />,
+        document.body
+      )}
     </div>
   );
 };

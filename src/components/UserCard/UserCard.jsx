@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
 import placeholderColor from '@/utils/placeholderColor';
 import styles from './UserCard.module.css';
@@ -14,6 +14,9 @@ const UserCard = ({
   className = '',
 }) => {
   if (!user) return null;
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const getSizeClass = () => {
     switch (imageSize) {
@@ -43,9 +46,8 @@ const UserCard = ({
 
   const cardContent = (
     <div
-      className={`${styles.UserCard} ${
-        background ? styles.withBackground : ''
-      } ${getSizeClass()} ${className}`}
+      className={`${styles.UserCard} ${background ? styles.withBackground : ''
+        } ${getSizeClass()} ${className}`}
     >
       {user.avatar ? (
         <img src={user.avatar} alt={user.name || user.username} />
@@ -81,8 +83,20 @@ const UserCard = ({
   );
 
   if (clickable && user.username) {
+    const handleClick = (e) => {
+      const targetPath = `/profile/${user.username}`;
+      if (location.pathname === targetPath) {
+        e.preventDefault();
+        window.location.reload();
+      }
+    };
+
     return (
-      <Link to={`/profile/${user.username}`} className={styles.linkWrapper}>
+      <Link
+        to={`/profile/${user.username}`}
+        className={styles.linkWrapper}
+        onClick={handleClick}
+      >
         {cardContent}
       </Link>
     );

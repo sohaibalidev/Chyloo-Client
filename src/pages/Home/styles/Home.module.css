@@ -19,7 +19,8 @@
 }
 
 .storiesSection {
-  margin-bottom: 24px;
+  max-width: 500px;
+  margin: 0 auto 24px auto;
 }
 
 .feedSection {

@@ -59,6 +59,7 @@ const Profile = () => {
 
       <ProfileContent
         user={user}
+        followStatus={followStatus}
         currentUser={currentUser}
         posts={posts}
         savedPosts={savedPosts}

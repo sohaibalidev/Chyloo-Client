@@ -1,0 +1,631 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.popup {
+    background: var(--dark-card);
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: 100%;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+}
+
+.popupContent {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.mediaSection {
+    width: 400px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    aspect-ratio: 9/16;
+}
+
+.contentSection {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    background: var(--dark-card);
+}
+
+.postMedia {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.mediaContainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.mediaContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.mediaItem {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.mediaItem img,
+.mediaItem video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.mediaItem video {
+    background: #000;
+}
+
+.videoContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.videoContainer video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.mediaIndicators {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 15;
+}
+
+.mediaIndicator {
+    border-radius: 50%;
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.mediaIndicator.active {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.2);
+}
+
+.navBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 15;
+    transition: background 0.2s ease;
+}
+
+.navBtn:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.navBtnLeft {
+    left: 16px;
+}
+
+.navBtnRight {
+    right: 16px;
+}
+
+.navBtn svg {
+    color: #262626;
+}
+
+.videoControls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.videoContainer:hover .videoControls,
+.videoControls.show {
+    opacity: 1;
+}
+
+.videoPlayBtn {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.videoPlayBtn:hover {
+    background: rgba(0, 0, 0, 0.7);
+    transform: scale(1.1);
+}
+
+.popupHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.postMore {
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.commentsContainer {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+}
+
+.commentItem {
+    margin-bottom: 20px;
+}
+
+.commentHeader {
+    margin-bottom: 4px;
+}
+
+.commentUsername {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.commentText {
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.commentTime {
+    color: var(--text-lighter);
+    font-size: 12px;
+}
+
+.popupActions {
+    padding: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+.actionButtons {
+    display: flex;
+}
+
+.actionBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text);
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.actionBtn:hover {
+    transform: scale(1.1);
+}
+
+.saveBtn {
+    margin-left: auto;
+}
+
+.likesCount {
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+    padding-left: 8px;
+    font-size: 14px;
+}
+
+.postTime {
+    font-size: 12px;
+    padding-left: 8px;
+    color: var(--text-lighter);
+    text-transform: uppercase;
+}
+
+.addComment {
+    display: flex;
+    padding: 16px;
+    border-top: 1px solid var(--border-color);
+    gap: 12px;
+}
+
+.commentInput {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 14px;
+    outline: none;
+}
+
+.commentInput::placeholder {
+    color: var(--text-lighter);
+}
+
+.postCommentBtn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.postCommentBtn:hover {
+    opacity: 1;
+}
+
+@media (max-width: 1024px) {
+    .popup {
+        max-width: 95vw;
+    }
+
+    .mediaSection {
+        width: 350px;
+    }
+
+    .contentSection {
+        width: 350px;
+    }
+}
+
+@media (max-width: 900px) {
+    .mediaSection {
+        width: 320px;
+    }
+
+    .contentSection {
+        width: 320px;
+    }
+}
+
+@media (max-width: 768px) {
+    .overlay {
+        padding: 0;
+    }
+
+    .popup {
+        max-width: 100vw;
+        max-height: 100vh;
+        flex-direction: column;
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .popupContent {
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .mediaSection {
+        width: 100%;
+        aspect-ratio: 9/16;
+        flex: none;
+        max-height: 70vh;
+    }
+
+    .contentSection {
+        width: 100%;
+        flex: 1;
+        max-height: 30vh;
+        min-height: 200px;
+    }
+
+    .navBtn {
+        width: 28px;
+        height: 28px;
+    }
+
+    .videoPlayBtn {
+        width: 60px;
+        height: 60px;
+    }
+
+    .commentsContainer {
+        padding: 12px;
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    .commentItem {
+        margin-bottom: 16px;
+    }
+
+    .commentText {
+        font-size: 13px;
+    }
+
+    .commentUsername {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 640px) {
+    .mediaSection {
+        max-height: 65vh;
+    }
+
+    .contentSection {
+        max-height: 35vh;
+    }
+
+    .navBtn {
+        width: 26px;
+        height: 26px;
+    }
+
+    .navBtnLeft {
+        left: 12px;
+    }
+
+    .navBtnRight {
+        right: 12px;
+    }
+
+    .videoPlayBtn {
+        width: 55px;
+        height: 55px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .popupHeader,
+    .commentsContainer,
+    .popupActions,
+    .addComment {
+        padding: 10px;
+    }
+
+    .navBtn {
+        width: 24px;
+        height: 24px;
+    }
+
+    .videoPlayBtn {
+        width: 50px;
+        height: 50px;
+    }
+
+    .mediaSection {
+        aspect-ratio: 9/16;
+        max-height: 60vh;
+    }
+
+    .contentSection {
+        max-height: 40vh;
+        min-height: 180px;
+    }
+
+    .mediaIndicators {
+        bottom: 12px;
+    }
+
+    .mediaIndicator {
+        width: 5px;
+        height: 5px;
+    }
+
+    .commentItem {
+        margin-bottom: 12px;
+    }
+
+    .commentText {
+        font-size: 12px;
+        line-height: 1.3;
+    }
+
+    .commentUsername {
+        font-size: 12px;
+    }
+
+    .commentTime {
+        font-size: 11px;
+    }
+
+    .likesCount {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .postTime {
+        font-size: 11px;
+    }
+
+    .actionBtn {
+        padding: 6px;
+    }
+
+    .commentInput {
+        font-size: 13px;
+    }
+
+    .postCommentBtn {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 375px) {
+    .mediaSection {
+        max-height: 55vh;
+    }
+
+    .contentSection {
+        max-height: 45vh;
+        min-height: 160px;
+    }
+
+    .popupHeader,
+    .commentsContainer,
+    .popupActions,
+    .addComment {
+        padding: 8px;
+    }
+
+    .navBtn {
+        width: 22px;
+        height: 22px;
+    }
+
+    .navBtnLeft {
+        left: 8px;
+    }
+
+    .navBtnRight {
+        right: 8px;
+    }
+
+    .videoPlayBtn {
+        width: 45px;
+        height: 45px;
+    }
+
+    .mediaIndicators {
+        bottom: 10px;
+    }
+
+    .mediaIndicator {
+        width: 4px;
+        height: 4px;
+    }
+}
+
+@media (max-height: 700px) and (orientation: landscape) {
+    .popupContent {
+        flex-direction: row;
+        height: 100vh;
+    }
+
+    .mediaSection {
+        width: 60%;
+        max-height: 100vh;
+        aspect-ratio: 16/9;
+    }
+
+    .contentSection {
+        width: 40%;
+        max-height: 100vh;
+        flex: 1;
+    }
+}
+
+@supports (padding: max(0px)) {
+    .overlay {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+        padding-top: max(20px, env(safe-area-inset-top));
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
+    }
+
+    @media (max-width: 768px) {
+        .overlay {
+            padding-left: max(0px, env(safe-area-inset-left));
+            padding-right: max(0px, env(safe-area-inset-right));
+            padding-top: max(0px, env(safe-area-inset-top));
+            padding-bottom: max(0px, env(safe-area-inset-bottom));
+        }
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+
+    .actionBtn,
+    .postMore,
+    .navBtn,
+    .videoPlayBtn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    .mediaIndicator {
+        min-width: 8px;
+        min-height: 8px;
+    }
+
+    .videoControls {
+        opacity: 1;
+    }
+
+    .commentInput {
+        font-size: 16px;
+    }
+}

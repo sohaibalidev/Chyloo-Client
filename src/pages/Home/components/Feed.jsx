@@ -71,7 +71,7 @@ const Feed = () => {
     const handleScroll = () => {
       if (
         window.innerHeight + document.documentElement.scrollTop >=
-          document.documentElement.offsetHeight - 400 &&
+        document.documentElement.offsetHeight - 400 &&
         !loadingMore &&
         hasMore
       ) {
@@ -87,7 +87,7 @@ const Feed = () => {
       {feedLoading && feedPosts.length === 0 && (
         <div className='feed-skeletons'>
           {[...Array(3)].map((_, i) => (
-            <div key={i} className={styles.postSkeleton}></div>
+            <div key={i} className={styles.postSkeleton}><div className={styles.postSkeletonChild}></div></div>
           ))}
         </div>
       )}

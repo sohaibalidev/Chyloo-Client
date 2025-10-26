@@ -20,6 +20,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://chyloo.netlify.app/stories/new</loc>
+    <lastmod>2025-10-26</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://chyloo.netlify.app/settings</loc>
     <lastmod>2025-10-13</lastmod>
     <priority>0.7</priority>
@@ -37,22 +42,22 @@
 
   <!-- Auth Pages -->
   <url>
-    <loc>https://chyloo.netlify.app/login</loc>
+    <loc>https://chyloo.netlify.app/auth/login</loc>
     <lastmod>2025-10-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://chyloo.netlify.app/register</loc>
+    <loc>https://chyloo.netlify.app/auth/register</loc>
     <lastmod>2025-10-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://chyloo.netlify.app/forgot-password</loc>
+    <loc>https://chyloo.netlify.app/auth/forgot-password</loc>
     <lastmod>2025-10-13</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://chyloo.netlify.app/reset-password</loc>
+    <loc>https://chyloo.netlify.app/auth/reset-password</loc>
     <lastmod>2025-10-13</lastmod>
     <priority>0.5</priority>
   </url>

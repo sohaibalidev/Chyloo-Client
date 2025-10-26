@@ -2,11 +2,12 @@ import { useState, useRef, useEffect } from 'react';
 import { BASE_URL } from '@/config/app.config';
 
 export const usePostCard = (post) => {
-  const [activeMediaIndex, setActiveMediaIndex] = useState(0);
-  const [videoStates, setVideoStates] = useState({});
+  const [likesCount, setLikesCount] = useState(post?.likesCount || 0);
   const [isLiked, setIsLiked] = useState(post?.isLiked || false);
   const [isSaved, setIsSaved] = useState(post?.isSaved || false);
-  const [likesCount, setLikesCount] = useState(post?.likesCount || 0);
+  const [activeMediaIndex, setActiveMediaIndex] = useState(0);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [videoStates, setVideoStates] = useState({});
   const [isLiking, setIsLiking] = useState(false);
 
   const likeRequestRef = useRef(null);
@@ -254,6 +255,7 @@ export const usePostCard = (post) => {
   return {
     // State
     activeMediaIndex,
+    selectedPost,
     videoStates,
     isLiked,
     isSaved,
@@ -271,6 +273,7 @@ export const usePostCard = (post) => {
     toggleVideoPlayback,
     handleVideoClick,
     handleVideoEnded,
+    setSelectedPost,
     handleLike,
     handleSave,
     formatDate,

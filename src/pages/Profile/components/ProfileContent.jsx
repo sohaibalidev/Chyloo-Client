@@ -1,4 +1,4 @@
-import { Grid, List, Bookmark, Users } from 'lucide-react';
+import { Grid, List, Bookmark, Users, Lock } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import PostCard from '@/components/PostCard';
 import styles from '../styles/ProfileContent.module.css';
@@ -12,6 +12,7 @@ const ProfileContent = ({
   viewMode,
   onTabChange,
   onViewModeChange,
+  followStatus
 }) => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
   const displayPosts = activeTab === 'posts' ? posts : savedPosts;
@@ -22,6 +23,8 @@ const ProfileContent = ({
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  console.log('Follow Status in ProfileContent:', followStatus);
 
   return (
     <div className={styles.profileContent}>
@@ -42,7 +45,9 @@ const ProfileContent = ({
 
       <div className={`${styles.profilePostsContainer} ${styles[viewMode]}`}>
         {isEmpty ? (
-          <EmptyState activeTab={activeTab} username={user.username} />
+          <EmptyState activeTab={activeTab}
+            username={user.username}
+            showPrivate={!!currentUser && currentUser._id !== user._id && followStatus !== 'accepted'} />
         ) : (
           displayPosts.map((post) => <PostCard key={post._id} post={post} />)
         )}
@@ -89,22 +94,36 @@ const ProfileViewOptions = ({ viewMode, onViewModeChange }) => (
   </div>
 );
 
-const EmptyState = ({ activeTab, username }) => (
-  <div className={styles.profileEmptyState}>
-    {activeTab === 'posts' ? (
-      <>
-        <Users size={48} />
-        <h3>No posts yet</h3>
-        <p>When {username} shares posts, they'll appear here.</p>
-      </>
-    ) : (
-      <>
-        <Bookmark size={48} />
-        <h3>No saved posts</h3>
-        <p>Posts that you save will appear here.</p>
-      </>
-    )}
-  </div>
-);
+const EmptyState = ({ activeTab, username, showPrivate }) => {
+  if (showPrivate && activeTab === "posts") {
+    return (
+      <div className={styles.profileEmptyState}>
+        <Lock size={48} />
+        <h3>This account is private</h3>
+        <p>
+          Follow <b>{username}</b> to view their posts.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.profileEmptyState}>
+      {activeTab === "posts" ? (
+        <>
+          <Users size={48} />
+          <h3>No posts yet</h3>
+          <p>When {username} shares posts, they'll appear here.</p>
+        </>
+      ) : (
+        <>
+          <Bookmark size={48} />
+          <h3>No saved posts</h3>
+          <p>Posts that you save will appear here.</p>
+        </>
+      )}
+    </div>
+  );
+};
 
 export default ProfileContent;

@@ -103,17 +103,17 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  transition: var(--transition);
-}
-
-.profileStat:hover {
-  transform: translateY(-2px);
 }
 
 .profileStatNumber {
   font-size: 18px;
   font-weight: 600;
   color: var(--text);
+  transition: 0.3s;
+}
+
+.profileStat:hover .profileStatNumber {
+  transform: translateY(-2px);
 }
 
 .profileStatLabel {
