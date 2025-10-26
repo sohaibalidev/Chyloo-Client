@@ -4,6 +4,13 @@ import { useAuth } from "@/contexts/AuthContext";
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
 
+  const isCrawler = () => {
+    if (typeof navigator === 'undefined') return false; 
+    return /bot|crawler|spider|googlebot|bingbot|yandex|baidu|duckduckbot/i.test(
+      navigator.userAgent.toLowerCase()
+    );
+  };
+
   if (loading) {
     return (
       <div className="container">
@@ -12,7 +19,7 @@ const PrivateRoute = ({ children }) => {
     );
   }
 
-  return user ? children : <Navigate to="/auth/login" />;
+  return user || isCrawler() ? children : <Navigate to="/auth/login" replace />;
 };
 
 export default PrivateRoute;
