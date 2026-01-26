@@ -65,7 +65,7 @@ const UserCard = ({
           <div className={styles.nameContainer}>
             <h3 className={styles.userName}>{user.name}</h3>
             {isVerified && user.isVerified && (
-              <span className={styles.verifiedBadge}>
+              <span className={styles.verifiedBadge} title={`${user.name} is a verified user`}>
                 <CheckCircle
                   size={getVerifiedIconSize()}
                   stroke='var(--primary-accent)'

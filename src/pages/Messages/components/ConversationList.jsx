@@ -69,7 +69,6 @@ const ConversationList = ({
     return conversation.lastMessageId || conversation.lastMessage;
   };
 
-  // UPDATED: Get new message status
   const getHasNewMessages = (conversation) => {
     return conversation.hasNewMessages || false;
   };
@@ -99,7 +98,7 @@ const ConversationList = ({
           const displayInfo = getDisplayInfo(conversation);
           const isSelected = selectedConversation?._id === conversation._id;
           const lastMessage = getLastMessage(conversation);
-          const hasNewMessages = getHasNewMessages(conversation); // UPDATED
+          const hasNewMessages = getHasNewMessages(conversation);
 
           return (
             <div

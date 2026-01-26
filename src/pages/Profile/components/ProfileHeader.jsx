@@ -68,7 +68,7 @@ const ProfileHeader = ({
           <div className={styles.profileNameSection}>
             <h1 className={styles.profileName}>{user.name}</h1>
             {user.isVerified && (
-              <span className={styles.profileVerifiedBadge}>
+              <span className={styles.profileVerifiedBadge} title={`${user.name} is a verified user`}>
                 <CheckCircle size={16} stroke='var(--primary-accent)' fill='none' strokeWidth={2} />
               </span>
             )}

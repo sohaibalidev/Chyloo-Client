@@ -33,7 +33,6 @@ const ProfileSettings = ({ user, onUpdate }) => {
         if (errors[name]) {
             setErrors(prev => ({ ...prev, [name]: '' }));
         }
-        // Clear API error when user starts typing
         if (apiError) {
             setApiError('');
         }
@@ -43,7 +42,6 @@ const ProfileSettings = ({ user, onUpdate }) => {
         setAvatarFile(file);
         setAvatarPreview(URL.createObjectURL(file));
         setErrors(prev => ({ ...prev, avatar: '' }));
-        // Clear API error when avatar changes
         if (apiError) {
             setApiError('');
         }
@@ -71,7 +69,6 @@ const ProfileSettings = ({ user, onUpdate }) => {
     };
 
     const handleSaveProfile = async () => {
-        // Clear previous errors
         setErrors({});
         setApiError('');
 
@@ -105,9 +102,7 @@ const ProfileSettings = ({ user, onUpdate }) => {
             onUpdate(profileForm.username.trim());
         } catch (error) {
             console.error('Failed to update profile:', error);
-            // Set API error message
             setApiError(error.message);
-            // Revert avatar preview on error
             if (avatarFile) {
                 setAvatarPreview(user.avatar);
                 setAvatarFile(null);

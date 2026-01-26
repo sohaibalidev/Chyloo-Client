@@ -53,7 +53,6 @@ export function ThemeProvider({ children }) {
 
     localStorage.setItem('theme', theme);
 
-    // Dispatch event for other components to listen to
     window.dispatchEvent(new CustomEvent('themeChange', {
       detail: { theme }
     }));
@@ -70,7 +69,6 @@ export function ThemeProvider({ children }) {
     await setThemeWithSave(newTheme);
   };
 
-  // Add this function for direct theme setting from PreferencesSettings
   const setThemeWithSave = async (newTheme) => {
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
@@ -90,10 +88,9 @@ export function ThemeProvider({ children }) {
         if (!res.ok) throw new Error('Failed to update theme setting');
       } catch (err) {
         console.error('Theme sync failed:', err);
-        // Revert on error
         setTheme(theme);
         localStorage.setItem('theme', theme);
-        throw err; // Re-throw for error handling in PreferencesSettings
+        throw err; 
       } finally {
         setIsSaving(false);
       }
@@ -104,7 +101,7 @@ export function ThemeProvider({ children }) {
     <ThemeContext.Provider value={{
       theme,
       toggleTheme,
-      setTheme: setThemeWithSave, // Expose setTheme for direct control
+      setTheme: setThemeWithSave,
       isSaving
     }}>
       {children}

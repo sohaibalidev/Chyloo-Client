@@ -2,7 +2,7 @@
   "name": "chyloo-frontend",
   "version": "1.0.0",
   "private": true,
-  "description": "Chyloo — A modern social media platform inspired by Facebook & Instagram. Built with React (Vite), Context API, and React Router.",
+  "description": "Chyloo - A modern social media platform inspired by Facebook & Instagram. Built with React (Vite), Context API, and React Router.",
   "type": "module",
   "scripts": {
     "dev": "vite --host",

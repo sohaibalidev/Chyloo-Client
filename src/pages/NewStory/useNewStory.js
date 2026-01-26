@@ -16,7 +16,6 @@ const useNewStory = () => {
         method: 'POST',
         credentials: 'include',
         body: formData,
-        // Don't set Content-Type header - let browser set it automatically with boundary
       });
 
       console.log('Response status:', response.status);
@@ -25,13 +24,10 @@ const useNewStory = () => {
       console.log('Response data:', data);
 
       if (!response.ok) {
-        // Handle different error formats from your backend
         const errorMessage = data.error || data.message || `HTTP error! status: ${response.status}`;
         throw new Error(errorMessage);
       }
 
-      // Your backend returns { message: 'Story created successfully', story: ... }
-      // So we don't check for data.success like before
       if (!data.message) {
         throw new Error('Invalid response from server');
       }

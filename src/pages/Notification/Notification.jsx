@@ -95,7 +95,7 @@ const Notifications = () => {
                 />
                 <div className={styles.loadingState}>
                     <div className={styles.loadingSpinner}>
-                        <Bell className={styles.spinning} size={32} />
+                        <Bell size={32} />
                     </div>
                     <p>Loading your notifications...</p>
                 </div>
@@ -107,7 +107,7 @@ const Notifications = () => {
         <>
             <SEO
                 title="Notifications"
-                description="Stay updated with the latest activity — likes, comments, and mentions all in one place on Chyloo."
+                description="Stay updated with the latest activity - likes, comments, and mentions all in one place on Chyloo."
                 path="/notifications"
             />
 

@@ -53,7 +53,7 @@ const Login = () => {
     <>
       <SEO
         title="Login"
-        description="Access your Chyloo account — log in to connect, share, and explore your personalized feed."
+        description="Access your Chyloo account - log in to connect, share, and explore your personalized feed."
         path="/login"
       />
 

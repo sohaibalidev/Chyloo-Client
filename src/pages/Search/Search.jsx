@@ -25,7 +25,7 @@ const SearchPage = () => {
     <>
       <SEO
         title="Search"
-        description="Search users, posts, and stories across Chyloo — discover new connections and trending content."
+        description="Search users, posts, and stories across Chyloo - discover new connections and trending content."
         path="/search"
       />
 

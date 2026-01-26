@@ -11,7 +11,7 @@ export default function SEO({
     image = DEFAULT_IMAGE,
     noindex = false
 }) {
-    const fullTitle = title ? `${title} — ${SITE_NAME}` : SITE_NAME;
+    const fullTitle = title ? `${title} - ${SITE_NAME}` : SITE_NAME;
     const fullUrl = `${BASE_URL}${path}`;
 
     return (

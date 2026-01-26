@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { X } from 'lucide-react';
+import { Skull, X } from 'lucide-react';
 import getPlaceholderColor from '@/utils/placeholderColor';
 import useStories from '../hooks/useStories';
 import styles from '../styles/Stories.module.css';
@@ -14,7 +14,7 @@ const Stories = () => {
   const startTimeRef = useRef(null);
 
   const userIds = Object.keys(stories);
-  const currentUserIndex = userIds.findIndex(id => id === selectedUserId);
+  const currentUserIndex = userIds.findIndex((id) => id === selectedUserId);
 
   const selectedUser = selectedUserId ? stories[selectedUserId] : null;
   const currentStory = selectedUser?.stories?.[currentIndex];
@@ -64,7 +64,7 @@ const Stories = () => {
       const prevUserId = userIds[currentUserIndex - 1];
       const prevUserStories = stories[prevUserId].stories;
       setSelectedUserId(prevUserId);
-      setCurrentIndex(prevUserStories.length - 1); 
+      setCurrentIndex(prevUserStories.length - 1);
       setProgress(0);
     } else {
       setCurrentIndex(0);
@@ -117,11 +117,14 @@ const Stories = () => {
     };
   }, [currentStory, nextStory]);
 
-  const handleProgressClick = useCallback((index) => {
-    if (!selectedUser) return;
-    setCurrentIndex(index);
-    setProgress(0);
-  }, [selectedUser]);
+  const handleProgressClick = useCallback(
+    (index) => {
+      if (!selectedUser) return;
+      setCurrentIndex(index);
+      setProgress(0);
+    },
+    [selectedUser]
+  );
 
   const renderAvatar = (user, size = 'normal') => {
     const { avatar, username, name } = user;
@@ -157,7 +160,11 @@ const Stories = () => {
   if (error && Object.keys(stories).length === 0)
     return <div className={styles.error}>Error loading stories: {error}</div>;
   if (Object.keys(stories).length === 0 && !loading)
-    return <div className={styles.noStories}>No stories available</div>;
+    return (
+      <div className={styles.noStories}>
+        <span>No stories. Not even accidentally.</span>
+      </div>
+    );
 
   return (
     <div className={styles.storiesContainer}>
@@ -190,20 +197,11 @@ const Stories = () => {
           <div className={styles.storyContent}>
             <div className={styles.progressContainer}>
               {selectedUser.stories.map((_, i) => (
-                <div
-                  key={i}
-                  className={styles.progressBar}
-                  onClick={() => handleProgressClick(i)}
-                >
+                <div key={i} className={styles.progressBar} onClick={() => handleProgressClick(i)}>
                   <div
                     className={styles.progressFill}
                     style={{
-                      width:
-                        i < currentIndex
-                          ? '100%'
-                          : i === currentIndex
-                            ? `${progress}%`
-                            : '0%',
+                      width: i < currentIndex ? '100%' : i === currentIndex ? `${progress}%` : '0%',
                     }}
                   />
                 </div>
@@ -211,7 +209,11 @@ const Stories = () => {
             </div>
 
             <div className={styles.storyHeader}>
-              <Link to={`/profile/${selectedUser.user.username}`} className={styles.userLink} onClick={closeStory}>
+              <Link
+                to={`/profile/${selectedUser.user.username}`}
+                className={styles.userLink}
+                onClick={closeStory}
+              >
                 <div className={styles.userInfo}>
                   {renderAvatar(selectedUser.user, 'small')}
                   <span className={styles.userName}>@{selectedUser.user.username}</span>
@@ -224,11 +226,7 @@ const Stories = () => {
 
             <div className={styles.mediaContainer}>
               {currentStory.media.type === 'image' ? (
-                <img
-                  src={currentStory.media.url}
-                  alt="Story"
-                  className={styles.storyMedia}
-                />
+                <img src={currentStory.media.url} alt='Story' className={styles.storyMedia} />
               ) : (
                 <video
                   src={currentStory.media.url}
@@ -242,19 +240,11 @@ const Stories = () => {
             </div>
 
             <div className={styles.navSection}>
-              <div
-                className={styles.navArea}
-                onClick={prevStory}
-              />
-              <div
-                className={styles.navArea}
-                onClick={nextStory}
-              />
+              <div className={styles.navArea} onClick={prevStory} />
+              <div className={styles.navArea} onClick={nextStory} />
             </div>
 
-            {currentStory.caption && (
-              <div className={styles.caption}>{currentStory.caption}</div>
-            )}
+            {currentStory.caption && <div className={styles.caption}>{currentStory.caption}</div>}
           </div>
         </div>
       )}

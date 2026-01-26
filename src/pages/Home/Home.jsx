@@ -18,7 +18,7 @@ const Home = () => {
     <> 
       <SEO
         title="Home"
-        description="Welcome to Chyloo — connect, share, and explore stories and posts from your network."
+        description="Welcome to Chyloo - connect, share, and explore stories and posts from your network."
         path="/"
       />
 

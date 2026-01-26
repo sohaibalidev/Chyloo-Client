@@ -85,7 +85,7 @@ const Register = () => {
     <>
       <SEO
         title="Register"
-        description="Join Chyloo — create an account to share stories, connect with people, and explore trending posts."
+        description="Join Chyloo - create an account to share stories, connect with people, and explore trending posts."
         path="/register"
       />
 

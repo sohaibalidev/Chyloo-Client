@@ -13,15 +13,13 @@ const PreferencesSettings = ({ user, onUpdate }) => {
     const { updateSettings, loading: settingsLoading } = useUpdateSettings();
     const { theme, setTheme, isSaving: themeSaving } = useTheme();
 
-    // Only initialize once when component mounts
     useEffect(() => {
         setPreferencesForm({
             theme: user.settings?.theme || 'dark',
             accountStatus: user.accountStatus || 'public',
         });
-    }, []); // Empty dependency array - only run once on mount
+    }, []);
 
-    // Sync theme from context
     useEffect(() => {
         if (theme !== preferencesForm.theme) {
             setPreferencesForm(prev => ({
@@ -35,7 +33,6 @@ const PreferencesSettings = ({ user, onUpdate }) => {
         const { name, value } = e.target;
         const previousValue = preferencesForm[name];
 
-        // Update UI immediately
         setPreferencesForm(prev => ({ ...prev, [name]: value }));
 
         try {
@@ -48,7 +45,6 @@ const PreferencesSettings = ({ user, onUpdate }) => {
             onUpdate();
         } catch (error) {
             console.error('Failed to update settings:', error);
-            // Revert UI on error
             setPreferencesForm(prev => ({ ...prev, [name]: previousValue }));
         }
     };

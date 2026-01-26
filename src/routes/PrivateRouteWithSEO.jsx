@@ -1,10 +1,10 @@
 import { useAuth } from "@/contexts/AuthContext";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
-// Import your prerender components
 import SearchPrerender from '@/prerender/SearchPrerender';
 import MessagesPrerender from '@/prerender/MessagesPrerender';
 import NotificationsPrerender from '@/prerender/NotificationsPrerender';
+import Loading from "../components/Loading";
 
 const prerenderComponents = {
     '/search': SearchPrerender,
@@ -38,7 +38,7 @@ export default function PrivateRouteWithSEO({ children }) {
     const location = useLocation();
 
     const isCrawler = () => {
-        if (typeof navigator === 'undefined') return true; // SSR context
+        if (typeof navigator === 'undefined') return true; 
         return /bot|crawler|spider|googlebot|bingbot|yandex/i.test(
             navigator.userAgent.toLowerCase()
         );
@@ -47,22 +47,19 @@ export default function PrivateRouteWithSEO({ children }) {
     if (loading) {
         return (
             <div className="container">
-                <div>Loading...</div>
+                <Loading />
             </div>
         );
     }
 
-    // If user is logged in, show real content
     if (user) {
         return children;
     }
 
-    // If crawler and we have a prerender component for this route, show SEO placeholder
     if (isCrawler() && prerenderComponents[location.pathname]) {
         const PrerenderComponent = prerenderComponents[location.pathname];
         return <PrerenderComponent />;
     }
 
-    // Regular user without login - redirect to login
     return <Navigate to="/auth/login" replace />;
 }

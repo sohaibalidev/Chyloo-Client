@@ -21,7 +21,6 @@ export const useUpdateProfile = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        // Use the API error message directly
         const errorMessage = data.message || 'Failed to update profile';
         throw new Error(errorMessage);
       }

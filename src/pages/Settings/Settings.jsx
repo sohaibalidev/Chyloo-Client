@@ -28,7 +28,7 @@ const Settings = () => {
         <>
             <SEO
                 title="Settings"
-                description="Manage your Chyloo profile, preferences, and privacy settings — take full control of your experience."
+                description="Manage your Chyloo profile, preferences, and privacy settings - take full control of your experience."
                 path="/settings"
             />
 

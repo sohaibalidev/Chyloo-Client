@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Check } from 'lucide-react';
+import { Check, Meh } from 'lucide-react';
 import PostCard from '@/components/PostCard';
 import { BASE_URL } from '@/config/app.config';
 import styles from '../styles/Feed.module.css';
@@ -71,7 +71,7 @@ const Feed = () => {
     const handleScroll = () => {
       if (
         window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight - 400 &&
+          document.documentElement.offsetHeight - 400 &&
         !loadingMore &&
         hasMore
       ) {
@@ -87,7 +87,9 @@ const Feed = () => {
       {feedLoading && feedPosts.length === 0 && (
         <div className='feed-skeletons'>
           {[...Array(3)].map((_, i) => (
-            <div key={i} className={styles.postSkeleton}><div className={styles.postSkeletonChild}></div></div>
+            <div key={i} className={styles.postSkeleton}>
+              <div className={styles.postSkeletonChild}></div>
+            </div>
           ))}
         </div>
       )}
@@ -117,7 +119,7 @@ const Feed = () => {
 
       {!hasMore && explorePosts.length > 0 && (
         <div className={styles.noMorePosts}>
-          <p>No more posts to load</p>
+          <span>You really thought there was more</span>
         </div>
       )}
     </div>
