@@ -54,7 +54,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import { VitePluginPrerender } from 'vite-plugin-prerender';
+import VitePluginPrerender from 'vite-plugin-prerender';
 
 export default defineConfig(({ command, mode }) => {
   const isProduction = mode === 'production';
