@@ -1,3 +1,7 @@
+.app-content {
+  padding: 0 !important;
+}
+
 .messagesContainer {
   background: transparent;
   display: flex;
@@ -45,8 +49,8 @@
 
 .messagesLayout {
   display: flex;
-  height: calc(100vh - 60px);
   gap: 1px;
+  height: 100%;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -123,7 +127,6 @@
 @media (max-width: 768px) {
   .messagesLayout {
     flex-direction: column;
-    height: calc(100vh - 60px);
     margin: 0.5rem;
   }
 
@@ -187,7 +190,6 @@
 
 @media (max-width: 480px) {
   .messagesLayout {
-    height: calc(100vh - 60px);
     margin: 0.25rem;
   }
 
@@ -242,19 +244,5 @@
 
   .loadingContainer p {
     font-size: 0.85rem;
-  }
-}
-
-@supports (padding: max(0px)) {
-  .messagesLayout {
-    margin-right: max(0.5rem, env(safe-area-inset-right));
-    margin-bottom: max(0.5rem, env(safe-area-inset-bottom));
-  }
-
-  @media (max-width: 480px) {
-    .messagesLayout {
-      margin-right: max(0.25rem, env(safe-area-inset-right));
-      margin-bottom: max(0.25rem, env(safe-area-inset-bottom));
-    }
   }
 }

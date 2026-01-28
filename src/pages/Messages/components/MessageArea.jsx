@@ -26,6 +26,12 @@ const MessageArea = ({
   });
 
   useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'auto' });
+    }
+  }, [messages.length]);
+
+  useEffect(() => {
     const handleClickOutside = () => {
       setContextMenu({ visible: false, x: 0, y: 0, message: null });
     };
@@ -355,7 +361,6 @@ const MessageArea = ({
                         <span className={styles.messageTime}>
                           {formatMessageTime(message.createdAt)}
                         </span>
-                        {/* REMOVED: Seen indicator since it's now at conversation level */}
                       </div>
                     </div>
                   </div>
@@ -378,13 +383,12 @@ const MessageArea = ({
           }}
         >
           <button onClick={handleDeleteMessage} className={styles.contextMenuItem}>
-            <Trash2 size={16} strokeWidth={1.8} />
+            <Trash2 size={14} strokeWidth={1.8} />
             <span>Delete Message</span>
           </button>
         </div>
       )}
 
-      {/* Media Popup */}
       {mediaPopup.open && (
         <div className={styles.mediaPopup} onClick={handlePopupClick}>
           <div className={styles.mediaPopupContent}>

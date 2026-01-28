@@ -110,7 +110,6 @@ const ProfileHeader = ({
         />
       </div>
 
-      {/* Avatar Zoom Modal */}
       {showAvatarZoom && (
         <AvatarZoomModal
           avatarUrl={user.avatar}

@@ -155,7 +155,6 @@ const ConversationList = ({
                         {lastMessage.text ||
                           (lastMessage.media?.length > 0 ? `Media` : 'Message sent')}
                       </span>
-                      {/* UPDATED: Show new message indicator instead of count */}
                       {hasNewMessages && (
                         <span className={styles.newMessageBadge}>New</span>
                       )}

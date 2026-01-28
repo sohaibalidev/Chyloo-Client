@@ -118,7 +118,6 @@ const ProfileSettings = ({ user, onUpdate }) => {
         <div className={styles.tabContent}>
             <h3>Profile Settings</h3>
 
-            {/* API Error Message */}
             {apiError && (
                 <div className={styles.apiError}>
                     {apiError}

@@ -51,7 +51,6 @@ const PostPreview = ({ caption, media, visibility }) => {
       <h3 className={styles.previewTitle}>Preview</h3>
 
       <div className={styles.previewCard}>
-        {/* Mock User Header */}
         <div className={styles.previewHeader}>
           <div className={styles.userInfo}>
             <div className={styles.avatar}>
@@ -67,10 +66,8 @@ const PostPreview = ({ caption, media, visibility }) => {
           </div>
         </div>
 
-        {/* Caption */}
         {caption && <div className={styles.previewCaption}>{caption}</div>}
 
-        {/* Media Preview */}
         {media.length > 0 && (
           <div className={styles.previewMedia}>
             {media.slice(0, 4).map((file, index) => (
@@ -95,7 +92,6 @@ const PostPreview = ({ caption, media, visibility }) => {
           </div>
         )}
 
-        {/* Mock Engagement */}
         <div className={styles.previewEngagement}>
           <div className={styles.engagementStats}>
             <span className={styles.engagementItem}>

@@ -4,6 +4,7 @@
   flex-direction: column;
   position: relative;
   overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .chatHeader {
@@ -201,7 +202,7 @@
 .myMessage .textContent {
   background: linear-gradient(135deg, var(--primary-accent), #e6b800);
   color: var(--primary-color);
-  border-radius: 10px 10px 2px 10px;
+  border-radius: 6px 6px 2px 6px;
   font-weight: 500;
 }
 
@@ -358,17 +359,17 @@
   position: fixed;
   background: var(--dark-card);
   border: 1px solid var(--border-color);
-  padding: 0.5rem;
   z-index: 1000;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
-  min-width: 160px;
-  border-radius: 8px;
+  min-width: max-content;
+  border-radius: 2px;
 }
 
 .contextMenuItem {
   width: 100%;
-  padding: 0.875rem 1rem;
+  min-width: 100% !important;
+  padding: 0.8rem 1rem;
   background: none;
   border: none;
   color: var(--text);

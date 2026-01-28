@@ -50,7 +50,7 @@ const Messages = () => {
   useEffect(() => {
     if (selectedConversation) {
       loadMessages(selectedConversation._id);
-      joinConversation(selectedConversation._id);
+      joinConversation(selectedConversation._id, user?._id);
       markConversationAsSeen(selectedConversation._id);
     }
   }, [selectedConversation]);
@@ -84,6 +84,7 @@ const Messages = () => {
   };
 
   const handleRefreshConversationList = useCallback(() => {
+    console.log('Refreshing conversation list...');
     loadConversations();
   }, []);
 

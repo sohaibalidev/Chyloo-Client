@@ -415,7 +415,6 @@
   border-color: var(--text-lighter);
 }
 
-/* Overlay */
 .overlay {
   position: fixed;
   inset: 0;

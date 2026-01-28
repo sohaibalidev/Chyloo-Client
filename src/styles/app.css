@@ -173,6 +173,8 @@ body::before {
 .app-content {
   flex: 1;
   padding: 1.25rem;
+  padding-bottom: 0;
+  height: 100vh;
   transition: var(--transition);
   width: 100%;
   max-width: 100%;
@@ -186,7 +188,7 @@ body::before {
 
   .app-content {
     padding: 0.85rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: 0;
   }
 }
 
@@ -197,7 +199,7 @@ body::before {
 
   .app-content {
     padding: 0.6rem;
-    padding-bottom: 1.25rem;
+    padding-bottom: 0;
   }
 }
 
