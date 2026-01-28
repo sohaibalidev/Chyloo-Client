@@ -40,12 +40,12 @@ const Settings = () => {
 
                     <div className={styles.settingsMain}>
                         <div className={styles.settingsLayout}>
-                            <aside className={styles.settingsSidebar}>
+                            <nav className={styles.settingsSidebar}>
                                 <SettingsSidebar
                                     activeTab={activeTab}
                                     onTabChange={setActiveTab}
                                 />
-                            </aside>
+                            </nav>
 
                             <main className={styles.settingsContent}>
                                 {activeTab === 'profile' && (

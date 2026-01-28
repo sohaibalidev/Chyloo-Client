@@ -61,7 +61,7 @@ const PreferencesSettings = ({ user, onUpdate }) => {
 
     return (
         <div className={styles.tabContent}>
-            <h3>Preferences</h3>
+            {/* <h3>Preferences</h3> */}
 
             <div className={styles.formGroup}>
                 <label>

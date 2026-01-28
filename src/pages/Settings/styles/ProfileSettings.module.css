@@ -1,122 +1,134 @@
-.tabContent h3 {
-    margin: 0 0 24px 0;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--text);
+.tabContent {
+  display: flex; 
+  gap: 24px; 
+  padding: 20px;
+  flex-wrap: wrap; 
+}
+
+.tabContent > div:first-child {
+  flex: 1;
+  min-width: 250px; 
+  padding: 20px;
+}
+
+.tabContent > div:nth-child(2) {
+  flex: 2; 
+  min-width: 300px;
+  padding: 20px;
 }
 
 .apiError {
-    background: rgba(229, 57, 53, 0.1);
-    border: 1px solid var(--error);
-    color: var(--error);
-    padding: 12px 16px;
-    border-radius: 0;
-    margin-bottom: 20px;
-    font-size: 14px;
-    font-weight: 500;
+  background: rgba(229, 57, 53, 0.1);
+  border: 1px solid var(--error);
+  color: var(--error);
+  padding: 12px 16px;
+  border-radius: 0;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .formGroup {
-    margin-bottom: 20px;
-    width: 100%;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .formGroup label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 500;
-    color: var(--text);
-    font-size: 14px;
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: var(--text);
+  font-size: 14px;
 }
 
 .formGroup input,
 .formGroup textarea {
-    width: 100%;
-    padding: 12px;
-    background: var(--dark-bg);
-    color: var(--text);
-    font-size: 14px;
-    transition: var(--transition);
-    border: 1px solid var(--border-color);
-    border-radius: 0;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  background: var(--dark-bg);
+  color: var(--text);
+  font-size: 14px;
+  transition: var(--transition);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  box-sizing: border-box;
 }
 
 .formGroup input:focus,
 .formGroup textarea:focus {
-    outline: none;
-    border-color: var(--primary-accent);
+  outline: none;
+  border-color: var(--primary-accent);
 }
 
 .formGroup textarea {
-    resize: vertical;
-    min-height: 80px;
-    max-height: 200px;
-    font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+  max-height: 200px;
+  font-family: inherit;
 }
 
 .charCount {
-    text-align: right;
-    font-size: 12px;
-    color: var(--text-light);
-    margin-top: 4px;
+  text-align: right;
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 4px;
 }
 
 .saveButton {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: var(--primary-accent);
-    color: var(--primary-color);
-    cursor: pointer;
-    font-weight: 600;
-    transition: var(--transition);
-    border: none;
-    border-radius: 0;
-    width: 100%;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--primary-accent);
+  color: var(--primary-color);
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+  border: none;
+  border-radius: 0;
+  width: 100%;
+  justify-content: center;
 }
 
 .saveButton:hover:not(:disabled) {
-    background: var(--primary-accent-hover);
+  background: var(--primary-accent-hover);
 }
 
 .saveButton:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .error {
-    color: var(--error);
-    font-size: 12px;
-    margin-top: 4px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+  color: var(--error);
+  font-size: 12px;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .errorInput {
-    border-color: var(--error) !important;
+  border-color: var(--error) !important;
 }
 
 @media (max-width: 768px) {
-    .tabContent h3 {
-        font-size: 16px;
-        margin-bottom: 20px;
-    }
+  .tabContent h3 {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
 
-    .apiError {
-        margin-bottom: 16px;
-        padding: 10px 14px;
-        font-size: 13px;
-    }
+  .apiError {
+    margin-bottom: 16px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
 
-    .formGroup {
-        margin-bottom: 16px;
-    }
+  .formGroup {
+    margin-bottom: 16px;
+  }
 
-    .saveButton {
-        padding: 14px 20px;
-    }
+  .saveButton {
+    padding: 14px 20px;
+  }
 }
