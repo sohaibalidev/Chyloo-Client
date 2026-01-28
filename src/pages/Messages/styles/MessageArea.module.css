@@ -7,7 +7,7 @@
 }
 
 .chatHeader {
-  padding: 1.25rem 2rem;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
   backdrop-filter: blur(10px);
   position: sticky;
@@ -188,7 +188,7 @@
 }
 
 .textContent {
-  padding: 0.875rem 1.25rem;
+  padding: 0.5rem 1rem;
   word-wrap: break-word;
   line-height: 1.5;
   font-size: 0.95rem;
@@ -331,7 +331,7 @@
   text-align: center;
   margin: 1.5rem 0;
   color: var(--text-lighter);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   position: relative;
   font-weight: 600;
 }
@@ -350,10 +350,8 @@
 .dateSeparator span {
   background: var(--dark-bg);
   padding: 0.5rem 1.5rem;
-  border: 1px solid var(--border-color);
   position: relative;
   z-index: 2;
-  border-radius: 20px;
 }
 
 .contextMenu {
@@ -615,7 +613,9 @@
 
 .mediaImage {
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .mediaImage:hover {
@@ -902,7 +902,7 @@
     padding-right: max(2rem, env(safe-area-inset-right));
     padding-bottom: max(2rem, env(safe-area-inset-bottom));
   }
-  
+
   @media (max-width: 768px) {
     .messagesContainer {
       padding-left: max(1.25rem, env(safe-area-inset-left));
@@ -910,7 +910,7 @@
       padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
     }
   }
-  
+
   @media (max-width: 480px) {
     .messagesContainer {
       padding-left: max(1rem, env(safe-area-inset-left));

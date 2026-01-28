@@ -135,7 +135,6 @@ const ConversationList = ({
                   </div>
                 )}
 
-                {/* UPDATED: New message indicator */}
                 {hasNewMessages && (
                   <div className={styles.newMessageIndicator}></div>
                 )}

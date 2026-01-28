@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { MessageSquare, Trash2, X, Play, Pause, Volume2, VolumeX } from 'lucide-react';
-import textEnhancer from '@/utils/textEnhancer'
+import textEnhancer from '@/utils/textEnhancer';
+import UserCard from '@/components/UserCard';
 import placeholderColor from '@/utils/placeholderColor';
 import styles from '../styles/MessageArea.module.css';
 
@@ -98,7 +99,7 @@ const MessageArea = ({
   };
 
   const getDisplayInfo = () => {
-    if (!conversation) return { name: '', avatar: '', isGroup: false };
+    if (!conversation) return { name: '', avatar: '', username: '', isGroup: false };
 
     if (conversation.isGroup) {
       return {
@@ -111,6 +112,7 @@ const MessageArea = ({
       return {
         name: otherMember?.name || 'Unknown User',
         avatar: otherMember?.avatar,
+        username: otherMember?.username,
         isGroup: false,
       };
     }
@@ -205,21 +207,9 @@ const MessageArea = ({
     return (
       <div className={styles.messageArea}>
         <div className={styles.chatHeader}>
-          <div className={styles.chatInfo}>
-            <div
-              className={styles.profileAvatarPlaceholder}
-              style={{ backgroundColor: placeholderColor(displayInfo.name) }}
-            >
-              {displayInfo.name?.charAt(0).toUpperCase()}
-            </div>
-            <div className={styles.chatDetails}>
-              <h3 className={styles.chatName}>{displayInfo.name}</h3>
-              {displayInfo.isGroup && (
-                <p className={styles.memberCount}>{conversation?.members?.length || 0} members</p>
-              )}
-            </div>
-          </div>
+          <UserCard user={displayInfo} showUsername={false} showName={true} imageSize={3} />
         </div>
+
         <div className={styles.loadingMessages}>
           <div className={styles.spinner}></div>
           <p>Loading messages...</p>
@@ -231,33 +221,7 @@ const MessageArea = ({
   return (
     <div className={styles.messageArea}>
       <div className={styles.chatHeader}>
-        <div className={styles.chatInfo}>
-          {displayInfo.avatar ? (
-            <img
-              src={displayInfo.avatar}
-              alt={displayInfo.name || 'User avatar'}
-              className={styles.chatAvatar}
-              onError={(e) => {
-                e.target.style.display = 'none';
-              }}
-            />
-          ) : null}
-          <div
-            className={styles.profileAvatarPlaceholder}
-            style={{
-              backgroundColor: placeholderColor(displayInfo.name),
-              display: displayInfo.avatar ? 'none' : 'flex',
-            }}
-          >
-            {displayInfo.name?.charAt(0).toUpperCase()}
-          </div>
-          <div className={styles.chatDetails}>
-            <h3 className={styles.chatName}>{displayInfo.name}</h3>
-            {displayInfo.isGroup && (
-              <p className={styles.memberCount}>{conversation?.members?.length || 0} members</p>
-            )}
-          </div>
-        </div>
+        <UserCard user={displayInfo} showUsername={false} showName={true} imageSize={3} />
       </div>
 
       <div className={styles.messagesContainer} ref={messagesContainerRef}>
