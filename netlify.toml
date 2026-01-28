@@ -2,11 +2,30 @@
   command = "npm run build"
   publish = "dist"
 
+# Netlify native prerendering (BOT HTML snapshots)
+[prerender]
+  enabled = true
+
+# Public routes only (SEO pages)
+[[prerender.routes]]
+  path = "/"
+
+[[prerender.routes]]
+  path = "/auth/login"
+
+[[prerender.routes]]
+  path = "/auth/register"
+
+[[prerender.routes]]
+  path = "/search"
+
+# SPA routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
+# Security + cache headers
 [[headers]]
   for = "/*"
   [headers.values]
