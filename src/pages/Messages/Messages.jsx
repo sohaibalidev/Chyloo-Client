@@ -3,7 +3,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useSocket } from '@/contexts/SocketContext';
 import { BASE_URL } from '@/config/app.config.js';
 import { MessageSquare, X } from 'lucide-react';
-import SEO from '@/components/SEO'
+import SEO from '@/components/SEO';
 import debounce from 'lodash/debounce';
 import ConversationList from './components/ConversationList';
 import MessageArea from './components/MessageArea';
@@ -143,17 +143,35 @@ const Messages = () => {
   }, []);
 
   const handleConversationSeen = useCallback(({ chatId, seenBy, userId }) => {
-    setConversations(prev =>
-      prev.map(conv =>
-        conv._id === chatId
-          ? { ...conv, seenBy, hasNewMessages: !seenBy.includes(userId) }
-          : conv
+    setConversations((prev) =>
+      prev.map((conv) =>
+        conv._id === chatId ? { ...conv, seenBy, hasNewMessages: !seenBy.includes(userId) } : conv
       )
     );
   }, []);
 
-  const handleMessageDeleted = useCallback(({ messageId }) => {
-    setMessages((prev) => prev.filter((msg) => msg._id !== messageId));
+  const handleMessageDeleted = useCallback(({ messageId, deleteType }) => {
+    if(deleteType === 'everyone') {
+      setMessages((prev) =>
+        prev.map((msg) => {
+          if (msg._id === messageId) {
+            return { ...msg, text: '', media: [], isDeletedForEveryone: true };
+          }
+          return msg;
+        })
+      );
+      return;
+    }
+
+    setMessages((prev) =>
+      prev.map((msg) => {
+        if (msg._id === messageId) {
+          return { ...msg, text: '', media: [], isDeletedForEveryone: false };
+        }
+        return msg;
+      })
+    );
+
     setConversations((prev) =>
       prev.map((conv) => {
         if (conv.lastMessage?._id === messageId) {
@@ -189,7 +207,7 @@ const Messages = () => {
           ...message.chatId,
           lastMessage: message,
           seenBy: conversationStatus?.seenBy || [],
-          hasNewMessages: conversationStatus?.hasNewMessages || false
+          hasNewMessages: conversationStatus?.hasNewMessages || false,
         },
         ...otherConversations,
       ];
@@ -220,12 +238,16 @@ const Messages = () => {
     }
   };
 
-  const deleteMessage = async (messageId) => {
+  const deleteMessage = async (messageId, deleteType) => {
     try {
-      const response = await fetch(`${BASE_URL}/api/messages/${messageId}`, {
-        method: 'DELETE',
-        credentials: 'include',
-      });
+      console.log('Deleting message:', { messageId, deleteType });
+      const response = await fetch(
+        `${BASE_URL}/api/messages/${messageId}?deleteType=${deleteType}`,
+        {
+          method: 'DELETE',
+          credentials: 'include',
+        }
+      );
       if (!response.ok) throw new Error('Failed to delete message');
     } catch (err) {
       setError(err.message);
@@ -252,13 +274,16 @@ const Messages = () => {
     }
   }, [socket, selectedConversation, user]);
 
-  const handleConversationSelect = useCallback((conversation) => {
-    if (selectedConversation?._id === conversation._id) return;
-    if (selectedConversation) leaveConversation(selectedConversation._id);
-    setSelectedConversation(conversation);
-    setMessages([]);
-    setTypingUsers({});
-  }, [selectedConversation]);
+  const handleConversationSelect = useCallback(
+    (conversation) => {
+      if (selectedConversation?._id === conversation._id) return;
+      if (selectedConversation) leaveConversation(selectedConversation._id);
+      setSelectedConversation(conversation);
+      setMessages([]);
+      setTypingUsers({});
+    },
+    [selectedConversation]
+  );
 
   if (loading) {
     return (
@@ -272,9 +297,9 @@ const Messages = () => {
   return (
     <>
       <SEO
-        title="Messages"
-        description="Chat privately with your friends and followers on Chyloo - stay connected and never miss a conversation."
-        path="/messages"
+        title='Messages'
+        description='Chat privately with your friends and followers on Chyloo - stay connected and never miss a conversation.'
+        path='/messages'
       />
 
       <div className={styles.messagesContainer}>

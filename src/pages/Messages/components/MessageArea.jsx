@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { MessageSquare, Trash2, X, Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { MessageSquare, Trash2, X, Play, Pause, Volume2, VolumeX, Ban } from 'lucide-react';
 import textEnhancer from '@/utils/textEnhancer';
 import UserCard from '@/components/UserCard';
 import placeholderColor from '@/utils/placeholderColor';
@@ -138,10 +138,10 @@ const MessageArea = ({
     }
   };
 
-  const handleDeleteMessage = async () => {
+  const handleDeleteMessage = async (deleteType) => {
     if (contextMenu.message && onDeleteMessage) {
       try {
-        await onDeleteMessage(contextMenu.message._id);
+        await onDeleteMessage(contextMenu.message._id, deleteType);
       } catch (error) {
         console.error('Failed to delete message:', error);
       } finally {
@@ -253,118 +253,130 @@ const MessageArea = ({
                   </div>
                 )}
 
-                <div
-                  className={`${styles.messageWrapper} ${consecutive ? styles.consecutive : ''}`}
-                  onContextMenu={(e) => handleMessageRightClick(e, message)}
-                >
+                {!message.deletedFor.includes(currentUser?._id) && (
                   <div
-                    className={`${styles.message} ${isMe ? styles.myMessage : styles.theirMessage}`}
+                    className={`${styles.messageWrapper} ${consecutive ? styles.consecutive : ''}`}
+                    onContextMenu={(e) =>
+                      !message.isDeletedForEveryone && handleMessageRightClick(e, message)
+                    }
                   >
-                    {!isMe && !consecutive && conversation.isGroup && (
-                      <>
-                        {message.senderId?.avatar ? (
-                          <img
-                            src={message.senderId.avatar}
-                            alt={message.senderId.name}
-                            className={styles.messageAvatar}
-                            onError={(e) => {
-                              e.target.style.display = 'none';
-                            }}
-                          />
-                        ) : (
+                    <div
+                      className={`${styles.message} ${isMe ? styles.myMessage : styles.theirMessage}`}
+                    >
+                      {!isMe && !consecutive && conversation.isGroup && (
+                        <>
+                          {message.senderId?.avatar ? (
+                            <img
+                              src={message.senderId.avatar}
+                              alt={message.senderId.name}
+                              className={styles.messageAvatar}
+                              onError={(e) => {
+                                e.target.style.display = 'none';
+                              }}
+                            />
+                          ) : (
+                            <div
+                              className={styles.messageAvatarPlaceholder}
+                              style={{ backgroundColor: placeholderColor(message.senderId?.name) }}
+                            >
+                              {message.senderId?.name?.charAt(0).toUpperCase()}
+                            </div>
+                          )}
+                        </>
+                      )}
+
+                      <div className={styles.messageContent}>
+                        {!isMe && !consecutive && conversation.isGroup && (
+                          <span className={styles.senderName}>
+                            {message.senderId?.name || 'Unknown User'}
+                          </span>
+                        )}
+
+                        {message.text && (
                           <div
-                            className={styles.messageAvatarPlaceholder}
-                            style={{ backgroundColor: placeholderColor(message.senderId?.name) }}
-                          >
-                            {message.senderId?.name?.charAt(0).toUpperCase()}
+                            className={styles.textContent}
+                            dangerouslySetInnerHTML={{ __html: textEnhancer(message.text) }}
+                          />
+                        )}
+
+                        {message.isDeletedForEveryone &&
+                          message.media &&
+                          message.media.length === 0 && (
+                            <div className={styles.deletedMessage}>
+                              <Ban size={14} /> This message was deleted
+                            </div>
+                          )}
+
+                        {message.media && message.media.length > 0 && (
+                          <div className={styles.mediaContent}>
+                            {message.media.map((media, mediaIndex) => (
+                              <div key={mediaIndex} className={styles.mediaItem}>
+                                {media.type === 'image' && (
+                                  <img
+                                    src={media.url}
+                                    alt='Shared content'
+                                    className={styles.mediaImage}
+                                    loading='lazy'
+                                    onClick={() => openMediaPopup(media, 'image')}
+                                    onError={(e) => {
+                                      e.target.style.display = 'none';
+                                    }}
+                                  />
+                                )}
+                                {media.type === 'video' && (
+                                  <div className={styles.videoContainer}>
+                                    <video
+                                      controls
+                                      className={styles.mediaVideo}
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        openMediaPopup(media, 'video');
+                                      }}
+                                    >
+                                      <source src={media.url} type='video/mp4' />
+                                      Your browser does not support the video tag.
+                                    </video>
+                                    <div
+                                      className={styles.videoOverlay}
+                                      onClick={() => openMediaPopup(media, 'video')}
+                                    >
+                                      <Play size={48} className={styles.playIcon} />
+                                    </div>
+                                  </div>
+                                )}
+                                {media.type === 'audio' && (
+                                  <audio controls className={styles.mediaAudio}>
+                                    <source src={media.url} type='audio/mpeg' />
+                                    Your browser does not support the audio tag.
+                                  </audio>
+                                )}
+                                {media.type === 'file' && (
+                                  <div className={styles.mediaFile}>
+                                    <span className={styles.fileIcon}>📎</span>
+                                    <a
+                                      href={media.url}
+                                      target='_blank'
+                                      rel='noopener noreferrer'
+                                      className={styles.fileLink}
+                                    >
+                                      Download File
+                                    </a>
+                                  </div>
+                                )}
+                              </div>
+                            ))}
                           </div>
                         )}
-                      </>
-                    )}
 
-                    <div className={styles.messageContent}>
-                      {!isMe && !consecutive && conversation.isGroup && (
-                        <span className={styles.senderName}>
-                          {message.senderId?.name || 'Unknown User'}
-                        </span>
-                      )}
-
-                      {message.text && (
-                        <div
-                          className={styles.textContent}
-                          dangerouslySetInnerHTML={{ __html: textEnhancer(message.text) }}
-                        />
-                      )}
-
-                      {message.media && message.media.length > 0 && (
-                        <div className={styles.mediaContent}>
-                          {message.media.map((media, mediaIndex) => (
-                            <div key={mediaIndex} className={styles.mediaItem}>
-                              {media.type === 'image' && (
-                                <img
-                                  src={media.url}
-                                  alt='Shared content'
-                                  className={styles.mediaImage}
-                                  loading='lazy'
-                                  onClick={() => openMediaPopup(media, 'image')}
-                                  onError={(e) => {
-                                    e.target.style.display = 'none';
-                                  }}
-                                />
-                              )}
-                              {media.type === 'video' && (
-                                <div className={styles.videoContainer}>
-                                  <video
-                                    controls
-                                    className={styles.mediaVideo}
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                      openMediaPopup(media, 'video');
-                                    }}
-                                  >
-                                    <source src={media.url} type='video/mp4' />
-                                    Your browser does not support the video tag.
-                                  </video>
-                                  <div
-                                    className={styles.videoOverlay}
-                                    onClick={() => openMediaPopup(media, 'video')}
-                                  >
-                                    <Play size={48} className={styles.playIcon} />
-                                  </div>
-                                </div>
-                              )}
-                              {media.type === 'audio' && (
-                                <audio controls className={styles.mediaAudio}>
-                                  <source src={media.url} type='audio/mpeg' />
-                                  Your browser does not support the audio tag.
-                                </audio>
-                              )}
-                              {media.type === 'file' && (
-                                <div className={styles.mediaFile}>
-                                  <span className={styles.fileIcon}>📎</span>
-                                  <a
-                                    href={media.url}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                    className={styles.fileLink}
-                                  >
-                                    Download File
-                                  </a>
-                                </div>
-                              )}
-                            </div>
-                          ))}
+                        <div className={styles.messageMeta}>
+                          <span className={styles.messageTime}>
+                            {formatMessageTime(message.createdAt)}
+                          </span>
                         </div>
-                      )}
-
-                      <div className={styles.messageMeta}>
-                        <span className={styles.messageTime}>
-                          {formatMessageTime(message.createdAt)}
-                        </span>
                       </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             );
           })
@@ -382,9 +394,16 @@ const MessageArea = ({
             left: contextMenu.x,
           }}
         >
-          <button onClick={handleDeleteMessage} className={styles.contextMenuItem}>
+          <button onClick={() => handleDeleteMessage('me')} className={styles.contextMenuItem}>
             <Trash2 size={14} strokeWidth={1.8} />
-            <span>Delete Message</span>
+            <span>Delete for me</span>
+          </button>
+          <button
+            onClick={() => handleDeleteMessage('everyone')}
+            className={styles.contextMenuItem}
+          >
+            <Trash2 size={14} strokeWidth={1.8} />
+            <span>Delete for everyone</span>
           </button>
         </div>
       )}

@@ -34,24 +34,20 @@
 }
 
 .settingsLayout {
-    /* display: grid; */
-    /* grid-template-columns: 280px 1fr; */
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* gap: 40px; */
     width: 100%;
 }
 
 .settingsSidebar {
-    /* position: sticky; */
     width: 100%;
     height: fit-content;
 }
 
 .settingsContent {
     background: var(--dark-card);
-    padding: 10px 32px;
+    padding: 10px 0;
     min-height: 500px;
     width: 100%;
     box-sizing: border-box;

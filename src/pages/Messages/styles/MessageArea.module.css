@@ -199,6 +199,22 @@
   cursor: pointer;
 }
 
+.deletedMessage {
+  display: flex;
+  padding: 0.5rem 1rem;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text-lighter);
+  background: var(--dark-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px 6px 6px 0;
+}
+
+.deletedMessage svg {
+  margin: auto 0.5rem auto 0;
+  color: var(--text-lighter);
+}
+
 .myMessage .textContent {
   background: linear-gradient(135deg, var(--primary-accent), #e6b800);
   color: var(--primary-color);
