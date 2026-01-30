@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Search, MessageSquare } from 'lucide-react';
+import { Search, MessageSquare, Ban } from 'lucide-react';
 import placeholderColor from '@/utils/placeholderColor';
 import styles from '../styles/ConversationList.module.css';
 
@@ -135,9 +135,7 @@ const ConversationList = ({
                   </div>
                 )}
 
-                {hasNewMessages && (
-                  <div className={styles.newMessageIndicator}></div>
-                )}
+                {hasNewMessages && <div className={styles.newMessageIndicator}></div>}
               </div>
 
               <div className={styles.conversationInfo}>
@@ -153,11 +151,15 @@ const ConversationList = ({
                     <>
                       <span className={styles.lastText}>
                         {lastMessage.text ||
-                          (lastMessage.media?.length > 0 ? `Media` : 'Message sent')}
+                          (lastMessage.media?.length > 0 ? (
+                            `Media`
+                          ) : (
+                            <div className={styles.deletedMessage}>
+                              <Ban size={10} /> This message was deleted
+                            </div>
+                          ))}
                       </span>
-                      {hasNewMessages && (
-                        <span className={styles.newMessageBadge}>New</span>
-                      )}
+                      {hasNewMessages && <span className={styles.newMessageBadge}>New</span>}
                     </>
                   ) : (
                     <span className={styles.noMessages}>Start a conversation</span>

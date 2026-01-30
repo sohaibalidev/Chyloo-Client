@@ -38,7 +38,6 @@ const Messages = () => {
 
     const conv = conversations.find((c) => c._id === conversationId);
     if (conv) setSelectedConversation(conv);
-    console.log(conversations)
   }, [conversationId]);
 
   useEffect(() => {
@@ -170,23 +169,11 @@ const Messages = () => {
     );
   }, []);
 
-  const handleMessageDeleted = useCallback(({ messageId, deleteType }) => {
-    if (deleteType === 'everyone') {
-      setMessages((prev) =>
-        prev.map((msg) => {
-          if (msg._id === messageId) {
-            return { ...msg, text: '', media: [], isDeletedForEveryone: true };
-          }
-          return msg;
-        })
-      );
-      return;
-    }
-
+  const handleMessageDeleted = useCallback(({ messageId }) => {
     setMessages((prev) =>
       prev.map((msg) => {
         if (msg._id === messageId) {
-          return { ...msg, text: '', media: [], isDeletedForEveryone: false };
+          return { ...msg, text: '', media: [], isDeletedForEveryone: true };
         }
         return msg;
       })
@@ -268,6 +255,9 @@ const Messages = () => {
           credentials: 'include',
         }
       );
+      if (response.ok && deleteType === 'me')
+        setMessages((prev) => prev.filter((msg) => msg._id !== messageId));
+
       if (!response.ok) throw new Error('Failed to delete message');
     } catch (err) {
       setError(err.message);
