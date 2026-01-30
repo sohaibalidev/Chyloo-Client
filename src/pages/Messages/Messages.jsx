@@ -235,7 +235,7 @@ const Messages = () => {
         body: formData,
         credentials: 'include',
       });
-
+      
       if (!response.ok) throw new Error('Failed to send message');
       const { message: newMessage } = await response.json();
       return newMessage;
