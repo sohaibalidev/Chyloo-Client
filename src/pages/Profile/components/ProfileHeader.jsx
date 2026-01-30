@@ -41,7 +41,7 @@ const ProfileHeader = ({
 
       const { conversation } = await response.json();
 
-      navigate(`/messages/?conversation=${conversation._id}`);
+      navigate(`/messages/${conversation._id}`);
     } catch (error) {
       console.error('Error creating/fetching conversation:', error);
     } finally {

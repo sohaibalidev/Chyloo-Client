@@ -3,6 +3,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useSocket } from '@/contexts/SocketContext';
 import { BASE_URL } from '@/config/app.config.js';
 import { MessageSquare, X } from 'lucide-react';
+import { useParams } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import debounce from 'lodash/debounce';
 import ConversationList from './components/ConversationList';
@@ -18,14 +19,27 @@ const Messages = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [typingUsers, setTypingUsers] = useState({});
-
+  const [conversationIdParam, setConversationIdParam] = useState(null);
+  const previousConversationRef = useRef(null);
+  const { conversationId } = useParams();
   const { socket } = useSocket();
   const { user } = useAuth();
-  const previousConversationRef = useRef(null);
+
+  useEffect(() => {
+    setConversationIdParam(conversationId);
+  }, [conversationId]);
 
   useEffect(() => {
     loadConversations();
-  }, []);
+  }, [, conversationIdParam]);
+
+  useEffect(() => {
+    if (!conversationId || conversations.length === 0) return;
+
+    const conv = conversations.find((c) => c._id === conversationId);
+    if (conv) setSelectedConversation(conv);
+    console.log(conversations)
+  }, [conversationId]);
 
   useEffect(() => {
     if (!socket) return;
@@ -76,6 +90,12 @@ const Messages = () => {
       if (!response.ok) throw new Error('Failed to load conversations');
       const { conversations: data } = await response.json();
       setConversations(data);
+
+      if (conversationIdParam) {
+        const conv = data.find((c) => c._id === conversationIdParam);
+        if (conv) setSelectedConversation(conv);
+        setConversationIdParam(null);
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -151,7 +171,7 @@ const Messages = () => {
   }, []);
 
   const handleMessageDeleted = useCallback(({ messageId, deleteType }) => {
-    if(deleteType === 'everyone') {
+    if (deleteType === 'everyone') {
       setMessages((prev) =>
         prev.map((msg) => {
           if (msg._id === messageId) {
